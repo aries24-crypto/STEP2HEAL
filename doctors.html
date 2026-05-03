@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doctors | Step2Heal - Advanced Physiotherapy & Rehabilitation</title>
+    <title>Founders | Step2Heal - Advanced Physiotherapy & Rehabilitation</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -26,6 +26,11 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        .tagline-italic {
+            font-style: italic;
+            color: #f97316; /* Tailwind orange-500 */
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900 selection:bg-teal-100 selection:text-[#0d3b44]" 
@@ -34,19 +39,19 @@
         mobileMenu: false
       }" @scroll.window="scrolled = (window.pageYOffset > 20)">
 
-    <!-- Navbar (Reusable) -->
+    <!-- Navbar -->
     <nav :class="scrolled ? 'shadow-md py-2 bg-white/95' : 'py-4 bg-transparent'" 
          class="fixed w-full z-[60] transition-all duration-300 border-b border-gray-100 nav-blur">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
                 <!-- Logo Section -->
                 <a href="index.html" class="flex items-center gap-3 group">
-                    <div class="relative w-16 h-16 md:w-24 md:h-24 flex items-center justify-center">
-                        <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105">
+                    <div class="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
+                        <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105" onerror="this.src='https://via.placeholder.com/80?text=S2H'">
                     </div>
                     <div class="flex flex-col">
                         <span class="font-extrabold text-lg md:text-xl leading-none text-[#0d3b44] tracking-tight">Step2Heal</span>
-                        <span class="text-[7px] md:text-[9px] uppercase tracking-[0.2em] text-teal-600 font-black">Advanced Physiotherapy</span>
+                        <span class="text-[9px] md:text-[10px] mt-1 font-bold tagline-italic uppercase tracking-wider">Where every step matters</span>
                     </div>
                 </a>
 
@@ -54,9 +59,11 @@
                 <div class="hidden md:flex space-x-7 items-center">
                     <a href="index.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Home</a>
                     <a href="services.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Services</a>
+                    <a href="doctors.html" class="text-sm font-bold text-teal-600">Founders</a>
                     <a href="gallery.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Gallery</a>
-                    <a href="doctors.html" class="text-sm font-bold text-teal-600">Doctors</a>
-                    <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-teal-700 transition-all shadow-lg">Book Now</a>
+                    <a href="blog.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Blog</a>
+                    <a href="contact.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Contact</a>
+                    <a href="https://wa.me/919773960242" target="_blank" class="bg-[#0d3b44] text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-teal-700 transition-all shadow-lg">Book Session</a>
                 </div>
 
                 <!-- Mobile Toggle -->
@@ -70,11 +77,16 @@
         </div>
 
         <!-- Mobile Menu -->
-        <div x-show="mobileMenu" x-transition x-cloak class="md:hidden absolute top-full left-0 w-full bg-white border-t shadow-2xl px-6 py-8 space-y-4">
-            <a href="index.html" class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Home</a>
-            <a href="services.html" class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Services</a>
-            <a href="gallery.html" class="flex items-center gap-4 p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Gallery</a>
-            <a href="doctors.html" class="flex items-center gap-4 p-4 rounded-xl bg-teal-50 font-bold text-teal-600">Doctors</a>
+        <div x-show="mobileMenu" x-transition x-cloak class="md:hidden absolute top-full left-0 w-full bg-white border-t shadow-2xl px-6 py-8 space-y-2">
+            <a href="index.html" class="block p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Home</a>
+            <a href="services.html" class="block p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Services</a>
+            <a href="doctors.html" class="block p-4 rounded-xl bg-teal-50 font-bold text-teal-600">Founders</a>
+            <a href="gallery.html" class="block p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Gallery</a>
+            <a href="blog.html" class="block p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Blog</a>
+            <a href="contact.html" class="block p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Contact</a>
+            <div class="pt-4">
+                <a href="https://wa.me/919773960242" target="_blank" class="block w-full text-center bg-[#0d3b44] text-white py-4 rounded-xl font-bold">Book Session</a>
+            </div>
         </div>
     </nav>
 
@@ -82,85 +94,71 @@
         <!-- Hero Section -->
         <header class="hero-gradient pt-32 pb-16 lg:pt-48 lg:pb-24">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h4 class="text-teal-600 font-black uppercase tracking-[0.3em] text-xs mb-4">Clinical Leadership</h4>
+                <h4 class="text-teal-600 font-black uppercase tracking-[0.3em] text-xs mb-4">The Visionaries</h4>
                 <h1 class="text-4xl md:text-5xl lg:text-7xl font-black text-[#0d3b44] leading-tight tracking-tighter">
-                    Meet Our Expert <span class="text-teal-600">Doctors</span>
+                    Meet Our <span class="text-teal-600">Founders</span>
                 </h1>
                 <p class="mt-6 text-lg text-gray-500 max-w-2xl mx-auto font-medium">
-                    Our team consists of highly qualified, evidence-based physiotherapy specialists dedicated to your complete recovery and long-term wellness.
+                    Led by passion and clinical excellence, our founders bring years of specialized experience to help you regain your strength and confidence.
                 </p>
             </div>
         </header>
 
-        <!-- Doctors Profile Section -->
+        <!-- Founders Profile Section -->
         <section class="py-12 bg-white">
             <div class="max-w-7xl mx-auto px-4 space-y-16">
                 
-                <!-- Doctor 1 -->
-                <div class="doctor-card bg-gray-50 rounded-[3rem] p-8 md:p-12 border border-gray-100 flex flex-col lg:flex-row gap-10 items-center">
-                    <div class="w-full lg:w-1/3 aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white bg-gray-200">
-                        <img src="https://images.unsplash.com/photo-1559839734-2b71f1536783?auto=format&fit=crop&q=80&w=800" alt="Dr. Saijal" class="w-full h-full object-cover">
+                <!-- Founder 1: Dr. Megha -->
+                <div class="doctor-card bg-gray-50 rounded-[3rem] p-8 md:p-12 border border-gray-100 flex flex-col lg:flex-row gap-12 items-center">
+                    <div class="w-full lg:w-2/5 aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white bg-gray-200">
+                        <img src="WhatsApp Image 2026-05-01 at 17.18.09 (2).jpeg" alt="Dr. Megha" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x500?text=Dr.+Megha'">
                     </div>
-                    <div class="w-full lg:w-2/3 space-y-6">
+                    <div class="w-full lg:w-3/5 space-y-6">
                         <div class="space-y-2">
-                            <h2 class="text-3xl md:text-4xl font-black text-[#0d3b44]">Dr. Saijal</h2>
-                            <p class="text-teal-600 font-bold text-lg">Senior Consultant Physiotherapist & Founder</p>
+                            <h2 class="text-4xl font-black text-[#0d3b44]">Dr. Megha</h2>
+                            <p class="text-teal-600 font-bold text-xl uppercase tracking-wide">Consultant Physiotherapist & Founder</p>
+                            <div class="flex flex-wrap gap-2 pt-2">
+                                <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">MPT</span>
+                                <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Advanced Modalities Expert</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed text-lg">
+                            Dr. Megha is a dedicated expert in advanced therapeutic modalities. Her approach integrates cutting-edge technology like laser therapy and dry needling with personalized exercise regimes. As a founder, she ensures that every patient at Step2Heal receives the highest standard of evidence-based care tailored to their unique recovery journey.
+                        </p>
+                        <div class="pt-4">
+                            <!-- WhatsApp Link for Megha -->
+                            <a href="https://wa.me/919773960242?text=Hello%20Step2Heal%2C%20I%20would%20like%20to%20book%20a%20physiotherapy%20session%20with%20Dr.%20Megha" target="_blank" class="inline-flex items-center gap-2 bg-[#0d3b44] text-white px-8 py-4 rounded-2xl font-black hover:bg-teal-700 transition-all shadow-xl">
+                                <i data-lucide="message-square" class="w-5 h-5"></i>
+                                Book Session with Dr. Megha
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Founder 2: Dr. Saijal -->
+                <div class="doctor-card bg-gray-50 rounded-[3rem] p-8 md:p-12 border border-gray-100 flex flex-col lg:flex-row-reverse gap-12 items-center">
+                    <div class="w-full lg:w-2/5 aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white bg-gray-200">
+                        <img src="WhatsApp Image 2026-05-01 at 17.20.33.jpeg" alt="Dr. Saijal" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x500?text=Dr.+Saijal'">
+                    </div>
+                    <div class="w-full lg:w-3/5 space-y-6">
+                        <div class="space-y-2">
+                            <h2 class="text-4xl font-black text-[#0d3b44]">Dr. Saijal</h2>
+                            <p class="text-teal-600 font-bold text-xl uppercase tracking-wide">Consultant Physiotherapist & Founder</p>
                             <div class="flex flex-wrap gap-2 pt-2">
                                 <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">MPT (Orthopedics)</span>
                                 <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Manual Therapy Specialist</span>
                             </div>
                         </div>
                         <p class="text-gray-600 leading-relaxed text-lg">
-                            With over a decade of clinical experience, Dr. Saijal specializes in orthopedic rehabilitation and manual therapy. She is renowned for her precision in diagnosing the root cause of pain and designing evidence-based recovery protocols that return patients to their peak performance.
+                            Dr. Saijal specializes in orthopedic rehabilitation and intricate manual therapy techniques. With a focus on precision diagnosis, she identifies the biomechanical root causes of pain to develop sustainable recovery protocols. Her leadership at Step2Heal is driven by the philosophy that movement is medicine and every step in rehabilitation matters.
                         </p>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white p-4 rounded-2xl border border-gray-100">
-                                <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400">Experience</p>
-                                <p class="font-black text-[#0d3b44]">10+ Years</p>
-                            </div>
-                            <div class="bg-white p-4 rounded-2xl border border-gray-100">
-                                <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400">Specialty</p>
-                                <p class="font-black text-[#0d3b44]">Orthopedic Rehab</p>
-                            </div>
+                        <div class="pt-4">
+                            <!-- WhatsApp Link for Saijal -->
+                            <a href="https://wa.me/919773960242?text=Hello%20Step2Heal%2C%20I%20would%20like%20to%20book%20a%20physiotherapy%20session%20with%20Dr.%20Saijal" target="_blank" class="inline-flex items-center gap-2 bg-teal-600 text-white px-8 py-4 rounded-2xl font-black hover:bg-teal-700 transition-all shadow-xl">
+                                <i data-lucide="message-square" class="w-5 h-5"></i>
+                                Book Session with Dr. Saijal
+                            </a>
                         </div>
-                        <a href="https://wa.me/919773960242" class="inline-flex items-center gap-2 bg-[#0d3b44] text-white px-8 py-4 rounded-2xl font-black hover:bg-teal-700 transition-all shadow-xl">
-                            <i data-lucide="calendar" class="w-5 h-5"></i>
-                            Consult with Dr. Saijal
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Doctor 2 -->
-                <div class="doctor-card bg-gray-50 rounded-[3rem] p-8 md:p-12 border border-gray-100 flex flex-col lg:flex-row-reverse gap-10 items-center">
-                    <div class="w-full lg:w-1/3 aspect-square rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white bg-gray-200">
-                        <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=800" alt="Dr. Megha" class="w-full h-full object-cover">
-                    </div>
-                    <div class="w-full lg:w-2/3 space-y-6">
-                        <div class="space-y-2">
-                            <h2 class="text-3xl md:text-4xl font-black text-[#0d3b44]">Dr. Megha</h2>
-                            <p class="text-teal-600 font-bold text-lg">Lead Specialist - Advanced Therapies</p>
-                            <div class="flex flex-wrap gap-2 pt-2">
-                                <span class="bg-teal-100 text-teal-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">MPT</span>
-                                <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Dry Needling Expert</span>
-                            </div>
-                        </div>
-                        <p class="text-gray-600 leading-relaxed text-lg">
-                            Dr. Megha is an expert in advanced therapeutic modalities including laser therapy, dry needling, and IASTM. Her patient-centric approach focuses on reducing inflammation and restoring mobility through a blend of cutting-edge technology and therapeutic exercise.
-                        </p>
-                        <div class="grid grid-cols-2 gap-4">
-                            <div class="bg-white p-4 rounded-2xl border border-gray-100">
-                                <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400">Patients Healed</p>
-                                <p class="font-black text-[#0d3b44]">1200+</p>
-                            </div>
-                            <div class="bg-white p-4 rounded-2xl border border-gray-100">
-                                <p class="text-[10px] uppercase tracking-widest font-bold text-gray-400">Specialty</p>
-                                <p class="font-black text-[#0d3b44]">Sports Injuries</p>
-                            </div>
-                        </div>
-                        <a href="https://wa.me/919773960242" class="inline-flex items-center gap-2 bg-teal-600 text-white px-8 py-4 rounded-2xl font-black hover:bg-teal-700 transition-all shadow-xl">
-                            <i data-lucide="calendar" class="w-5 h-5"></i>
-                            Consult with Dr. Megha
-                        </a>
                     </div>
                 </div>
 
@@ -176,47 +174,47 @@
                             <i data-lucide="award" class="w-8 h-8"></i>
                         </div>
                         <h3 class="font-black text-[#0d3b44] text-xl">Qualified Experts</h3>
-                        <p class="text-gray-500 text-sm">All our doctors hold Master's degrees in specialized fields of Physiotherapy.</p>
+                        <p class="text-gray-500 text-sm">Both founders hold specialized Master's degrees in Physiotherapy (MPT).</p>
                     </div>
                     <div class="text-center space-y-3">
                         <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto shadow-sm text-teal-600">
                             <i data-lucide="microscope" class="w-8 h-8"></i>
                         </div>
                         <h3 class="font-black text-[#0d3b44] text-xl">Evidence Based</h3>
-                        <p class="text-gray-500 text-sm">Treatments are backed by the latest clinical research and medical standards.</p>
+                        <p class="text-gray-500 text-sm">Our clinical approach is rooted in the latest global research and medical standards.</p>
                     </div>
                     <div class="text-center space-y-3">
                         <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto shadow-sm text-teal-600">
                             <i data-lucide="heart" class="w-8 h-8"></i>
                         </div>
                         <h3 class="font-black text-[#0d3b44] text-xl">Patient First</h3>
-                        <p class="text-gray-500 text-sm">Dedicated one-on-one sessions to ensure personalized attention and faster results.</p>
+                        <p class="text-gray-500 text-sm">We provide dedicated one-on-one attention to ensure personalized recovery results.</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer (Reusable) -->
+    <!-- Footer -->
     <footer class="bg-[#0d3b44] text-white pt-20 pb-10 rounded-t-[3rem] md:rounded-t-[5rem]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
                 <div class="space-y-6">
                     <div class="flex items-center gap-3">
                         <div class="w-12 h-12 bg-white rounded-xl p-2">
-                             <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" class="w-full h-full object-contain" alt="Logo">
+                             <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" class="w-full h-full object-contain" alt="Logo" onerror="this.src='https://via.placeholder.com/40?text=S2H'">
                         </div>
                         <span class="font-black text-2xl tracking-tighter">Step2Heal</span>
                     </div>
-                    <p class="text-teal-100/60 leading-relaxed text-sm">Advanced evidence-based physiotherapy. We bring expert care to your home or in our modern clinic in Noida.</p>
+                    <p class="text-teal-100/60 leading-relaxed text-sm">Advanced evidence-based physiotherapy. We bring expert care to your doorstep or in our modern clinic.</p>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-6 text-teal-400 uppercase tracking-widest text-xs">Pages</h4>
+                    <h4 class="font-bold mb-6 text-teal-400 uppercase tracking-widest text-xs">Navigation</h4>
                     <ul class="space-y-4 text-sm font-medium text-teal-50/80">
                         <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
                         <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
+                        <li><a href="doctors.html" class="hover:text-white transition-colors font-bold text-white">Founders</a></li>
                         <li><a href="gallery.html" class="hover:text-white transition-colors">Gallery</a></li>
-                        <li><a href="doctors.html" class="hover:text-white transition-colors">Doctors</a></li>
                     </ul>
                 </div>
                 <div>
