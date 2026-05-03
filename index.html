@@ -8,7 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Alpine.js -->
+    <!-- Alpine.js (Updated to include Collapse plugin for smoother FAQs) -->
+    <script src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -38,7 +39,7 @@
 
     <!-- Navbar -->
     <nav :class="scrolled ? 'shadow-sm py-2 bg-white/90' : 'py-5 bg-transparent'" 
-         class="fixed w-full z-[60] transition-all duration-300 nav-blur">
+          class="fixed w-full z-[60] transition-all duration-300 nav-blur">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
                 <div class="flex items-center gap-4 group cursor-pointer" onclick="window.location.href='index.html'">
@@ -89,14 +90,13 @@
                       <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
                       <span class="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
                     </span>
-                    Advanced Physiotherapy and Rehabilation Centre
+                    Advanced Physiotherapy and Rehabilitation Centre
                 </div>
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-[#0d3b44] leading-[0.9] tracking-tighter uppercase">
                     MOVE BETTER. <br><span class="text-teal-600">FEEL BETTER.</span><br><span class="text-orange-500">LIVE BETTER.</span>
                 </h1>
                 <p class="text-lg md:text-xl text-gray-500 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
-                    Stop managing pain. Start outgrowing it.
-Personalised physiotherapy for chronic pain, sports recovery, and every step in between.
+                    Stop managing pain. Start outgrowing it. Personalised physiotherapy for chronic pain, sports recovery, and every step in between.
                 </p>
                 <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
                     <a href="https://wa.me/919773960242" class="w-full sm:w-auto bg-[#0d3b44] text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-teal-700 transition-all shadow-2xl shadow-teal-900/10 flex items-center justify-center gap-2">
@@ -246,22 +246,57 @@ Personalised physiotherapy for chronic pain, sports recovery, and every step in 
         <div class="max-w-4xl mx-auto">
             <h2 class="text-4xl font-black text-[#0d3b44] mb-12 text-center">Frequently Asked Questions</h2>
             <div class="space-y-4">
-                <template x-for="(faq, index) in [
-                    { q: 'What should I expect during my first visit?', a: 'Your first session includes a comprehensive evaluation where we discuss your medical history, perform physical tests, and create a customized treatment plan.' },
-                    { q: 'How many sessions will I need?', a: 'The number of sessions depends on the severity of your condition and your body response to treatment.' },
-                    { q: 'Do I need a doctor referral for physiotherapy?', a: 'No referral required. Physiotherapy is something you can access directly, on your own terms. If you're in pain, dealing with an injury, or simply want to move better — you don't need a doctor's note to get started. Just reach out.' },
-                    { q: 'Do you offer home visit services?', a: 'Yes, we provide advanced physiotherapy home services in Noida and surrounding areas for patients who have mobility constraints.' }
-                ]" :key="index">
-                    <div class="border border-gray-100 rounded-2xl overflow-hidden">
-                        <button @click="active = active === index ? null : index" class="w-full flex items-center justify-between p-6 text-left font-bold text-gray-700 bg-gray-50 hover:bg-teal-50 transition-colors">
-                            <span x-text="faq.q"></span>
-                            <i data-lucide="plus" class="w-5 h-5 transition-transform" :class="active === index ? 'rotate-45 text-teal-600' : ''"></i>
-                        </button>
-                        <div x-show="active === index" x-collapse class="p-6 text-gray-500 bg-white border-t border-gray-100">
-                            <span x-text="faq.a"></span>
+                <div class="border border-gray-100 rounded-2xl overflow-hidden bg-white">
+                    <button @click="active = active === 0 ? null : 0" 
+                            class="w-full flex items-center justify-between p-6 text-left font-bold text-gray-700 hover:bg-teal-50 transition-colors">
+                        <span>What should I expect during my first visit?</span>
+                        <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 0 ? 'rotate-45 text-teal-600' : ''"></i>
+                    </button>
+                    <div x-show="active === 0" x-collapse x-cloak>
+                        <div class="p-6 text-gray-500 bg-white border-t border-gray-100">
+                            Your first session includes a comprehensive evaluation where we discuss your medical history, perform physical tests, and create a customized treatment plan.
                         </div>
                     </div>
-                </template>
+                </div>
+
+                <div class="border border-gray-100 rounded-2xl overflow-hidden bg-white">
+                    <button @click="active = active === 1 ? null : 1" 
+                            class="w-full flex items-center justify-between p-6 text-left font-bold text-gray-700 hover:bg-teal-50 transition-colors">
+                        <span>How many sessions will I need?</span>
+                        <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 1 ? 'rotate-45 text-teal-600' : ''"></i>
+                    </button>
+                    <div x-show="active === 1" x-collapse x-cloak>
+                        <div class="p-6 text-gray-500 bg-white border-t border-gray-100">
+                            The number of sessions depends on the severity of your condition and your body's response to treatment.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-gray-100 rounded-2xl overflow-hidden bg-white">
+                    <button @click="active = active === 2 ? null : 2" 
+                            class="w-full flex items-center justify-between p-6 text-left font-bold text-gray-700 hover:bg-teal-50 transition-colors">
+                        <span>Do I need a doctor referral for physiotherapy?</span>
+                        <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 2 ? 'rotate-45 text-teal-600' : ''"></i>
+                    </button>
+                    <div x-show="active === 2" x-collapse x-cloak>
+                        <div class="p-6 text-gray-500 bg-white border-t border-gray-100">
+                            No referral required. Physiotherapy is something you can access directly. If you're in pain, dealing with an injury, or simply want to move better — you don't need a doctor's note to get started. Just reach out.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border border-gray-100 rounded-2xl overflow-hidden bg-white">
+                    <button @click="active = active === 3 ? null : 3" 
+                            class="w-full flex items-center justify-between p-6 text-left font-bold text-gray-700 hover:bg-teal-50 transition-colors">
+                        <span>Do you offer home visit services?</span>
+                        <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 3 ? 'rotate-45 text-teal-600' : ''"></i>
+                    </button>
+                    <div x-show="active === 3" x-collapse x-cloak>
+                        <div class="p-6 text-gray-500 bg-white border-t border-gray-100">
+                            Yes, we provide advanced physiotherapy home services in Noida and surrounding areas for patients who have mobility constraints.
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -290,7 +325,6 @@ Personalised physiotherapy for chronic pain, sports recovery, and every step in 
                     </div>
                 </div>
                 <div class="mt-10 overflow-hidden rounded-3xl h-64 border border-gray-200">
-                    <!-- Actual Google Map Embed -->
                     <iframe 
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.220197541624!2d77.3368705755054!3d28.592946775688647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce51cf414c6db%3A0xb521cfc7d4322d0a!2sStep2Heal%20Advanced%20Physiotherapy%20and%20Rehabilitation%20Centre!5e0!3m2!1sen!2sin!4v1714560000000!5m2!1sen!2sin" 
                         width="100%" 
@@ -341,11 +375,6 @@ Personalised physiotherapy for chronic pain, sports recovery, and every step in 
                     "Where every step matters"<br>
                     Noida's most trusted name in advanced physiotherapy and sports rehabilitation.
                 </p>
-                <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-teal-500 transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-teal-500 transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-teal-500 transition-all"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-                </div>
             </div>
 
             <div>
@@ -374,7 +403,7 @@ Personalised physiotherapy for chronic pain, sports recovery, and every step in 
                 <h4 class="font-bold text-lg mb-6 text-teal-400">Direct Contact</h4>
                 <ul class="space-y-4 text-teal-50/60">
                     <li class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4 text-teal-400"></i> +91 97739 60242</li>
-                    <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4 text-teal-400"></i> info@step2heal.com</li>
+                    <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4 text-teal-400"></i> step2heal1111@gmail.com</li>
                     <li class="flex items-start gap-3">
                         <i data-lucide="map-pin" class="w-4 h-4 text-teal-400 mt-1"></i>
                         <span>Sector 12, Noida, Uttar Pradesh</span>
@@ -383,16 +412,17 @@ Personalised physiotherapy for chronic pain, sports recovery, and every step in 
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-teal-50/40">
-            <p>&copy; 2026 Step2Heal Advanced Physiotherapy Centre. All rights reserved.</p>
-            <div class="flex gap-8">
-                <a href="#" class="hover:text-white">Privacy Policy</a>
-                <a href="#" class="hover:text-white">Terms of Service</a>
+            <div class="flex flex-col items-center md:items-start w-full">
+                <p>&copy; 2026 Step2Heal Advanced Physiotherapy Centre. All rights reserved.</p>
+                <p class="mt-1">Developed by: <a href="https://www.linkedin.com/in/tejas-yadav-3b1ab83a6/" target="_blank" class="text-teal-400 hover:underline">Tejas Yadav</a></p>
             </div>
         </div>
     </footer>
 
     <script>
-        lucide.createIcons();
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
     </script>
 </body>
 </html>
