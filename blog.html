@@ -19,7 +19,7 @@
         .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
         [x-cloak] { display: none !important; }
         
-        .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
         .card-hover:hover { transform: translateY(-8px); }
         
         .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
@@ -36,6 +36,12 @@
         ::-webkit-scrollbar-track { background: #f1f1f1; }
         ::-webkit-scrollbar-thumb { background: #0d3b44; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #14b8a6; }
+
+        /* Modal transitions */
+        .modal-overlay {
+            background-color: rgba(13, 59, 68, 0.85);
+            backdrop-filter: blur(8px);
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900 selection:bg-teal-100 selection:text-[#0d3b44]" 
@@ -45,6 +51,8 @@
         searchQuery: '',
         activeCategory: 'All',
         sortBy: 'newest',
+        selectedPost: null,
+        isReading: false,
         categories: ['All', 'Exercises', 'Recovery', 'Lifestyle'],
         posts: [
             {
@@ -52,7 +60,13 @@
                 category: 'Exercises',
                 title: 'MOVE BETTER. FEEL BETTER. LIVE BETTER.',
                 excerpt: 'Why exercise is at the heart of physiotherapy. Explore how movement serves as a clear, step-by-step road map back to health.',
-                content: `When people think of physiotherapy, they often picture massage tables and ultrasound machines. But there's one tool we use more than anything else — and it's free, always available, and incredibly powerful: movement itself.`,
+                content: `
+                    <p class='mb-4'>When people think of physiotherapy, they often picture massage tables and ultrasound machines. But there's one tool we use more than anything else — and it's free, always available, and incredibly powerful: movement itself.</p>
+                    <p class='mb-4 font-bold text-[#0d3b44]'>The Logic of Movement</p>
+                    <p class='mb-4'>Exercise isn't just about 'getting fit.' In a clinical setting, movement is medicine. It stimulates tissue repair, increases blood flow to injured areas, and retrains the nervous system to process pain signals differently.</p>
+                    <p class='mb-4'>Our approach at Step2Heal focuses on functional movement. We don't just want you to do 10 reps of a stretch; we want you to be able to pick up your child, climb stairs without wincing, and enjoy your weekend hikes again.</p>
+                    <blockquote class='border-l-4 border-teal-500 pl-4 py-2 italic text-gray-600 mb-4'>'The best posture is your next posture.' — Movement is continuous.</blockquote>
+                `,
                 date: '2026-05-03',
                 displayDate: '3 May 2026',
                 author: 'Step2heal Team',
@@ -64,7 +78,12 @@
                 category: 'Recovery',
                 title: 'The Science of Post-Surgical Healing',
                 excerpt: 'Understanding the biological timeline of recovery and how targeted intervention speeds up the natural healing process.',
-                content: `Recovery is not just about time; it is about active engagement with the healing process. After surgery, the body initiates a complex inflammatory response that is necessary for repair.`,
+                content: `
+                    <p class='mb-4'>Recovery is not just about time; it is about active engagement with the healing process. After surgery, the body initiates a complex inflammatory response that is necessary for repair.</p>
+                    <p class='mb-4 font-bold text-[#0d3b44]'>Phase 1: Protection & Controlled Stress</p>
+                    <p class='mb-4'>Immediately after surgery, the priority is reducing swelling while maintaining joint mobility. Many patients are afraid to move, but early, gentle intervention prevents scar tissue from 'freezing' the joint.</p>
+                    <p class='mb-4'>At Step2Heal, we monitor these biological windows closely. We ensure that the load we put on your body matches exactly what your healing tissues can handle—no more, no less.</p>
+                `,
                 date: '2026-05-03',
                 displayDate: '3 May 2026',
                 author: 'Step2heal Team',
@@ -76,7 +95,15 @@
                 category: 'Lifestyle',
                 title: 'Daily Habits for a Pain-Free Spine',
                 excerpt: 'Simple adjustments to your daily routine that can significantly reduce the risk of chronic back and neck pain.',
-                content: `Your spine is your lifeline, yet we often subject it to hours of static loading. Small lifestyle changes—like the 20-20-20 rule for movement and ergonomic desk setups—can prevent cumulative stress.`,
+                content: `
+                    <p class='mb-4'>Your spine is your lifeline, yet we often subject it to hours of static loading. Small lifestyle changes—like the 20-20-20 rule for movement and ergonomic desk setups—can prevent cumulative stress.</p>
+                    <ul class='list-disc pl-5 mb-4 space-y-2'>
+                        <li><strong>Micro-breaks:</strong> Stand up every 20 minutes to reset your spinal alignment.</li>
+                        <li><strong>Eye-level screens:</strong> Ensure your monitor is at eye level to prevent 'Tech Neck'.</li>
+                        <li><strong>Hydration:</strong> Your spinal discs need water to stay plump and shock-absorbent.</li>
+                    </ul>
+                    <p class='mb-4'>Consistency beats intensity. It is better to have 10 small movement moments throughout the day than one hour at the gym followed by 8 hours of sitting.</p>
+                `,
                 date: '2026-05-03',
                 displayDate: '3 May 2026',
                 author: 'Step2heal Team',
@@ -99,6 +126,17 @@
             }
             return result;
         },
+        openPost(post) {
+            this.selectedPost = post;
+            this.isReading = true;
+            document.body.style.overflow = 'hidden';
+            setTimeout(() => lucide.createIcons(), 50);
+        },
+        closePost() {
+            this.isReading = false;
+            document.body.style.overflow = 'auto';
+            setTimeout(() => { this.selectedPost = null; }, 300);
+        },
         handleQuerySubmit(e) {
             e.preventDefault();
             const query = e.target.querySelector('input').value;
@@ -117,7 +155,7 @@
             <div class="flex justify-between items-center">
                 <!-- Logo -->
                 <div class="flex items-center gap-3 group cursor-pointer" onclick="window.location.href='index.html'">
-                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-12 w-auto md:h-16" onerror="this.src='https://ui-avatars.com/api/?name=S2H&background=0d3b44&color=fff'">
+                    <img src="https://ui-avatars.com/api/?name=S2H&background=0d3b44&color=fff" alt="Step2Heal Logo" class="h-12 w-auto md:h-16">
                     <div class="flex flex-col">
                         <span class="font-extrabold text-lg md:text-xl leading-none text-[#0d3b44] tracking-tight">Step2Heal</span>
                         <span class="text-[9px] md:text-[11px] italic text-orange-500 font-medium">Where every step matters</span>
@@ -205,7 +243,7 @@
         <!-- Blog Grid -->
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             <template x-for="post in filteredPosts" :key="post.id">
-                <article class="card-hover group flex flex-col bg-white border border-gray-100 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl">
+                <article @click="openPost(post)" class="card-hover group flex flex-col bg-white border border-gray-100 rounded-[2.5rem] overflow-hidden shadow-sm hover:shadow-xl animate-slide">
                     <div class="relative h-60 overflow-hidden">
                         <img :src="post.image" :alt="post.title" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                         <div class="absolute top-4 left-4">
@@ -223,10 +261,10 @@
                         
                         <div class="flex items-center justify-between pt-6 border-t border-gray-50">
                             <div class="flex items-center gap-2">
-                                <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" class="w-6 h-6 object-contain" alt="Logo" onerror="this.src='https://ui-avatars.com/api/?name=S2H&background=0d3b44&color=fff'">
+                                <img src="https://ui-avatars.com/api/?name=S2H&background=0d3b44&color=fff" class="w-6 h-6 rounded-full" alt="Logo">
                                 <span class="text-[11px] font-bold text-gray-900" x-text="post.author"></span>
                             </div>
-                            <button class="text-teal-600 p-2 rounded-full bg-teal-50 hover:bg-teal-600 hover:text-white transition-all">
+                            <button class="text-teal-600 p-2 rounded-full bg-teal-50 group-hover:bg-teal-600 group-hover:text-white transition-all">
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </button>
                         </div>
@@ -246,7 +284,78 @@
         </div>
     </main>
 
-    <!-- WhatsApp Query Section (Replaced Newsletter) -->
+    <!-- Reading Modal -->
+    <div x-show="isReading" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8" x-cloak>
+        
+        <!-- Backdrop -->
+        <div class="absolute inset-0 modal-overlay" @click="closePost"></div>
+
+        <!-- Content -->
+        <div class="relative bg-white w-full max-w-4xl max-h-[90vh] rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col"
+             x-transition:enter="transition ease-out duration-300 transform"
+             x-transition:enter-start="scale-95 translate-y-8"
+             x-transition:enter-end="scale-100 translate-y-0">
+            
+            <!-- Modal Header -->
+            <div class="absolute top-6 right-6 z-10">
+                <button @click="closePost" class="p-3 bg-white/90 backdrop-blur rounded-full text-[#0d3b44] hover:bg-red-50 hover:text-red-600 transition-all shadow-lg">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Scrollable Content -->
+            <div class="overflow-y-auto flex-1 pb-12">
+                <div class="relative h-64 md:h-96">
+                    <img :src="selectedPost?.image" :alt="selectedPost?.title" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent"></div>
+                </div>
+
+                <div class="px-6 md:px-16 -mt-12 relative">
+                    <div class="bg-teal-600 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest inline-block mb-6 shadow-xl shadow-teal-100" x-text="selectedPost?.category"></div>
+                    
+                    <h2 class="text-3xl md:text-5xl font-black text-[#0d3b44] mb-6 leading-tight" x-text="selectedPost?.title"></h2>
+                    
+                    <div class="flex flex-wrap items-center gap-6 mb-10 pb-8 border-b border-gray-100">
+                        <div class="flex items-center gap-3">
+                            <img src="https://ui-avatars.com/api/?name=S2H&background=0d3b44&color=fff" class="w-10 h-10 rounded-full" alt="Author">
+                            <div>
+                                <p class="text-sm font-bold text-gray-900" x-text="selectedPost?.author"></p>
+                                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider" x-text="selectedPost?.displayDate"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 text-gray-400">
+                            <i data-lucide="clock" class="w-4 h-4"></i>
+                            <span class="text-xs font-bold" x-text="selectedPost?.readTime"></span>
+                        </div>
+                    </div>
+
+                    <!-- Article Body -->
+                    <div class="prose prose-lg max-w-none text-gray-600 leading-relaxed space-y-4" x-html="selectedPost?.content"></div>
+
+                    <!-- Post Footer -->
+                    <div class="mt-12 p-8 bg-gray-50 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6">
+                        <div class="text-center md:text-left">
+                            <p class="font-black text-[#0d3b44] text-lg">Was this helpful?</p>
+                            <p class="text-sm text-gray-500">Reach out for a personalized consultation.</p>
+                        </div>
+                        <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white px-8 py-3 rounded-2xl font-bold hover:bg-teal-700 transition-all flex items-center gap-2">
+                            <span>Book an Appointment</span>
+                            <i data-lucide="calendar" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Query Section -->
     <section class="bg-white py-20 px-4">
         <div class="max-w-5xl mx-auto bg-[#0d3b44] rounded-[3rem] p-8 md:p-16 relative overflow-hidden text-center md:text-left shadow-2xl">
             <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
@@ -273,7 +382,7 @@
     <footer class="bg-white py-12 border-t border-gray-100">
         <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-8">
             <div class="flex items-center gap-3">
-                <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="S2H" class="h-10 w-auto" onerror="this.src='https://ui-avatars.com/api/?name=S2H&background=0d3b44&color=fff'">
+                <img src="https://ui-avatars.com/api/?name=S2H&background=0d3b44&color=fff" alt="S2H" class="h-10 w-auto">
                 <div class="flex flex-col">
                     <span class="font-bold text-[#0d3b44]">Step2Heal</span>
                     <span class="text-[8px] italic text-orange-500">Where every step matters</span>
