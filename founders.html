@@ -26,11 +26,6 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        .tagline-italic {
-            font-style: italic;
-            color: #f97316; /* Tailwind orange-500 */
-        }
     </style>
 </head>
 <body class="bg-white text-gray-900 selection:bg-teal-100 selection:text-[#0d3b44]" 
@@ -40,55 +35,48 @@
       }" @scroll.window="scrolled = (window.pageYOffset > 20)">
 
     <!-- Navbar -->
-    <nav :class="scrolled ? 'shadow-md py-2 bg-white/95' : 'py-4 bg-transparent'" 
-         class="fixed w-full z-[60] transition-all duration-300 border-b border-gray-100 nav-blur">
+    <nav :class="scrolled ? 'shadow-sm py-2 bg-white/90' : 'py-5 bg-transparent'" 
+          class="fixed w-full z-[60] transition-all duration-300 nav-blur">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
-                <!-- Logo Section -->
-                <a href="index.html" class="flex items-center gap-3 group">
-                    <div class="relative w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
-                        <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105" onerror="this.src='https://via.placeholder.com/80?text=S2H'">
+                <div class="flex items-center gap-4 group cursor-pointer" onclick="window.location.href='index.html'">
+                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-105" onerror="this.src='https://via.placeholder.com/80?text=S2H'">
+                    <div class="flex flex-col leading-none">
+                        <span class="font-extrabold text-xl text-[#0d3b44] tracking-tight">Step2Heal</span>
+                        <span class="text-[10px] italic font-semibold text-orange-500 mt-1">Where every step matters</span>
                     </div>
-                    <div class="flex flex-col">
-                        <span class="font-extrabold text-lg md:text-xl leading-none text-[#0d3b44] tracking-tight">Step2Heal</span>
-                        <span class="text-[9px] md:text-[10px] mt-1 font-bold tagline-italic uppercase tracking-wider">Where every step matters</span>
-                    </div>
-                </a>
+                </div>
 
-                <!-- Desktop Nav -->
-                <div class="hidden md:flex space-x-7 items-center">
-                    <a href="home.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Home</a>
-                    <a href="services.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Services</a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="home.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Home</a>
+                    <a href="services.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Services</a>
                     <a href="founders.html" class="text-sm font-bold text-teal-600">Founders</a>
-                    <a href="gallery.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Gallery</a>
-                    <a href="blog.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Blog</a>
-                    <a href="contact.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Contact</a>
-                    <a href="https://wa.me/919773960242" target="_blank" class="bg-[#0d3b44] text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-teal-700 transition-all shadow-lg">Book Session</a>
+                    <a href="gallery.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Gallery</a>
+                    <a href="blog.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Blog</a>
+                    <a href="contact.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Contact</a>
+                    <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white px-6 py-3 rounded-xl text-sm font-bold hover:shadow-xl hover:shadow-teal-900/20 transition-all">Book Session</a>
                 </div>
 
-                <!-- Mobile Toggle -->
-                <div class="md:hidden flex items-center gap-4">
-                    <button @click="mobileMenu = !mobileMenu" class="p-2 text-[#0d3b44] bg-gray-50 rounded-lg">
-                        <i data-lucide="menu" x-show="!mobileMenu"></i>
-                        <i data-lucide="x" x-show="mobileMenu"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div x-show="mobileMenu" x-transition x-cloak class="md:hidden absolute top-full left-0 w-full bg-white border-t shadow-2xl px-6 py-8 space-y-2">
-            <a href="home.html" class="block p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Home</a>
-            <a href="services.html" class="block p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Services</a>
-            <a href="founders.html" class="block p-4 rounded-xl bg-teal-50 font-bold text-teal-600">Founders</a>
-            <a href="gallery.html" class="block p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Gallery</a>
-            <a href="blog.html" class="block p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Blog</a>
-            <a href="contact.html" class="block p-4 rounded-xl hover:bg-gray-50 font-bold text-[#0d3b44]">Contact</a>
-            <div class="pt-4">
-                <a href="https://wa.me/919773960242" target="_blank" class="block w-full text-center bg-[#0d3b44] text-white py-4 rounded-xl font-bold">Book Session</a>
+                <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-[#0d3b44]">
+                    <i data-lucide="menu" x-show="!mobileMenu"></i>
+                    <i data-lucide="x" x-show="mobileMenu"></i>
+                </button>
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div x-show="mobileMenu" x-transition x-cloak class="fixed inset-0 z-[55] bg-white pt-24 px-8 md:hidden">
+        <div class="flex flex-col space-y-6 text-center">
+            <a href="home.html" @click="mobileMenu = false" class="text-2xl font-bold text-gray-800">Home</a>
+            <a href="services.html" @click="mobileMenu = false" class="text-2xl font-bold text-gray-800">Services</a>
+            <a href="founders.html" @click="mobileMenu = false" class="text-2xl font-bold text-teal-600">Founders</a>
+            <a href="gallery.html" @click="mobileMenu = false" class="text-2xl font-bold text-gray-800">Gallery</a>
+            <a href="blog.html" @click="mobileMenu = false" class="text-2xl font-bold text-gray-800">Blog</a>
+            <a href="contact.html" @click="mobileMenu = false" class="text-2xl font-bold text-gray-800">Contact</a>
+            <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white py-4 rounded-2xl font-bold text-lg">Book Session</a>
+        </div>
+    </div>
 
     <main class="page-enter">
         <!-- Hero Section -->
@@ -126,7 +114,6 @@
                             Dr. Megha is a dedicated expert in advanced therapeutic modalities. Her approach integrates cutting-edge technology like laser therapy and dry needling with personalized exercise regimes. As a founder, she ensures that every patient at Step2Heal receives the highest standard of evidence-based care tailored to their unique recovery journey.
                         </p>
                         <div class="pt-4">
-                            <!-- WhatsApp Link for Megha -->
                             <a href="https://wa.me/919773960242?text=Hello%20Step2Heal%2C%20I%20would%20like%20to%20book%20a%20physiotherapy%20session%20with%20Dr.%20Megha" target="_blank" class="inline-flex items-center gap-2 bg-[#0d3b44] text-white px-8 py-4 rounded-2xl font-black hover:bg-teal-700 transition-all shadow-xl">
                                 <i data-lucide="message-square" class="w-5 h-5"></i>
                                 Book Session with Dr. Megha
@@ -153,7 +140,6 @@
                             Dr. Saijal specializes in orthopedic rehabilitation and intricate manual therapy techniques. With a focus on precision diagnosis, she identifies the biomechanical root causes of pain to develop sustainable recovery protocols. Her leadership at Step2Heal is driven by the philosophy that movement is medicine and every step in rehabilitation matters.
                         </p>
                         <div class="pt-4">
-                            <!-- WhatsApp Link for Saijal -->
                             <a href="https://wa.me/919773960242?text=Hello%20Step2Heal%2C%20I%20would%20like%20to%20book%20a%20physiotherapy%20session%20with%20Dr.%20Saijal" target="_blank" class="inline-flex items-center gap-2 bg-teal-600 text-white px-8 py-4 rounded-2xl font-black hover:bg-teal-700 transition-all shadow-xl">
                                 <i data-lucide="message-square" class="w-5 h-5"></i>
                                 Book Session with Dr. Saijal
@@ -165,7 +151,7 @@
             </div>
         </section>
 
-        <!-- Certifications/Quality Section -->
+        <!-- Quality Section -->
         <section class="py-20 bg-gray-50">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="grid md:grid-cols-3 gap-8">
@@ -174,7 +160,7 @@
                             <i data-lucide="award" class="w-8 h-8"></i>
                         </div>
                         <h3 class="font-black text-[#0d3b44] text-xl">Qualified Experts</h3>
-                        <p class="text-gray-500 text-sm">Both founders hold specialized Master's degrees in Physiotherapy (MPT).</p>
+                        <p class="text-gray-500 text-sm">Our founders hold specialized certifications and years of clinical experience.</p>
                     </div>
                     <div class="text-center space-y-3">
                         <div class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center mx-auto shadow-sm text-teal-600">
@@ -211,9 +197,9 @@
                 <div>
                     <h4 class="font-bold mb-6 text-teal-400 uppercase tracking-widest text-xs">Navigation</h4>
                     <ul class="space-y-4 text-sm font-medium text-teal-50/80">
-                        <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                        <li><a href="home.html" class="hover:text-white transition-colors">Home</a></li>
                         <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
-                        <li><a href="doctors.html" class="hover:text-white transition-colors font-bold text-white">Founders</a></li>
+                        <li><a href="founders.html" class="hover:text-white transition-colors font-bold text-white">Founders</a></li>
                         <li><a href="gallery.html" class="hover:text-white transition-colors">Gallery</a></li>
                     </ul>
                 </div>
@@ -235,7 +221,7 @@
                 </div>
             </div>
             <div class="border-t border-white/5 pt-10 text-center">
-                <p class="text-xs font-bold text-teal-100/30">© 2026 Step2Heal Advanced Physiotherapy and Rehabilation Centre. All Rights Reserved.</p>
+                <p class="text-xs font-bold text-teal-100/30">© 2026 Step2Heal Advanced Physiotherapy and Rehabilitation Centre. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
