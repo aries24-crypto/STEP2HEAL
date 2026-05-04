@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Alpine.js (Updated to include Collapse plugin for smoother FAQs) -->
+    <!-- Alpine.js -->
     <script src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <!-- Lucide Icons -->
@@ -24,6 +24,28 @@
         .portal-card:hover { transform: translateY(-12px); }
         
         .image-mask { clip-path: border-box; border-radius: 3rem 3rem 10rem 3rem; }
+
+        /* Review Slider Mobile Specific Styles */
+        @media (max-width: 767px) {
+            .review-slider {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Hide scrollbar for Firefox */
+                padding-bottom: 20px;
+            }
+            .review-slider::-webkit-scrollbar {
+                display: none; /* Hide scrollbar for Chrome/Safari */
+            }
+            .review-item {
+                flex: 0 0 85%; /* Shows 85% of the card to peek at next card */
+                scroll-snap-align: center;
+                margin-right: 16px;
+            }
+            .review-item:first-child { margin-left: 5%; }
+        }
 
         @keyframes float {
             0% { transform: translateY(0px); }
@@ -118,15 +140,17 @@
     </section>
 
     <!-- Google Reviews Section -->
-    <section class="py-24 px-4 bg-teal-50/30">
-        <div class="max-w-7xl mx-auto">
+    <section class="py-24 px-0 md:px-4 bg-teal-50/30 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 md:px-0">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black text-[#0d3b44] tracking-tight mb-4">Patient Success Stories</h2>
-                <p class="text-gray-500 font-medium">Hear from those who've regained their mobility at Step2Heal.</p>
+                <h2 class="text-4xl md:text-5xl font-black text-[#0d3b44] tracking-tight mb-4 px-4">Patient Success Stories</h2>
+                <p class="text-gray-500 font-medium px-4">Hear from those who've regained their mobility at Step2Heal.</p>
             </div>
-            <div class="grid md:grid-cols-3 gap-8">
+            
+            <!-- Horizontal slider class added for mobile -->
+            <div class="review-slider md:grid md:grid-cols-3 md:gap-8">
                 <!-- Review 1 -->
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-teal-50">
+                <div class="review-item bg-white p-8 rounded-[2rem] shadow-sm border border-teal-50 flex flex-col h-full">
                     <div class="flex text-orange-400 mb-4">
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
@@ -134,14 +158,14 @@
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
                     </div>
-                    <p class="text-gray-600 mb-6 italic">"Thank you Dr Saijal & Megha. Amazing physiotherapist. Their skills & knowledge r outstanding. They are so passionate to achieve the best possible outcome for their patients. I was taking sessions for my slip disc and I am feeling so much better now. I highly recommend step to heal."</p>
+                    <p class="text-gray-600 mb-6 italic flex-grow">"Thank you Dr Saijal & Megha. Amazing physiotherapist. Their skills & knowledge r outstanding. They are so passionate to achieve the best possible outcome for their patients. I was taking sessions for my slip disc and I am feeling so much better now. I highly recommend step to heal."</p>
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[#0d3b44]">P</div>
                         <span class="font-bold text-[#0d3b44]">Parul Kapoor</span>
                     </div>
                 </div>
                 <!-- Review 2 -->
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-teal-50">
+                <div class="review-item bg-white p-8 rounded-[2rem] shadow-sm border border-teal-50 flex flex-col h-full">
                     <div class="flex text-orange-400 mb-4">
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
@@ -149,14 +173,14 @@
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
                     </div>
-                    <p class="text-gray-600 mb-6 italic">""Experiencing therapy and relaxation at his center is truly amazing! It's a great way to find relief from pain and rejuvenate your body. The expert care and modern techniques used here help you feel your best.""</p>
+                    <p class="text-gray-600 mb-6 italic flex-grow">"Experiencing therapy and relaxation at his center is truly amazing! It's a great way to find relief from pain and rejuvenate your body. The expert care and modern techniques used here help you feel your best."</p>
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[#0d3b44]">A</div>
                         <span class="font-bold text-[#0d3b44]">Akash Singh</span>
                     </div>
                 </div>
                 <!-- Review 3 -->
-                <div class="bg-white p-8 rounded-[2rem] shadow-sm border border-teal-50">
+                <div class="review-item bg-white p-8 rounded-[2rem] shadow-sm border border-teal-50 flex flex-col h-full">
                     <div class="flex text-orange-400 mb-4">
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
@@ -164,14 +188,20 @@
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
                         <i data-lucide="star" class="fill-current w-4 h-4"></i>
                     </div>
-                    <p class="text-gray-600 mb-6 italic">"The best physiotherapy ever, care comfort confidence that helps the patient recover faster and live healthier lives. They support every step of healing. Must visit.
-"</p>
+                    <p class="text-gray-600 mb-6 italic flex-grow">"The best physiotherapy ever, care comfort confidence that helps the patient recover faster and live healthier lives. They support every step of healing. Must visit."</p>
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[#0d3b44]">P</div>
                         <span class="font-bold text-[#0d3b44]">Panshul Gupta</span>
                     </div>
                 </div>
             </div>
+            
+            <div class="mt-4 md:hidden flex justify-center gap-2">
+                <div class="w-2 h-2 rounded-full bg-teal-600"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+                <div class="w-2 h-2 rounded-full bg-gray-300"></div>
+            </div>
+
             <div class="mt-12 text-center">
                 <a href="https://share.google/rvc6hhUrntZ1oY3fh" target="_blank" class="text-teal-600 font-bold flex items-center justify-center gap-2 hover:underline">
                     Read more on Google <i data-lucide="external-link" class="w-4 h-4"></i>
