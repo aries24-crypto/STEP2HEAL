@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Step2Heal | Advanced Physiotherapy & Rehabilitation Noida</title>
+    <title>Step2Heal | Advanced Physiotherapy & Rehabilitation Centre Noida</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
@@ -199,14 +199,6 @@
                         <span class="font-bold text-[#0d3b44]">Panshul Gupta</span>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Indicators synced with scroll -->
-            <div class="mt-4 md:hidden flex justify-center gap-2">
-                <template x-for="i in [0, 1, 2]">
-                    <div class="w-2 h-2 rounded-full transition-all duration-300" 
-                         :class="activeReview === i ? 'bg-teal-600 w-4' : 'bg-gray-300'"></div>
-                </template>
             </div>
 
             <div class="mt-12 text-center">
@@ -463,63 +455,69 @@
 
             // Automatic Slider Logic
             const slider = document.getElementById('reviewSlider');
-            const items = slider.querySelectorAll('.review-item');
-            const totalItems = items.length;
-            let currentIndex = 0;
-            let isAutoScrolling = true;
+            if (slider) {
+                const items = slider.querySelectorAll('.review-item');
+                const totalItems = items.length;
+                let currentIndex = 0;
+                let isAutoScrolling = true;
 
-            // Update Alpine state from outside
-            function updateAlpineIndex(idx) {
-                const bodyEl = document.querySelector('body');
-                if (bodyEl && bodyEl.__x) {
-                    bodyEl.__x.$data.activeReview = idx;
+                // Update Alpine state if needed (though indicators are removed)
+                function updateAlpineIndex(idx) {
+                    const bodyEl = document.querySelector('body');
+                    if (bodyEl && bodyEl.__x) {
+                        bodyEl.__x.$data.activeReview = idx;
+                    }
                 }
-            }
 
-            function autoScroll() {
-                // Only autoscroll on mobile where layout is horizontal
-                if (!isAutoScrolling || window.innerWidth >= 768) return;
+                function autoScroll() {
+                    // Only autoscroll on mobile where layout is horizontal
+                    if (!isAutoScrolling || window.innerWidth >= 768) return;
 
-                currentIndex = (currentIndex + 1) % totalItems;
-                
-                // Scroll the container
-                const item = items[currentIndex];
-                const scrollAmount = item.offsetLeft - (slider.offsetWidth - item.offsetWidth) / 2;
-                
-                slider.scrollTo({
-                    left: scrollAmount,
-                    behavior: 'smooth'
-                });
-                
-                updateAlpineIndex(currentIndex);
-            }
-
-            // Sync indicators on manual scroll (user swiping)
-            slider.addEventListener('scroll', () => {
-                if (window.innerWidth >= 768) return;
-                
-                const scrollLeft = slider.scrollLeft;
-                const itemWidth = items[0].offsetWidth + 16; // width + margin
-                const centerIndex = Math.round(scrollLeft / itemWidth);
-                
-                if (centerIndex !== currentIndex) {
-                    currentIndex = centerIndex;
+                    currentIndex = (currentIndex + 1) % totalItems;
+                    
+                    // Scroll the container
+                    const item = items[currentIndex];
+                    const scrollAmount = item.offsetLeft - (slider.offsetWidth - item.offsetWidth) / 2;
+                    
+                    slider.scrollTo({
+                        left: scrollAmount,
+                        behavior: 'smooth'
+                    });
+                    
                     updateAlpineIndex(currentIndex);
                 }
-            });
 
-            // Pause autoscroll on interaction
-            slider.addEventListener('touchstart', () => isAutoScrolling = false);
-            
-            // Resume after 5 seconds of inactivity
-            let resumeTimeout;
-            slider.addEventListener('touchend', () => {
-                clearTimeout(resumeTimeout);
-                resumeTimeout = setTimeout(() => isAutoScrolling = true, 5000);
-            });
+                // Initial interval set to 2 seconds
+                let scrollInterval = setInterval(autoScroll, 2000);
 
-            // Set interval to 2.5 seconds (2500ms)
-            setInterval(autoScroll, 2500);
+                // Pause auto-scroll on interaction
+                slider.addEventListener('touchstart', () => {
+                    isAutoScrolling = false;
+                    clearInterval(scrollInterval);
+                });
+
+                // Resume auto-scroll after a delay if interaction stops
+                slider.addEventListener('touchend', () => {
+                    setTimeout(() => {
+                        isAutoScrolling = true;
+                        clearInterval(scrollInterval);
+                        scrollInterval = setInterval(autoScroll, 2000);
+                    }, 4000);
+                });
+
+                // Manual scroll sync logic (to keep currentIndex updated if user swipes)
+                slider.addEventListener('scroll', () => {
+                    if (window.innerWidth < 768) {
+                        const scrollLeft = slider.scrollLeft;
+                        const width = items[0].offsetWidth + 16;
+                        const newIdx = Math.round(scrollLeft / width);
+                        if (newIdx !== currentIndex && newIdx < totalItems) {
+                            currentIndex = newIdx;
+                            updateAlpineIndex(currentIndex);
+                        }
+                    }
+                });
+            }
         });
     </script>
 </body>
