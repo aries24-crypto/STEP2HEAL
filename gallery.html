@@ -78,7 +78,8 @@
             { id: 14, category: 'Posts', title: 'Cerebral Palsy', size: 'normal', url: 'download (2).jpg', desc: 'About Cerebral Palsy.' }
         ],
         get filteredItems() {
-            if (this.activeCategory === 'All' || this.activeCategory === 'Instagram') return this.items;
+            if (this.activeCategory === 'All') return this.items;
+            if (this.activeCategory === 'Instagram') return []; 
             return this.items.filter(i => i.category === this.activeCategory);
         },
         openLightbox(img) {
@@ -88,51 +89,46 @@
       }" @scroll.window="scrolled = (window.pageYOffset > 20)">
 
     <!-- Navbar -->
-    <nav :class="scrolled ? 'shadow-md py-2 bg-white/95' : 'py-4 bg-transparent'" 
-         class="fixed w-full z-[60] transition-all duration-300 border-b border-gray-100 nav-blur">
+    <nav :class="scrolled ? 'shadow-sm py-2 bg-white/90' : 'py-5 bg-transparent'" 
+          class="fixed w-full z-[60] transition-all duration-300 nav-blur">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <div class="flex items-center gap-3 group cursor-pointer" onclick="window.location.href='index.html'">
-                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-12 w-auto object-contain">
-                    <div class="flex flex-col">
-                        <span class="font-extrabold text-lg leading-none text-[#0d3b44] tracking-tight">Step2Heal</span>
-                        <span class="text-[9px] italic text-orange-500 font-bold mt-0.5">Where every step matters</span>
+                <div class="flex items-center gap-4 group cursor-pointer" onclick="window.location.href='index.html'">
+                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-14 w-auto object-contain">
+                    <div class="flex flex-col leading-none">
+                        <span class="font-extrabold text-xl text-[#0d3b44] tracking-tight">Step2Heal</span>
+                        <span class="text-[10px] italic font-semibold text-orange-500 mt-1">Where every step matters</span>
                     </div>
                 </div>
 
-                <!-- Desktop Nav -->
-                <div class="hidden md:flex space-x-7 items-center">
-                    <a href="home.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Home</a>
-                    <a href="services.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Services</a>
-                    <a href="founders.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Founders</a>
-                    <a href="gallery.html" class="text-sm font-bold text-teal-600 border-b-2 border-teal-600 pb-1">Gallery</a>
-                    <a href="blog.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Blog</a>
-                    <a href="contact.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors mr-2">Contact</a>
-                    <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-teal-700 transition-all shadow-lg">Book Session</a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="home.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Home</a>
+                    <a href="services.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Services</a>
+                    <a href="founders.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Founders</a>
+                    <a href="gallery.html" class="text-sm font-bold text-teal-600">Gallery</a>
+                    <a href="blog.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Blog</a>
+                    <a href="contact.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Contact</a>
+                    <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white px-6 py-3 rounded-xl text-sm font-bold hover:shadow-xl hover:shadow-teal-900/20 transition-all">Book Session</a>
                 </div>
 
-                <div class="md:hidden">
-                    <button @click="mobileMenu = !mobileMenu" class="p-2 text-[#0d3b44] bg-gray-50 rounded-lg">
-                        <i data-lucide="menu" x-show="!mobileMenu"></i>
-                        <i data-lucide="x" x-show="mobileMenu"></i>
-                    </button>
-                </div>
+                <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-[#0d3b44]">
+                    <i data-lucide="menu" x-show="!mobileMenu"></i>
+                    <i data-lucide="x" x-show="mobileMenu"></i>
+                </button>
             </div>
         </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div x-show="mobileMenu" x-transition x-cloak class="fixed inset-0 z-[55] bg-white pt-24 px-6 md:hidden">
+    <!-- Mobile Menu -->
+    <div x-show="mobileMenu" x-transition x-cloak class="fixed inset-0 z-[55] bg-white pt-24 px-8 md:hidden">
         <div class="flex flex-col space-y-6 text-center">
-            <a href="home.html" class="text-2xl font-bold text-gray-800">Home</a>
-            <a href="services.html" class="text-2xl font-bold text-gray-800">Services</a>
-            <a href="founders.html" class="text-2xl font-bold text-gray-800">Founders</a>
+            <a href="home.html" class="text-2xl font-bold">Home</a>
+            <a href="services.html" class="text-2xl font-bold">Services</a>
+            <a href="founders.html" class="text-2xl font-bold">Founders</a>
             <a href="gallery.html" class="text-2xl font-bold text-teal-600">Gallery</a>
-            <a href="blog.html" class="text-2xl font-bold text-gray-800">Blog</a>
-            <a href="contact.html" class="text-2xl font-bold text-gray-800">Contact</a>
-            <hr>
-            <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white py-4 rounded-2xl font-bold text-lg">Book Appointment</a>
+            <a href="blog.html" class="text-2xl font-bold">Blog</a>
+            <a href="contact.html" class="text-2xl font-bold">Contact</a>
+            <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white py-4 rounded-2xl font-bold text-lg">Book Session</a>
         </div>
     </div>
 
@@ -155,7 +151,8 @@
                         :class="activeCategory === cat ? 'bg-[#0d3b44] text-white shadow-xl scale-105' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-100'"
                         class="px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2"
                     >
-                        <i data-lucide="instagram" class="w-4 h-4" x-show="cat === 'Instagram'"></i>
+                        <!-- Inline SVG for Instagram inside button -->
+                        <svg x-show="cat === 'Instagram'" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                         <span x-text="cat"></span>
                     </button>
                 </template>
@@ -175,15 +172,13 @@
                 <p class="text-gray-500 mt-2">Follow <a href="https://www.instagram.com/pt_step2heal/" target="_blank" class="text-teal-600 font-bold hover:underline">@pt_step2heal</a> for daily health tips and clinic updates.</p>
             </div>
             <a href="https://www.instagram.com/pt_step2heal/" target="_blank" class="flex items-center gap-2 text-sm font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-xl hover:shadow-lg transition-all">
-                <i data-lucide="instagram" class="w-4 h-4"></i>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                 Follow on Instagram
             </a>
         </div>
         
         <!-- Instagram Embed Container -->
         <div class="instagram-container shadow-inner border border-gray-100 p-1 md:p-4 bg-gray-50">
-            <!-- Note: Direct Instagram Embeds usually require an iframe from a service like Elfsight or LightWidget. 
-                 Below is a placeholder using an iframe that links to the profile feed -->
             <iframe 
                 src="https://www.instagram.com/pt_step2heal/embed" 
                 class="w-full h-[600px] md:h-[800px] rounded-2xl border-0 shadow-sm"
@@ -296,26 +291,27 @@
                     <a href="blog.html" class="hover:text-teal-600 transition-colors">Blog</a>
                 </div>
                 <div class="flex gap-5">
-                    <a href="https://www.instagram.com/pt_step2heal/" target="_blank" class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-50 hover:text-teal-600 transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                    <a href="https://www.facebook.com/share/157uL5uYit/?mibextid=wwXIfr" target="_blank" class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-50 hover:text-teal-600 transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a href="https://www.instagram.com/pt_step2heal/" target="_blank" class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-50 hover:text-teal-600 transition-all" title="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/share/157uL5uYit/?mibextid=wwXIfr" target="_blank" class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-50 hover:text-teal-600 transition-all" title="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
                 </div>
             </div>
-            <p class="text-center text-gray-400 text-[10px] uppercase tracking-widest mt-12 font-bold">© 2026 Step2Heal Advanced Physiotherapy Noida. All rights reserved.</p>
+            <p class="text-center text-gray-400 text-[10px] uppercase tracking-widest mt-12 font-bold">© 2026 Step2Heal Advanced Physiotherapy and Rehabilation Centre Noida. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Initialize Lucide icons on load and during data changes
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
-        });
-
-        // Watch for Alpine category changes to re-initialize icons if necessary
-        document.addEventListener('alpine:initialized', () => {
-            Alpine.effect(() => {
-                const currentCategory = Alpine.store('activeCategory');
-                setTimeout(() => lucide.createIcons(), 50);
-            });
         });
     </script>
 </body>
