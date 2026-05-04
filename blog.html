@@ -153,51 +153,48 @@
       }" @scroll.window="scrolled = (window.pageYOffset > 20)">
 
     <!-- Navbar -->
-    <nav :class="scrolled ? 'shadow-md py-2 bg-white/95' : 'py-4 bg-transparent'" 
-         class="fixed w-full z-[60] transition-all duration-300 border-b border-gray-100 nav-blur">
+    <nav :class="scrolled ? 'shadow-sm py-2 bg-white/90' : 'py-5 bg-transparent'" 
+          class="fixed w-full z-[60] transition-all duration-300 nav-blur">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
-                <!-- Logo -->
-                <div class="flex items-center gap-2 group cursor-pointer" onclick="window.location.href='index.html'">
-                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-10 md:h-14 logo-img" onerror="this.src='https://ui-avatars.com/api/?name=S2H&background=0d3b44&color=fff'">
-                    <div class="flex flex-col">
-                        <span class="font-extrabold text-lg md:text-xl leading-none text-[#0d3b44] tracking-tight">Step2Heal</span>
-                        <span class="text-[9px] md:text-[11px] italic text-orange-500 font-medium">Where every step matters</span>
+                <div class="flex items-center gap-4 group cursor-pointer" onclick="window.location.href='index.html'">
+                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-14 w-auto object-contain">
+                    <div class="flex flex-col leading-none">
+                        <span class="font-extrabold text-xl text-[#0d3b44] tracking-tight">Step2Heal</span>
+                        <span class="text-[10px] italic font-semibold text-orange-500 mt-1">Where every step matters</span>
                     </div>
                 </div>
 
-                <!-- Desktop Nav -->
-                <div class="hidden lg:flex space-x-7 items-center">
-                    <a href="home.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Home</a>
-                    <a href="services.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Services</a>
-                    <a href="founders.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Founders</a>
-                    <a href="gallery.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Gallery</a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="home.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Home</a>
+                    <a href="services.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Services</a>
+                    <a href="founders.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Founders</a>
+                    <a href="gallery.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Gallery</a>
                     <a href="blog.html" class="text-sm font-bold text-teal-600">Blog</a>
-                    <a href="contact.html" class="text-sm font-bold text-gray-800 hover:text-teal-600 transition-colors">Contact</a>
-                    <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-teal-700 transition-all shadow-lg ml-4">Book Session</a>
+                    <a href="contact.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Contact</a>
+                    <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white px-6 py-3 rounded-xl text-sm font-bold hover:shadow-xl hover:shadow-teal-900/20 transition-all">Book Session</a>
                 </div>
 
-                <!-- Mobile Toggle -->
-                <div class="lg:hidden">
-                    <button @click="mobileMenu = !mobileMenu" class="p-2 text-[#0d3b44] bg-gray-50 rounded-lg">
-                        <i data-lucide="menu" x-show="!mobileMenu"></i>
-                        <i data-lucide="x" x-show="mobileMenu"></i>
-                    </button>
-                </div>
+                <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-[#0d3b44]">
+                    <i data-lucide="menu" x-show="!mobileMenu"></i>
+                    <i data-lucide="x" x-show="mobileMenu"></i>
+                </button>
             </div>
         </div>
-
-        <!-- Mobile Menu -->
-        <div x-show="mobileMenu" x-cloak class="lg:hidden bg-white border-b border-gray-100 py-6 px-4 space-y-4 shadow-xl">
-            <a href="home.html" class="block text-lg font-bold text-gray-800">Home</a>
-            <a href="services.html" class="block text-lg font-bold text-gray-800">Services</a>
-            <a href="founders.html" class="block text-lg font-bold text-gray-800">Founders</a>
-            <a href="gallery.html" class="block text-lg font-bold text-gray-800">Gallery</a>
-            <a href="blog.html" class="block text-lg font-bold text-teal-600">Blog</a>
-            <a href="contact.html" class="block text-lg font-bold text-gray-800">Contact</a>
-            <a href="https://wa.me/919773960242" class="block bg-[#0d3b44] text-white text-center py-4 rounded-2xl font-bold">Book Session</a>
-        </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div x-show="mobileMenu" x-transition x-cloak class="fixed inset-0 z-[55] bg-white pt-24 px-8 md:hidden">
+        <div class="flex flex-col space-y-6 text-center">
+            <a href="home.html" class="text-2xl font-bold">Home</a>
+            <a href="services.html" class="text-2xl font-bold">Services</a>
+            <a href="founders.html" class="text-2xl font-bold">Founders</a>
+            <a href="gallery.html" class="text-2xl font-bold">Gallery</a>
+            <a href="blog.html" class="text-2xl font-bold text-teal-600">Blog</a>
+            <a href="contact.html" class="text-2xl font-bold">Contact</a>
+            <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white py-4 rounded-2xl font-bold text-lg">Book Session</a>
+        </div>
+    </div>
 
     <!-- Hero -->
     <section class="blog-gradient pt-32 pb-16 md:pt-48 md:pb-24">
