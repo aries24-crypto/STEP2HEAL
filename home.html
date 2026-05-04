@@ -33,14 +33,14 @@
                 scroll-snap-type: x mandatory;
                 scroll-behavior: smooth;
                 -webkit-overflow-scrolling: touch;
-                scrollbar-width: none; /* Hide scrollbar for Firefox */
+                scrollbar-width: none;
                 padding-bottom: 20px;
             }
             .review-slider::-webkit-scrollbar {
-                display: none; /* Hide scrollbar for Chrome/Safari */
+                display: none;
             }
             .review-item {
-                flex: 0 0 85%; /* Shows 85% of the card to peek at next card */
+                flex: 0 0 85%;
                 scroll-snap-align: center;
                 margin-right: 16px;
             }
@@ -56,7 +56,12 @@
     </style>
 </head>
 <body class="bg-white text-gray-900 selection:bg-teal-100 selection:text-[#0d3b44]" 
-      x-data="{ scrolled: false, mobileMenu: false, activeReview: 0 }" 
+      x-data="{ 
+        scrolled: false, 
+        mobileMenu: false, 
+        activeReview: 0,
+        whatsappMsg: 'I want book a session with step2heal'
+      }" 
       @scroll.window="scrolled = (window.pageYOffset > 20)">
 
     <!-- Navbar -->
@@ -79,7 +84,7 @@
                     <a href="gallery.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Gallery</a>
                     <a href="blog.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Blog</a>
                     <a href="contact.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Contact</a>
-                    <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white px-6 py-3 rounded-xl text-sm font-bold hover:shadow-xl hover:shadow-teal-900/20 transition-all">Book Session</a>
+                    <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" class="bg-[#0d3b44] text-white px-6 py-3 rounded-xl text-sm font-bold hover:shadow-xl hover:shadow-teal-900/20 transition-all">Book Session</a>
                 </div>
 
                 <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-[#0d3b44]">
@@ -99,7 +104,7 @@
             <a href="gallery.html" class="text-2xl font-bold">Gallery</a>
             <a href="blog.html" class="text-2xl font-bold">Blog</a>
             <a href="contact.html" class="text-2xl font-bold">Contact</a>
-            <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white py-4 rounded-2xl font-bold text-lg">Book Session</a>
+            <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" class="bg-[#0d3b44] text-white py-4 rounded-2xl font-bold text-lg">Book Session</a>
         </div>
     </div>
 
@@ -121,7 +126,7 @@
                     Stop managing pain. Start outgrowing it. Personalised physiotherapy for chronic pain, sports recovery, and every step in between.
                 </p>
                 <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                    <a href="https://wa.me/919773960242" class="w-full sm:w-auto bg-[#0d3b44] text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-teal-700 transition-all shadow-2xl shadow-teal-900/10 flex items-center justify-center gap-2">
+                    <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" class="w-full sm:w-auto bg-[#0d3b44] text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-teal-700 transition-all shadow-2xl shadow-teal-900/10 flex items-center justify-center gap-2">
                         Get Started <i data-lucide="arrow-right" class="w-5 h-5"></i>
                     </a>
                     <a href="services.html" class="w-full sm:w-auto px-10 py-5 rounded-2xl font-bold text-lg border-2 border-gray-100 hover:border-teal-500 transition-all flex items-center justify-center gap-2">
@@ -147,7 +152,7 @@
                 <p class="text-gray-500 font-medium px-4">Hear from those who've regained their mobility at Step2Heal.</p>
             </div>
             
-            <!-- Horizontal slider with ID for JS control -->
+            <!-- Horizontal slider -->
             <div id="reviewSlider" class="review-slider md:grid md:grid-cols-3 md:gap-8">
                 <!-- Review 1 -->
                 <div class="review-item bg-white p-8 rounded-[2rem] shadow-sm border border-teal-50 flex flex-col h-full">
@@ -198,9 +203,10 @@
             
             <!-- Indicators synced with scroll -->
             <div class="mt-4 md:hidden flex justify-center gap-2">
-                <div class="w-2 h-2 rounded-full transition-colors duration-300" :class="activeReview === 0 ? 'bg-teal-600' : 'bg-gray-300'"></div>
-                <div class="w-2 h-2 rounded-full transition-colors duration-300" :class="activeReview === 1 ? 'bg-teal-600' : 'bg-gray-300'"></div>
-                <div class="w-2 h-2 rounded-full transition-colors duration-300" :class="activeReview === 2 ? 'bg-teal-600' : 'bg-gray-300'"></div>
+                <template x-for="i in [0, 1, 2]">
+                    <div class="w-2 h-2 rounded-full transition-all duration-300" 
+                         :class="activeReview === i ? 'bg-teal-600 w-4' : 'bg-gray-300'"></div>
+                </template>
             </div>
 
             <div class="mt-12 text-center">
@@ -374,7 +380,7 @@
                     <h3 class="text-4xl font-black mb-6">Book Your Visit</h3>
                     <p class="text-teal-50/80 mb-10 text-lg leading-relaxed">Our coordinators are ready to assist you with booking or answering questions. We prioritize same-day appointments for urgent cases.</p>
                     <div class="space-y-4">
-                        <a href="https://wa.me/919773960242" class="flex items-center justify-between p-6 rounded-2xl bg-white/10 hover:bg-white/20 transition-all border border-white/20">
+                        <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" class="flex items-center justify-between p-6 rounded-2xl bg-white/10 hover:bg-white/20 transition-all border border-white/20">
                             <div class="flex items-center gap-4">
                                 <i data-lucide="message-circle" class="w-8 h-8"></i>
                                 <span class="font-bold text-xl">WhatsApp Us</span>
@@ -462,53 +468,58 @@
             let currentIndex = 0;
             let isAutoScrolling = true;
 
+            // Update Alpine state from outside
+            function updateAlpineIndex(idx) {
+                const bodyEl = document.querySelector('body');
+                if (bodyEl && bodyEl.__x) {
+                    bodyEl.__x.$data.activeReview = idx;
+                }
+            }
+
             function autoScroll() {
+                // Only autoscroll on mobile where layout is horizontal
                 if (!isAutoScrolling || window.innerWidth >= 768) return;
 
                 currentIndex = (currentIndex + 1) % totalItems;
                 
-                // Update Alpine state for indicators
-                const bodyEl = document.querySelector('body');
-                if (bodyEl.__x) {
-                    bodyEl.__x.$data.activeReview = currentIndex;
-                }
-
                 // Scroll the container
-                const scrollAmount = items[currentIndex].offsetLeft - (slider.offsetWidth - items[currentIndex].offsetWidth) / 2;
+                const item = items[currentIndex];
+                const scrollAmount = item.offsetLeft - (slider.offsetWidth - item.offsetWidth) / 2;
+                
                 slider.scrollTo({
                     left: scrollAmount,
                     behavior: 'smooth'
                 });
+                
+                updateAlpineIndex(currentIndex);
             }
 
-            // Sync indicators on manual scroll
+            // Sync indicators on manual scroll (user swiping)
             slider.addEventListener('scroll', () => {
-                if (window.innerWidth < 768) {
-                    const scrollLeft = slider.scrollLeft;
-                    const itemWidth = items[0].offsetWidth + 16;
-                    const newIndex = Math.round(scrollLeft / itemWidth);
-                    
-                    const bodyEl = document.querySelector('body');
-                    if (bodyEl.__x && bodyEl.__x.$data.activeReview !== newIndex) {
-                        bodyEl.__x.$data.activeReview = newIndex;
-                        currentIndex = newIndex;
-                    }
+                if (window.innerWidth >= 768) return;
+                
+                const scrollLeft = slider.scrollLeft;
+                const itemWidth = items[0].offsetWidth + 16; // width + margin
+                const centerIndex = Math.round(scrollLeft / itemWidth);
+                
+                if (centerIndex !== currentIndex) {
+                    currentIndex = centerIndex;
+                    updateAlpineIndex(currentIndex);
                 }
             });
 
-            // Pause auto-scroll on interaction
+            // Pause autoscroll on interaction
             slider.addEventListener('touchstart', () => isAutoScrolling = false);
             
-            // Resume auto-scroll after 5 seconds of inactivity
+            // Resume after 5 seconds of inactivity
             let resumeTimeout;
             slider.addEventListener('touchend', () => {
                 clearTimeout(resumeTimeout);
-                resumeTimeout = setTimeout(() => {
-                    isAutoScrolling = true;
-                }, 5000);
+                resumeTimeout = setTimeout(() => isAutoScrolling = true, 5000);
             });
 
-            setInterval(autoScroll, 3500);
+            // Set interval to 2.5 seconds (2500ms)
+            setInterval(autoScroll, 2500);
         });
     </script>
 </body>
