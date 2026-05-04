@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Alpine.js -->
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
@@ -35,6 +35,7 @@
 
         @media (max-width: 768px) {
             .masonry-item-wide { grid-column: span 1; }
+            .masonry-grid { grid-auto-rows: 200px; }
         }
 
         @keyframes fadeIn {
@@ -51,28 +52,25 @@
         activeCategory: 'All',
         modalOpen: false,
         selectedImage: null,
-        categories: ['All', 'Clinic', 'Treatments', 'Results'],
+        categories: ['All', 'Clinic', 'Treatments', 'Results', 'Posts'],
         items: [
             { id: 1, category: 'Clinic', title: 'Waiting Area', size: 'tall', url: '2025-09-28 (1).jpg', desc: 'Our comfortable waiting space designed for patient ease.' },
             { id: 2, category: 'Treatments', title: 'Our Services', size: 'tall', url: '2025-09-28 (2).jpg', desc: 'List of the services offered by Step2Heal.' },
             { id: 3, category: 'Clinic', title: 'Therapy Hall View', size: 'wide', url: '2025-09-28.jpg', desc: 'A spacious, well-lit environment encouraging active recovery and movement.' },
-            { id: 4, category: 'Clinic', title: 'Our Banner', size: 'wide', url: 'ChatGPT Image Apr 21, 2026, 06_11_40 PM.png', desc: 'Step2Heal's Banner on Linked In.' },
-            { id: 5, category: 'Treatments', title: 'Free Camp', size: 'Normal', url: 'WhatsApp Image 2026-01-15 at 12.35.44.jpeg', desc: 'We offer free physiotherapy camps, follow us on Instagram for latest information and updates regadrding Physiotherapy camps (@pt_step2heal).' },
-            { id: 6, category: 'Clinic', title: 'Logo', size: 'normal', url: 'WhatsApp Image 2026-04-21 at 17.24.20.jpeg', desc: 'Step2Heal's Official Logo.' },
-            { id: 7, category: 'Treatments', title: 'At 9th Royal Challenges Cup', size: 'wide', url: 'WhatsApp Image 2026-05-01 at 17.16.41.jpeg', desc: 'Honoured to be a part of the 9th ROYAL CHALLENGES CUP, All India Traditional Shoto-kai Karate Championship 🏆
-Keeping fighters strong, flexible and injury-free! #physioonduty Supporting every kick, punch, and winning moments 👊 helping Champions move better, fight better 👩‍⚕️.' },
-            { id: 8, category: 'Treatments', title: 'At Noida Chase by WeChaser', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.16.43.jpeg', desc: 'Noida chase 10km/5km/2km Run
-Perfectly organised by @wechaser 💯💯
-Thanks a lot @im_rathor and @rohit_runs for giving us this opportunity, it was an awesome event full of energy and enthusiasm 🤗🤗
-Team @pt_step2heal is there's Recovery partner it was an amazing experience to partner with you guys looking forward to more such events ✨.' },
-            { id: 9, category: 'Clinic', title: 'Inside Step2Heal', size: 'tall', url: 'WhatsApp Image 2026-05-01 at 17.18.09 (1).jpeg', desc: 'Inside Step2Heal.' },
-            { id: 10, category: 'Clinic', title: 'Dr.Megha Yadav(PT)', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.18.09 (2).jpeg', desc: 'Dr.Megha Yadav(PT)-Consultant Physiotherapist and Co-Founder of Step2Heal.' },
-            { id: 11, category: 'Clinic', title: 'Dr. Saijal Mathuria(PT)', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.18.09.jpeg', desc: 'Dr.Saijal Mathuria(PT)-Consultant Physiotherapist and Co-Founder of Step2Heal.' },
-            { id: 12, category: 'Clinic', title: 'Clinic from Outside at Night', size: 'tall', url: 'b1113011-2f24-4a6a-a7e9-0d5823ec1386.jpg', desc: 'Night View of Clinic from Outside.' },
+            { id: 4, category: 'Posts', title: 'LinkedIn Updates', size: 'wide', url: 'ChatGPT Image Apr 21, 2026, 06_11_40 PM.png', desc: 'Step2Heal\'s Banner on LinkedIn sharing our clinical journey.' },
+            { id: 5, category: 'Treatments', title: 'Free Camp', size: 'normal', url: 'WhatsApp Image 2026-01-15 at 12.35.44.jpeg', desc: 'We offer free physiotherapy camps, follow us on Instagram for latest information and updates regarding Physiotherapy camps (@pt_step2heal).' },
+            { id: 6, category: 'Clinic', title: 'Logo', size: 'normal', url: 'WhatsApp Image 2026-04-21 at 17.24.20.jpeg', desc: 'Step2Heal\'s Official Logo.' },
+            { id: 7, category: 'Treatments', title: 'At 9th Royal Challenges Cup', size: 'wide', url: 'WhatsApp Image 2026-05-01 at 17.16.41.jpeg', desc: 'Honoured to be a part of the 9th ROYAL CHALLENGES CUP. Keeping fighters strong, flexible and injury-free!' },
+            { id: 8, category: 'Treatments', title: 'At Noida Chase by WeChaser', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.16.43.jpeg', desc: 'Noida chase 10km/5km/2km Run. Team Step2Heal acted as Recovery partner for this amazing event.' },
+            { id: 9, category: 'Clinic', title: 'Inside Step2Heal', size: 'tall', url: 'WhatsApp Image 2026-05-01 at 17.18.09 (1).jpeg', desc: 'Inside Step2Heal Clinic interiors.' },
+            { id: 10, category: 'Clinic', title: 'Dr. Megha Yadav(PT)', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.18.09 (2).jpeg', desc: 'Dr. Megha Yadav(PT) - Consultant Physiotherapist and Co-Founder of Step2Heal.' },
+            { id: 11, category: 'Clinic', title: 'Dr. Saijal Mathuria(PT)', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.18.09.jpeg', desc: 'Dr. Saijal Mathuria(PT) - Consultant Physiotherapist and Co-Founder of Step2Heal.' },
+            { id: 12, category: 'Posts', title: 'Night View', size: 'tall', url: 'b1113011-2f24-4a6a-a7e9-0d5823ec1386.jpg', desc: 'Shared on our social media: Night View of Clinic from Outside.' },
             { id: 13, category: 'Clinic', title: 'Step2Heal Clinic Front View', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.20.33.jpeg', desc: 'Daylight View of Clinic from Outside.' }
         ],
         get filteredItems() {
-            return this.activeCategory === 'All' ? this.items : this.items.filter(i => i.category === this.activeCategory);
+            if (this.activeCategory === 'All') return this.items;
+            return this.items.filter(i => i.category === this.activeCategory);
         },
         openLightbox(img) {
             this.selectedImage = img;
@@ -85,7 +83,7 @@ Team @pt_step2heal is there's Recovery partner it was an amazing experience to p
          class="fixed w-full z-[60] transition-all duration-300 border-b border-gray-100 nav-blur">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
-                <!-- Logo and Tagline -->
+                <!-- Logo -->
                 <div class="flex items-center gap-3 group cursor-pointer" onclick="window.location.href='index.html'">
                     <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-12 w-auto object-contain">
                     <div class="flex flex-col">
@@ -187,7 +185,6 @@ Team @pt_step2heal is there's Recovery partner it was an amazing experience to p
                     <a href="tel:+919773960242" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-10 py-4 rounded-2xl font-bold transition-all">Call Clinic</a>
                 </div>
             </div>
-            <!-- Background element -->
             <div class="absolute -right-20 -top-20 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl"></div>
         </div>
     </main>
@@ -196,23 +193,22 @@ Team @pt_step2heal is there's Recovery partner it was an amazing experience to p
     <div 
         x-show="modalOpen" 
         x-cloak 
-        x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 scale-95"
-        x-transition:enter-end="opacity-100 scale-100"
-        x-transition:leave="transition ease-in duration-200"
-        x-transition:leave-start="opacity-100 scale-100"
-        x-transition:leave-end="opacity-0 scale-95"
         class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10"
         @keydown.escape.window="modalOpen = false"
     >
-        <div class="absolute inset-0 bg-black/95" @click="modalOpen = false"></div>
+        <div class="absolute inset-0 bg-black/95 transition-opacity" x-show="modalOpen" x-transition.opacity @click="modalOpen = false"></div>
         
-        <div class="relative max-w-5xl w-full bg-white rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row">
+        <div class="relative max-w-5xl w-full bg-white rounded-[2.5rem] overflow-hidden shadow-2xl flex flex-col md:flex-row"
+             x-show="modalOpen"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 scale-95"
+             x-transition:enter-end="opacity-100 scale-100">
+            
             <button @click="modalOpen = false" class="absolute top-6 right-6 z-20 bg-black/20 hover:bg-black/40 text-white p-2 rounded-full backdrop-blur-md">
                 <i data-lucide="x"></i>
             </button>
             
-            <div class="w-full md:w-2/3 bg-gray-100 flex items-center justify-center h-[50vh] md:h-[70vh]">
+            <div class="w-full md:w-2/3 bg-gray-100 flex items-center justify-center h-[40vh] md:h-[70vh]">
                 <img :src="selectedImage?.url" :alt="selectedImage?.title" class="w-full h-full object-cover">
             </div>
             
@@ -254,7 +250,7 @@ Team @pt_step2heal is there's Recovery partner it was an amazing experience to p
                 <div class="flex gap-8 text-sm font-semibold text-gray-500">
                     <a href="index.html" class="hover:text-teal-600 transition-colors">Home</a>
                     <a href="services.html" class="hover:text-teal-600 transition-colors">Services</a>
-                    <a href="doctors.html" class="hover:text-teal-600 transition-colors">Founders</a>
+                    <a href="founders.html" class="hover:text-teal-600 transition-colors">Founders</a>
                     <a href="blog.html" class="hover:text-teal-600 transition-colors">Blog</a>
                 </div>
                 <div class="flex gap-5">
@@ -267,8 +263,10 @@ Team @pt_step2heal is there's Recovery partner it was an amazing experience to p
     </footer>
 
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
+        // Initialize Lucide icons on load and during data changes if needed
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
     </script>
 </body>
 </html>
