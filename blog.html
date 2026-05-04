@@ -57,6 +57,8 @@
         sortBy: 'newest',
         selectedPost: null,
         isReading: false,
+        whatsappNumber: '919773960242',
+        bookingMessage: 'Hi Step2Heal! 👋 I\'d like to book a physiotherapy session. Could you please share the available slots? Thank you!',
         categories: ['All', 'Exercises', 'Recovery', 'Lifestyle'],
         posts: [
             {
@@ -141,13 +143,16 @@
             document.body.style.overflow = 'auto';
             setTimeout(() => { this.selectedPost = null; }, 300);
         },
+        bookSession() {
+            const url = `https://wa.me/${this.whatsappNumber}?text=${encodeURIComponent(this.bookingMessage)}`;
+            window.open(url, '_blank');
+        },
         handleQuerySubmit(e) {
             e.preventDefault();
             const query = e.target.querySelector('input').value;
             if(query) {
-                const phoneNumber = '919773960242';
                 const message = encodeURIComponent(`Hello Step2Heal! I have a query regarding my recovery: ${query}`);
-                window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+                window.open(`https://wa.me/${this.whatsappNumber}?text=${message}`, '_blank');
             }
         }
       }" @scroll.window="scrolled = (window.pageYOffset > 20)">
@@ -172,7 +177,7 @@
                     <a href="gallery.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Gallery</a>
                     <a href="blog.html" class="text-sm font-bold text-teal-600">Blog</a>
                     <a href="contact.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Contact</a>
-                    <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white px-6 py-3 rounded-xl text-sm font-bold hover:shadow-xl hover:shadow-teal-900/20 transition-all">Book Session</a>
+                    <button @click="bookSession" class="bg-[#0d3b44] text-white px-6 py-3 rounded-xl text-sm font-bold hover:shadow-xl hover:shadow-teal-900/20 transition-all">Book Session</button>
                 </div>
 
                 <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-[#0d3b44]">
@@ -192,7 +197,7 @@
             <a href="gallery.html" class="text-2xl font-bold">Gallery</a>
             <a href="blog.html" class="text-2xl font-bold text-teal-600">Blog</a>
             <a href="contact.html" class="text-2xl font-bold">Contact</a>
-            <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white py-4 rounded-2xl font-bold text-lg">Book Session</a>
+            <button @click="bookSession" class="bg-[#0d3b44] text-white py-4 rounded-2xl font-bold text-lg">Book Session</button>
         </div>
     </div>
 
@@ -346,10 +351,10 @@
                             <p class="font-black text-[#0d3b44] text-lg">Was this helpful?</p>
                             <p class="text-sm text-gray-500">Reach out for a personalized consultation.</p>
                         </div>
-                        <a href="https://wa.me/919773960242" class="bg-[#0d3b44] text-white px-8 py-3 rounded-2xl font-bold hover:bg-teal-700 transition-all flex items-center gap-2">
+                        <button @click="bookSession" class="bg-[#0d3b44] text-white px-8 py-3 rounded-2xl font-bold hover:bg-teal-700 transition-all flex items-center gap-2">
                             <span>Book an Appointment</span>
                             <i data-lucide="calendar" class="w-4 h-4"></i>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -389,7 +394,7 @@
                     <span class="text-[8px] italic text-orange-500">Where every step matters</span>
                 </div>
             </div>
-            <p class="text-xs text-gray-400">© 2026 Step2Heal Advanced Physiotherapy and Rehabilation Centre Noida. All rights reserved.</p>
+            <p class="text-xs text-gray-400">© 2026 Step2Heal Advanced Physiotherapy and Rehabilitation Centre Noida. All rights reserved.</p>
             <div class="flex gap-6">
                 <a href="#" class="text-gray-400 hover:text-teal-600 transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
                 <a href="#" class="text-gray-400 hover:text-teal-600 transition-colors"><i data-lucide="facebook" class="w-5 h-5"></i></a>
