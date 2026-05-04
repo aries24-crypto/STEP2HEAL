@@ -43,6 +43,14 @@
             to { opacity: 1; transform: translateY(0); }
         }
         .animate-fade { animation: fadeIn 0.4s ease-out forwards; }
+
+        /* Instagram Embed Styling */
+        .instagram-container {
+            min-height: 600px;
+            background: #fafafa;
+            border-radius: 2rem;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-900 selection:bg-teal-100 selection:text-[#0d3b44]" 
@@ -52,7 +60,7 @@
         activeCategory: 'All',
         modalOpen: false,
         selectedImage: null,
-        categories: ['All', 'Clinic', 'Treatments', 'Results', 'Posts'],
+        categories: ['All', 'Clinic', 'Treatments', 'Instagram', 'Results', 'Posts'],
         items: [
             { id: 1, category: 'Clinic', title: 'Waiting Area', size: 'tall', url: '2025-09-28 (1).jpg', desc: 'Our comfortable waiting space designed for patient ease.' },
             { id: 2, category: 'Treatments', title: 'Our Services', size: 'tall', url: '2025-09-28 (2).jpg', desc: 'List of the services offered by Step2Heal.' },
@@ -64,12 +72,12 @@
             { id: 8, category: 'Treatments', title: 'At Noida Chase by WeChaser', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.16.43.jpeg', desc: 'Noida chase 10km/5km/2km Run. Team Step2Heal acted as Recovery partner for this amazing event.' },
             { id: 9, category: 'Clinic', title: 'Inside Step2Heal', size: 'tall', url: 'WhatsApp Image 2026-05-01 at 17.18.09 (1).jpeg', desc: 'Inside Step2Heal Clinic interiors.' },
             { id: 10, category: 'Clinic', title: 'Dr. Megha Yadav(PT)', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.18.09 (2).jpeg', desc: 'Dr. Megha Yadav(PT) - Consultant Physiotherapist and Co-Founder of Step2Heal.' },
-            { id: 11, category: 'Clinic', title: 'Dr. Saijal Mathuria(PT)', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.20.33.jpeg', desc: 'Dr. Saijal Mathuria(PT) - Consultant Physiotherapist and Co-Founder of Step2Heal.' },
+            { id: 11, category: 'Clinic', title: 'Dr. Saijal Mathuria(PT)', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.18.09.jpeg', desc: 'Dr. Saijal Mathuria(PT) - Consultant Physiotherapist and Co-Founder of Step2Heal.' },
             { id: 12, category: 'Posts', title: 'Night View', size: 'tall', url: 'b1113011-2f24-4a6a-a7e9-0d5823ec1386.jpg', desc: 'Shared on our social media: Night View of Clinic from Outside.' },
-            { id: 13, category: 'Clinic', title: 'Step2Heal Clinic Front View', size: 'normal', url: '#', desc: 'Daylight View of Clinic from Outside.' }
+            { id: 13, category: 'Clinic', title: 'Step2Heal Clinic Front View', size: 'normal', url: 'WhatsApp Image 2026-05-01 at 17.20.33.jpeg', desc: 'Daylight View of Clinic from Outside.' }
         ],
         get filteredItems() {
-            if (this.activeCategory === 'All') return this.items;
+            if (this.activeCategory === 'All' || this.activeCategory === 'Instagram') return this.items;
             return this.items.filter(i => i.category === this.activeCategory);
         },
         openLightbox(img) {
@@ -144,16 +152,49 @@
                     <button 
                         @click="activeCategory = cat"
                         :class="activeCategory === cat ? 'bg-[#0d3b44] text-white shadow-xl scale-105' : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-100'"
-                        class="px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300"
-                        x-text="cat"
-                    ></button>
+                        class="px-6 py-2.5 rounded-full text-sm font-bold transition-all duration-300 flex items-center gap-2"
+                    >
+                        <i data-lucide="instagram" class="w-4 h-4" x-show="cat === 'Instagram'"></i>
+                        <span x-text="cat"></span>
+                    </button>
                 </template>
             </div>
         </div>
     </header>
 
+    <!-- Instagram Feed Section (Conditional) -->
+    <section x-show="activeCategory === 'Instagram' || activeCategory === 'All'" 
+             x-transition:enter="transition ease-out duration-500"
+             x-transition:enter-start="opacity-0 translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             class="max-w-7xl mx-auto px-4 mb-16">
+        <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+                <h2 class="text-3xl font-black text-[#0d3b44]">Latest from Instagram</h2>
+                <p class="text-gray-500 mt-2">Follow <a href="https://www.instagram.com/pt_step2heal/" target="_blank" class="text-teal-600 font-bold hover:underline">@pt_step2heal</a> for daily health tips and clinic updates.</p>
+            </div>
+            <a href="https://www.instagram.com/pt_step2heal/" target="_blank" class="flex items-center gap-2 text-sm font-bold text-white bg-gradient-to-r from-purple-500 to-pink-500 px-6 py-3 rounded-xl hover:shadow-lg transition-all">
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+                Follow on Instagram
+            </a>
+        </div>
+        
+        <!-- Instagram Embed Container -->
+        <div class="instagram-container shadow-inner border border-gray-100 p-1 md:p-4 bg-gray-50">
+            <!-- Note: Direct Instagram Embeds usually require an iframe from a service like Elfsight or LightWidget. 
+                 Below is a placeholder using an iframe that links to the profile feed -->
+            <iframe 
+                src="https://www.instagram.com/pt_step2heal/embed" 
+                class="w-full h-[600px] md:h-[800px] rounded-2xl border-0 shadow-sm"
+                frameborder="0" 
+                scrolling="no" 
+                allowtransparency="true">
+            </iframe>
+        </div>
+    </section>
+
     <!-- Gallery Grid -->
-    <main class="max-w-7xl mx-auto px-4 pb-24">
+    <main class="max-w-7xl mx-auto px-4 pb-24" x-show="activeCategory !== 'Instagram'">
         <div class="masonry-grid">
             <template x-for="item in filteredItems" :key="item.id">
                 <div 
@@ -247,15 +288,15 @@
                         <span class="text-[9px] text-gray-400 uppercase tracking-wider">Advanced Physiotherapy</span>
                     </div>
                 </div>
-                <div class="flex gap-8 text-sm font-semibold text-gray-500">
+                <div class="flex flex-wrap justify-center gap-8 text-sm font-semibold text-gray-500">
                     <a href="index.html" class="hover:text-teal-600 transition-colors">Home</a>
                     <a href="services.html" class="hover:text-teal-600 transition-colors">Services</a>
                     <a href="founders.html" class="hover:text-teal-600 transition-colors">Founders</a>
                     <a href="blog.html" class="hover:text-teal-600 transition-colors">Blog</a>
                 </div>
                 <div class="flex gap-5">
-                    <a href="#" class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-50 hover:text-teal-600 transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                    <a href="#" class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-50 hover:text-teal-600 transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
+                    <a href="https://www.instagram.com/pt_step2heal/" target="_blank" class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-50 hover:text-teal-600 transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
+                    <a href="https://www.facebook.com/share/157uL5uYit/?mibextid=wwXIfr" target="_blank" class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 hover:bg-teal-50 hover:text-teal-600 transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
                 </div>
             </div>
             <p class="text-center text-gray-400 text-[10px] uppercase tracking-widest mt-12 font-bold">© 2026 Step2Heal Advanced Physiotherapy Noida. All rights reserved.</p>
@@ -263,9 +304,17 @@
     </footer>
 
     <script>
-        // Initialize Lucide icons on load and during data changes if needed
+        // Initialize Lucide icons on load and during data changes
         document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
+        });
+
+        // Watch for Alpine category changes to re-initialize icons if necessary
+        document.addEventListener('alpine:initialized', () => {
+            Alpine.effect(() => {
+                const currentCategory = Alpine.store('activeCategory');
+                setTimeout(() => lucide.createIcons(), 50);
+            });
         });
     </script>
 </body>
