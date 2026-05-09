@@ -414,6 +414,70 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Service 03: Sports Physiotherapy -->
+                    <div class="border-b border-gray-100">
+                        <button @click="active = (active === 3 ? null : 3)" class="w-full py-12 flex flex-col md:flex-row md:items-center justify-between text-left group">
+                            <div class="flex items-baseline gap-6">
+                                <span class="text-sm font-black text-gray-300 group-hover:text-teal-600 transition-colors">03</span>
+                                <span class="text-3xl md:text-5xl font-bold text-[#0d3b44] group-hover:translate-x-2 transition-transform duration-500">Sports Physiotherapy</span>
+                            </div>
+                            <div class="mt-4 md:mt-0 flex items-center gap-4">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest hidden md:block">Performance Oriented</span>
+                                <div class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all"
+                                     :class="active === 3 ? 'bg-[#0d3b44] border-[#0d3b44] text-white shadow-lg' : 'group-hover:bg-[#0d3b44] group-hover:text-white'">
+                                    <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-500" :class="active === 3 ? 'rotate-180' : ''"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div x-show="active === 3" x-collapse x-cloak>
+                            <div class="pb-20">
+                                <div class="grid lg:grid-cols-12 gap-12 items-start">
+                                    <div class="lg:col-span-7">
+                                        <p class="text-2xl text-gray-500 font-medium leading-relaxed mb-10">
+                                            Tailored rehabilitation for athletes of all levels. We focus on sport-specific movements to ensure a safe return to the field while minimizing the risk of re-injury.
+                                        </p>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6">
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2.5"></div>
+                                                <p class="text-gray-600 font-semibold">Running Injuries</p>
+                                            </div>
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2.5"></div>
+                                                <p class="text-gray-600 font-semibold">Ligament Tears</p>
+                                            </div>
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2.5"></div>
+                                                <p class="text-gray-600 font-semibold">Muscle Strains</p>
+                                            </div>
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2.5"></div>
+                                                <p class="text-gray-600 font-semibold">Biomechanical Analysis</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lg:col-span-5 bg-orange-50/50 p-8 rounded-[2rem] border border-orange-100">
+                                        <h5 class="text-xs font-black uppercase tracking-widest text-orange-600 mb-6">Sports Recovery</h5>
+                                        <div class="space-y-6">
+                                            <div class="flex justify-between items-center pb-4 border-b border-orange-100">
+                                                <span class="font-bold text-[#0d3b44]">Sports Taping</span>
+                                                <i data-lucide="check-circle-2" class="w-5 h-5 text-orange-500"></i>
+                                            </div>
+                                            <div class="flex justify-between items-center pb-4 border-b border-orange-100">
+                                                <span class="font-bold text-[#0d3b44]">Agility Training</span>
+                                                <i data-lucide="check-circle-2" class="w-5 h-5 text-orange-500"></i>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="font-bold text-[#0d3b44]">Load Management</span>
+                                                <i data-lucide="check-circle-2" class="w-5 h-5 text-orange-500"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -422,57 +486,34 @@
     <!-- Footer -->
     <footer class="bg-[#0d3b44] pt-24 pb-12 text-white relative">
         <!-- Back to Top Button -->
-        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/30">
-            <i data-lucide="arrow-up" class="w-6 h-6"></i>
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/30 group">
+            <i data-lucide="arrow-up" class="w-6 h-6 group-hover:-translate-y-1 transition-transform"></i>
         </button>
 
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-                <div class="col-span-1 lg:col-span-1">
-                    <div class="flex items-center gap-3 mb-8">
-                        <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="S2H Logo" class="h-10 w-auto">
-                        <span class="font-extrabold text-xl tracking-tight">Step2Heal</span>
-                    </div>
-                    <p class="text-teal-100/60 text-sm leading-relaxed mb-8">Professional physiotherapy care for Noida and surrounding areas. We focus on long-term health and functional recovery.</p>
-                </div>
-                <div>
-                    <h5 class="font-black text-xs uppercase tracking-widest mb-8 text-orange-400">Quick Links</h5>
-                    <ul class="space-y-4 text-sm font-bold text-teal-100/60">
-                        <li><a href="/" class="hover:text-white transition-colors">Home</a></li>
-                        <li><a href="services.html" class="hover:text-white transition-colors">Services</a></li>
-                        <li><a href="founders.html" class="hover:text-white transition-colors">Founders</a></li>
-                        <li><a href="contact.html" class="hover:text-white transition-colors">Contact</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-black text-xs uppercase tracking-widest mb-8 text-orange-400">Our Services</h5>
-                    <ul class="space-y-4 text-sm font-bold text-teal-100/60">
-                        <li><a href="#" class="hover:text-white transition-colors">Manual Therapy</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Back Pain Relief</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Surgical Recovery</a></li>
-                        <li><a href="#" class="hover:text-white transition-colors">Home Visits</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h5 class="font-black text-xs uppercase tracking-widest mb-8 text-orange-400">Location</h5>
-                    <p class="text-sm font-bold text-teal-100/60 mb-6">Noida Sector 76-100 Area<br>Gautam Buddha Nagar, UP</p>
-                    <div class="flex gap-4">
-                        <a href="https://instagram.com/step2heal.in" class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                        <a href="https://wa.me/919773960242" class="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center hover:bg-white/10 transition-colors"><i data-lucide="message-square" class="w-5 h-5"></i></a>
-                    </div>
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 text-center">
+            <!-- Clinic Logo & Info -->
+            <div class="flex flex-col items-center gap-4 mb-8">
+                <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="S2H Logo" class="h-16 w-auto brightness-0 invert opacity-90">
+                <div class="flex flex-col items-center leading-tight">
+                    <span class="font-extrabold text-2xl tracking-tight">Step2Heal</span>
+                    <span class="text-xs italic font-semibold text-orange-400 mt-1 uppercase tracking-widest">Where every step matters</span>
                 </div>
             </div>
-            <div class="pt-8 border-t border-white/5 text-center">
-                <p class="text-[10px] font-black uppercase tracking-widest text-teal-100/30">© 2024 Step2Heal Physiotherapy. Quality care for everyday recovery.</p>
+
+            <!-- Copyright & Credits -->
+            <div class="pt-12 border-t border-white/10">
+                <p class="text-teal-100/40 text-sm font-medium">
+                    &copy; 2024 Step2Heal Physiotherapy Clinic. All rights reserved.
+                </p>
+                <p class="text-teal-100/20 text-[10px] mt-2 uppercase tracking-[0.2em] font-bold">
+                    Professional Care in Noida
+                </p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-
-        // Reveal Animations
+        // Reveal animation on scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -487,6 +528,9 @@
         }, observerOptions);
 
         document.querySelectorAll('.reveal-up').forEach((el) => observer.observe(el));
+
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
