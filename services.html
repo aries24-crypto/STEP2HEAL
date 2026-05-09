@@ -21,7 +21,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Alpine.js -->
+    <!-- Alpine.js Plugins -->
+    <script src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <!-- Alpine.js Core -->
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -29,8 +31,8 @@
     <style>
         :root {
             --brand-dark: #0d3b44;
-            --brand-teal: #0d9488; /* teal-600 */
-            --brand-orange: #f97316; /* orange-500 */
+            --brand-teal: #0d9488;
+            --brand-orange: #f97316;
         }
 
         body { 
@@ -56,72 +58,49 @@
 
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.3s; }
-
-        /* Custom Accordion Transition */
-        .accordion-content {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
 
         /* Premium Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f8fafc; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
 
-        /* Typography Enhancements */
-        .kerning-tight { letter-spacing: -0.04em; }
         .text-balanced { text-wrap: balance; }
-
-        /* Custom Button Shine */
-        .btn-premium {
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-premium::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            transition: 0.5s;
-        }
-        .btn-premium:hover::after {
-            left: 100%;
+        
+        /* Smooth transition for accordion arrows */
+        .accordion-trigger i {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
     </style>
 </head>
 <body class="bg-white text-gray-900 selection:bg-teal-100 selection:text-teal-900" x-data="{ scrolled: false, mobileMenu: false }" @scroll.window="scrolled = (window.pageYOffset > 20)">
 
-    <!-- Navbar (PRESERVED) -->
-    <nav :class="scrolled ? 'shadow-sm py-3 bg-white/95 border-b border-gray-100' : 'py-6 bg-transparent'" 
-         class="fixed w-full z-[60] transition-all duration-500 nav-blur">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <!-- Navbar -->
+    <nav :class="scrolled ? 'shadow-sm py-2 bg-white/90' : 'py-5 bg-transparent'" 
+         class="fixed w-full z-[60] transition-all duration-300 nav-blur">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center">
                 <!-- Logo -->
                 <div class="flex items-center gap-4 group cursor-pointer" onclick="window.location.href='index.html'">
-                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-12 md:h-14 w-auto object-contain" onerror="this.src='https://via.placeholder.com/150?text=S2H'">
+                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-14 w-auto object-contain" onerror="this.src='https://via.placeholder.com/150?text=S2H'">
                     <div class="flex flex-col leading-none">
-                        <span class="font-extrabold text-lg md:text-xl text-[#0d3b44] tracking-tight">Step2Heal</span>
-                        <span class="text-[9px] md:text-[10px] italic font-bold text-orange-500 mt-1 uppercase tracking-wider">Where every step matters</span>
+                        <span class="font-extrabold text-xl text-[#0d3b44] tracking-tight">Step2Heal</span>
+                        <span class="text-[10px] italic font-semibold text-orange-500 mt-1">Where every step matters</span>
                     </div>
                 </div>
 
                 <!-- Desktop Nav -->
-                <div class="hidden md:flex space-x-10 items-center">
-                    <a href="/" class="text-sm font-bold text-gray-500 hover:text-teal-600 transition-colors">Home</a>
-                    <a href="services.html" class="text-sm font-bold text-teal-600 relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-full after:h-0.5 after:bg-teal-600">Services</a>
-                    <a href="founders.html" class="text-sm font-bold text-gray-500 hover:text-teal-600 transition-colors">Founders</a>
-                    <a href="gallery.html" class="text-sm font-bold text-gray-500 hover:text-teal-600 transition-colors">Gallery</a>
-                    <a href="contact.html" class="text-sm font-bold text-gray-500 hover:text-teal-600 transition-colors">Contact</a>
-                    <a href="https://wa.me/919773960242?text=Hi%20Step2Heal!%20%F0%9F%91%8B%20I'd%20like%20to%20book%20a%20physiotherapy%20session.%20Could%20you%20please%20share%20the%20available%20slots%3F%20Thank%20you!" 
-                       class="bg-[#0d3b44] text-white px-7 py-3.5 rounded-full text-xs font-extrabold tracking-widest uppercase hover:bg-teal-900 transition-all duration-300 shadow-lg shadow-teal-900/10">
-                        Book Session
-                    </a>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="/" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Home</a>
+                    <a href="services.html" class="text-sm font-bold text-teal-600">Services</a>
+                    <a href="founders.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Founders</a>
+                    <a href="gallery.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Gallery</a>
+                    <a href="blog.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Blog</a>
+                    <a href="contact.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Contact</a>
+                    <a href="https://wa.me/919773960242?text=Hi%20Step2Heal!%20%F0%9F%91%8B%20I'd%20like%20to%20book%20a%20physiotherapy%20session.%20Could%20you%20please%20share%20the%20available%20slots%3F%20Thank%20you!" class="bg-[#0d3b44] text-white px-6 py-3 rounded-xl text-sm font-bold hover:shadow-xl hover:shadow-teal-900/20 transition-all">Book Session</a>
                 </div>
 
                 <!-- Mobile Toggle -->
-                <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-[#0d3b44] transition-transform active:scale-90">
+                <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-[#0d3b44] relative z-[70]">
                     <i data-lucide="menu" x-show="!mobileMenu"></i>
                     <i data-lucide="x" x-show="mobileMenu"></i>
                 </button>
@@ -129,30 +108,27 @@
         </div>
     </nav>
 
-    <!-- Mobile Menu (PRESERVED) -->
+    <!-- Mobile Menu -->
     <div x-show="mobileMenu" 
          x-transition:enter="transition ease-out duration-300"
          x-transition:enter-start="opacity-0 translate-y-[-20px]"
          x-transition:enter-end="opacity-100 translate-y-0"
          x-cloak 
-         class="fixed inset-0 z-[55] bg-white pt-32 px-10 md:hidden">
-        <div class="flex flex-col space-y-8">
-            <a href="/" class="text-3xl font-black text-gray-400">Home</a>
-            <a href="services.html" class="text-3xl font-black text-teal-600">Services</a>
-            <a href="founders.html" class="text-3xl font-black text-gray-400">Founders</a>
-            <a href="gallery.html" class="text-3xl font-black text-gray-400">Gallery</a>
-            <a href="contact.html" class="text-3xl font-black text-gray-400">Contact</a>
-            <a href="https://wa.me/919773960242?text=Hi%20Step2Heal!%20%F0%9F%91%8B%20I'd%20like%20to%20book%20a%20physiotherapy%20session.%20Could%20you%20please%20share%20the%20available%20slots%3F%20Thank%20you!" 
-               class="bg-[#0d3b44] text-white py-5 rounded-2xl font-black text-lg text-center shadow-2xl shadow-teal-900/20">Book Session</a>
+         class="fixed inset-0 z-[55] bg-white pt-24 px-8 md:hidden">
+        <div class="flex flex-col space-y-6 text-center">
+            <a href="/" class="text-2xl font-bold text-gray-600">Home</a>
+            <a href="services.html" class="text-2xl font-bold text-teal-600">Services</a>
+            <a href="founders.html" class="text-2xl font-bold text-gray-600">Founders</a>
+            <a href="gallery.html" class="text-2xl font-bold text-gray-600">Gallery</a>
+            <a href="blog.html" class="text-2xl font-bold text-gray-600">Blog</a>
+            <a href="contact.html" class="text-2xl font-bold text-gray-600">Contact</a>
+            <a href="https://wa.me/919773960242?text=Hi%20Step2Heal!%20%F0%9F%91%8B%20I'd%20like%20to%20book%20a%20physiotherapy%20session.%20Could%20you%20please%20share%20the%20available%20slots%3F%20Thank%20you!" class="bg-[#0d3b44] text-white py-4 rounded-2xl font-bold text-lg">Book Session</a>
         </div>
     </div>
 
     <main class="overflow-hidden">
-        <!-- REDESIGNED Hero Section: Cinematic & Editorial -->
+        <!-- Hero Section -->
         <section class="relative pt-48 pb-24 md:pt-64 md:pb-40 bg-[#fdfdfd]">
-            <!-- Subtle Decorative Element -->
-            <div class="absolute top-0 right-0 w-1/2 h-full bg-teal-50/30 -z-10 clip-path-hero hidden lg:block"></div>
-            
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="grid lg:grid-cols-12 gap-12 items-start">
                     <div class="lg:col-span-8 space-y-10 reveal-up">
@@ -199,7 +175,7 @@
             </div>
         </section>
 
-        <!-- REDESIGNED Services Section: Editorial Accordion Experience -->
+        <!-- Services Section with Fixed Accordion Transitions -->
         <section class="py-32 bg-white" x-data="{ active: 1 }">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="mb-24 reveal-up">
@@ -208,22 +184,23 @@
                 </div>
 
                 <div class="border-t border-gray-100 reveal-up delay-2">
-                    <!-- Service 01: Back & Neck -->
+                    <!-- Service 01 -->
                     <div class="border-b border-gray-100 group">
-                        <button @click="active = 1" class="w-full py-10 flex flex-col md:flex-row md:items-center justify-between text-left group transition-all duration-500">
+                        <button @click="active = (active === 1 ? null : 1)" class="accordion-trigger w-full py-10 flex flex-col md:flex-row md:items-center justify-between text-left group transition-all duration-500">
                             <div class="flex items-baseline gap-6">
                                 <span class="text-sm font-black text-gray-300 group-hover:text-teal-600 transition-colors">01</span>
                                 <span class="text-2xl md:text-4xl font-bold text-[#0d3b44] group-hover:translate-x-2 transition-transform duration-500">Orthopedic & Chronic Pain</span>
                             </div>
                             <div class="mt-4 md:mt-0 flex items-center gap-4">
                                 <span class="text-xs font-bold text-gray-400 uppercase tracking-widest hidden md:block">Spine & Joints</span>
-                                <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-[#0d3b44] group-hover:border-[#0d3b44] group-hover:text-white transition-all">
-                                    <i data-lucide="plus" class="w-4 h-4 transition-transform duration-500" :class="active === 1 ? 'rotate-45' : ''"></i>
+                                <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center transition-all"
+                                     :class="active === 1 ? 'bg-[#0d3b44] border-[#0d3b44] text-white' : 'group-hover:bg-[#0d3b44] group-hover:border-[#0d3b44] group-hover:text-white'">
+                                    <i data-lucide="plus" class="w-4 h-4" :class="active === 1 ? 'rotate-45' : ''"></i>
                                 </div>
                             </div>
                         </button>
                         
-                        <div x-show="active === 1" x-collapse class="overflow-hidden">
+                        <div x-show="active === 1" x-collapse>
                             <div class="pb-16 grid md:grid-cols-12 gap-12 items-start">
                                 <div class="md:col-span-7 space-y-8">
                                     <p class="text-xl md:text-2xl text-gray-500 font-medium leading-relaxed">
@@ -238,275 +215,85 @@
                                                 <li class="flex items-center gap-3"><span class="w-1 h-1 bg-teal-500 rounded-full"></span> Dry Needling</li>
                                             </ul>
                                         </div>
-                                        <div>
-                                            <h4 class="text-xs font-black uppercase tracking-widest text-orange-500 mb-3">Target Outcomes</h4>
-                                            <ul class="text-sm font-bold text-gray-400 space-y-2">
-                                                <li class="flex items-center gap-3"><span class="w-1 h-1 bg-orange-500 rounded-full"></span> Immediate Decompression</li>
-                                                <li class="flex items-center gap-3"><span class="w-1 h-1 bg-orange-500 rounded-full"></span> Restored Mobility</li>
-                                            </ul>
-                                        </div>
                                     </div>
                                     <div class="pt-4">
-                                        <a href="https://wa.me/919773960242?text=Hi%20Step2Heal!%20%F0%9F%91%8B%20I'd%20like%20to%20book%20a%20physiotherapy%20session.%20Could%20you%20please%20share%20the%20available%20slots%3F%20Thank%20you!" class="inline-flex items-center gap-3 text-sm font-black uppercase tracking-widest text-[#0d3b44] group/link">
+                                        <a href="https://wa.me/919773960242" class="inline-flex items-center gap-3 text-sm font-black uppercase tracking-widest text-[#0d3b44] group/link">
                                             Consult an Expert <i data-lucide="arrow-right" class="w-4 h-4 group-hover/link:translate-x-2 transition-transform"></i>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="md:col-span-5 aspect-[4/3] bg-gray-50 rounded-3xl overflow-hidden relative group">
+                                <div class="md:col-span-5 aspect-[4/3] bg-gray-50 rounded-3xl overflow-hidden relative">
                                     <div class="absolute inset-0 flex items-center justify-center p-12 text-center">
-                                        <div class="space-y-4">
-                                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto shadow-sm">
-                                                <i data-lucide="shield-check" class="w-8 h-8 text-teal-600"></i>
-                                            </div>
-                                            <p class="text-xs font-bold text-gray-400 leading-relaxed italic">"Restoring structural integrity through precise biomechanical adjustment."</p>
-                                        </div>
+                                        <i data-lucide="shield-check" class="w-12 h-12 text-teal-600 mb-4 opacity-20"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Service 02: Post-Surgical -->
+                    <!-- Service 02 -->
                     <div class="border-b border-gray-100 group">
-                        <button @click="active = 2" class="w-full py-10 flex flex-col md:flex-row md:items-center justify-between text-left group transition-all duration-500">
+                        <button @click="active = (active === 2 ? null : 2)" class="accordion-trigger w-full py-10 flex flex-col md:flex-row md:items-center justify-between text-left group transition-all duration-500">
                             <div class="flex items-baseline gap-6">
                                 <span class="text-sm font-black text-gray-300 group-hover:text-teal-600 transition-colors">02</span>
                                 <span class="text-2xl md:text-4xl font-bold text-[#0d3b44] group-hover:translate-x-2 transition-transform duration-500">Post-Surgical Rehabilitation</span>
                             </div>
                             <div class="mt-4 md:mt-0 flex items-center gap-4">
                                 <span class="text-xs font-bold text-gray-400 uppercase tracking-widest hidden md:block">Recovery Mastery</span>
-                                <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-[#0d3b44] group-hover:border-[#0d3b44] group-hover:text-white transition-all">
-                                    <i data-lucide="plus" class="w-4 h-4 transition-transform duration-500" :class="active === 2 ? 'rotate-45' : ''"></i>
+                                <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center transition-all"
+                                     :class="active === 2 ? 'bg-[#0d3b44] border-[#0d3b44] text-white' : 'group-hover:bg-[#0d3b44] group-hover:border-[#0d3b44] group-hover:text-white'">
+                                    <i data-lucide="plus" class="w-4 h-4" :class="active === 2 ? 'rotate-45' : ''"></i>
                                 </div>
                             </div>
                         </button>
                         
-                        <div x-show="active === 2" x-collapse class="overflow-hidden">
+                        <div x-show="active === 2" x-collapse>
                             <div class="pb-16 grid md:grid-cols-12 gap-12 items-start">
                                 <div class="md:col-span-7 space-y-8">
                                     <p class="text-xl md:text-2xl text-gray-500 font-medium leading-relaxed">
-                                        Specialized recovery protocols for ACL reconstruction, Total Knee/Hip replacements, and Fracture management. We bring clinical rehab to your timeline.
+                                        Specialized recovery protocols for ACL reconstruction, Total Knee/Hip replacements, and Fracture management.
                                     </p>
-                                    <div class="grid grid-cols-2 gap-8">
-                                        <div>
-                                            <h4 class="text-xs font-black uppercase tracking-widest text-teal-600 mb-3">Clinical Protocols</h4>
-                                            <ul class="text-sm font-bold text-gray-400 space-y-2">
-                                                <li class="flex items-center gap-3"><span class="w-1 h-1 bg-teal-500 rounded-full"></span> Progressive Loading</li>
-                                                <li class="flex items-center gap-3"><span class="w-1 h-1 bg-teal-500 rounded-full"></span> Scar Tissue Management</li>
-                                                <li class="flex items-center gap-3"><span class="w-1 h-1 bg-teal-500 rounded-full"></span> Edema Control</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <h4 class="text-xs font-black uppercase tracking-widest text-orange-500 mb-3">Our Promise</h4>
-                                            <ul class="text-sm font-bold text-gray-400 space-y-2">
-                                                <li class="flex items-center gap-3"><span class="w-1 h-1 bg-orange-500 rounded-full"></span> Faster Safe-Return</li>
-                                                <li class="flex items-center gap-3"><span class="w-1 h-1 bg-orange-500 rounded-full"></span> Reduced Re-injury Risk</li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                     <div class="pt-4">
-                                        <a href="https://wa.me/919773960242?text=Hi%20Step2Heal!%20%F0%9F%91%8B%20I'd%20like%20to%20book%20a%20physiotherapy%20session.%20Could%20you%20please%20share%20the%20available%20slots%3F%20Thank%20you!" class="inline-flex items-center gap-3 text-sm font-black uppercase tracking-widest text-[#0d3b44] group/link">
+                                        <a href="https://wa.me/919773960242" class="inline-flex items-center gap-3 text-sm font-black uppercase tracking-widest text-[#0d3b44] group/link">
                                             Start Your Recovery <i data-lucide="arrow-right" class="w-4 h-4 group-hover/link:translate-x-2 transition-transform"></i>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="md:col-span-5 aspect-[4/3] bg-teal-50 rounded-3xl overflow-hidden relative">
-                                    <div class="absolute inset-0 flex items-center justify-center p-12 text-center">
-                                        <div class="space-y-4">
-                                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto shadow-sm">
-                                                <i data-lucide="activity" class="w-8 h-8 text-teal-600"></i>
-                                            </div>
-                                            <p class="text-xs font-bold text-[#0d3b44]/60 leading-relaxed italic">"Bridging the gap between the surgical table and your everyday life."</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="md:col-span-5 aspect-[4/3] bg-teal-50 rounded-3xl overflow-hidden relative"></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Service 03: Frozen Shoulder -->
+                    <!-- Service 03 -->
                     <div class="border-b border-gray-100 group">
-                        <button @click="active = 3" class="w-full py-10 flex flex-col md:flex-row md:items-center justify-between text-left group transition-all duration-500">
+                        <button @click="active = (active === 3 ? null : 3)" class="accordion-trigger w-full py-10 flex flex-col md:flex-row md:items-center justify-between text-left group transition-all duration-500">
                             <div class="flex items-baseline gap-6">
                                 <span class="text-sm font-black text-gray-300 group-hover:text-teal-600 transition-colors">03</span>
-                                <span class="text-2xl md:text-4xl font-bold text-[#0d3b44] group-hover:translate-x-2 transition-transform duration-500">Frozen Shoulder & Joint Stiffness</span>
+                                <span class="text-2xl md:text-4xl font-bold text-[#0d3b44] group-hover:translate-x-2 transition-transform duration-500">Frozen Shoulder & Joints</span>
                             </div>
                             <div class="mt-4 md:mt-0 flex items-center gap-4">
                                 <span class="text-xs font-bold text-gray-400 uppercase tracking-widest hidden md:block">Mobilization Specialists</span>
-                                <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center group-hover:bg-[#0d3b44] group-hover:border-[#0d3b44] group-hover:text-white transition-all">
-                                    <i data-lucide="plus" class="w-4 h-4 transition-transform duration-500" :class="active === 3 ? 'rotate-45' : ''"></i>
+                                <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center transition-all"
+                                     :class="active === 3 ? 'bg-[#0d3b44] border-[#0d3b44] text-white' : 'group-hover:bg-[#0d3b44] group-hover:border-[#0d3b44] group-hover:text-white'">
+                                    <i data-lucide="plus" class="w-4 h-4" :class="active === 3 ? 'rotate-45' : ''"></i>
                                 </div>
                             </div>
                         </button>
                         
-                        <div x-show="active === 3" x-collapse class="overflow-hidden">
+                        <div x-show="active === 3" x-collapse>
                             <div class="pb-16 grid md:grid-cols-12 gap-12 items-start">
                                 <div class="md:col-span-7 space-y-8">
                                     <p class="text-xl md:text-2xl text-gray-500 font-medium leading-relaxed">
-                                        Quick mobilization techniques to restore range of motion and reduce nocturnal pain. We use a combination of heat therapy and manual stretching.
+                                        Quick mobilization techniques to restore range of motion and reduce nocturnal pain.
                                     </p>
-                                    <div class="grid grid-cols-2 gap-8">
-                                        <div>
-                                            <h4 class="text-xs font-black uppercase tracking-widest text-teal-600 mb-3">Key Focus</h4>
-                                            <ul class="text-sm font-bold text-gray-400 space-y-2">
-                                                <li class="flex items-center gap-3"><span class="w-1 h-1 bg-teal-500 rounded-full"></span> Capsular Release</li>
-                                                <li class="flex items-center gap-3"><span class="w-1 h-1 bg-teal-500 rounded-full"></span> Nocturnal Pain Relief</li>
-                                                <li class="flex items-center gap-3"><span class="w-1 h-1 bg-teal-500 rounded-full"></span> Heat Therapy</li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                     <div class="pt-4">
-                                        <a href="https://wa.me/919773960242?text=Hi%20Step2Heal!%20%F0%9F%91%8B%20I'd%20like%20to%20book%20a%20physiotherapy%20session.%20Could%20you%20please%20share%20the%20available%20slots%3F%20Thank%20you!" class="inline-flex items-center gap-3 text-sm font-black uppercase tracking-widest text-[#0d3b44] group/link">
-                                            Book an Assessment <i data-lucide="arrow-right" class="w-4 h-4 group-hover/link:translate-x-2 transition-transform"></i>
+                                        <a href="https://wa.me/919773960242" class="inline-flex items-center gap-3 text-sm font-black uppercase tracking-widest text-[#0d3b44] group/link">
+                                            Book Assessment <i data-lucide="arrow-right" class="w-4 h-4 group-hover/link:translate-x-2 transition-transform"></i>
                                         </a>
                                     </div>
                                 </div>
-                                <div class="md:col-span-5 aspect-[4/3] bg-orange-50 rounded-3xl overflow-hidden relative">
-                                    <div class="absolute inset-0 flex items-center justify-center p-12 text-center">
-                                        <div class="space-y-4">
-                                            <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto shadow-sm">
-                                                <i data-lucide="move" class="w-8 h-8 text-orange-500"></i>
-                                            </div>
-                                            <p class="text-xs font-bold text-orange-600/60 leading-relaxed italic">"Restoring freedom of movement through rhythmic mobilization."</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div class="md:col-span-5 aspect-[4/3] bg-orange-50 rounded-3xl overflow-hidden relative"></div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- REDESIGNED Advanced Modalities: Medically Tech-Focused -->
-        <section class="py-32 bg-[#0d3b44] relative">
-            <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] pointer-events-none"></div>
-            
-            <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-                <div class="mb-20 text-center md:text-left">
-                    <h2 class="text-xs font-black uppercase tracking-[0.4em] text-teal-400 mb-6">Cutting-Edge Recovery</h2>
-                    <h3 class="text-4xl md:text-6xl font-black text-white tracking-tight">Advanced Modalities</h3>
-                </div>
-
-                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Laser Therapy -->
-                    <div class="p-10 bg-white/5 border border-white/10 rounded-[2.5rem] backdrop-blur-sm group hover:bg-white/10 transition-all duration-500">
-                        <div class="w-14 h-14 bg-teal-500/20 text-teal-400 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                            <i data-lucide="layers" class="w-7 h-7"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-4">Laser Therapy</h4>
-                        <p class="text-teal-100/40 text-sm leading-relaxed">
-                            Class IV High-Intensity Laser for deep tissue repair and rapid inflammation reduction.
-                        </p>
-                    </div>
-
-                    <!-- Dry Needling -->
-                    <div class="p-10 bg-white/5 border border-white/10 rounded-[2.5rem] backdrop-blur-sm group hover:bg-white/10 transition-all duration-500">
-                        <div class="w-14 h-14 bg-orange-500/20 text-orange-400 rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                            <i data-lucide="target" class="w-7 h-7"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-4">Dry Needling</h4>
-                        <p class="text-teal-100/40 text-sm leading-relaxed">
-                            Precision treatment for myofascial trigger points and chronic muscular knot release.
-                        </p>
-                    </div>
-
-                    <!-- Cupping -->
-                    <div class="p-10 bg-white/5 border border-white/10 rounded-[2.5rem] backdrop-blur-sm group hover:bg-white/10 transition-all duration-500">
-                        <div class="w-14 h-14 bg-white/10 text-white rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                            <i data-lucide="thermometer" class="w-7 h-7"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-4">Cupping Therapy</h4>
-                        <p class="text-teal-100/40 text-sm leading-relaxed">
-                            Myofascial decompression therapy for improved vascularization and soft tissue release.
-                        </p>
-                    </div>
-
-                    <!-- IASTM -->
-                    <div class="p-10 bg-white/5 border border-white/10 rounded-[2.5rem] backdrop-blur-sm group hover:bg-white/10 transition-all duration-500">
-                        <div class="w-14 h-14 bg-teal-400 text-[#0d3b44] rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                            <i data-lucide="zap" class="w-7 h-7"></i>
-                        </div>
-                        <h4 class="text-xl font-bold text-white mb-4">IASTM</h4>
-                        <p class="text-teal-100/40 text-sm leading-relaxed">
-                            Instrument Assisted Soft Tissue Mobilization to effectively break down fascia restrictions.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- REDESIGNED CTA Banner: Tactile & High-End -->
-        <section class="py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-6 lg:px-8">
-                <div class="relative bg-gray-50 rounded-[4rem] overflow-hidden p-12 md:p-24 text-center border border-gray-100">
-                    <!-- Subtle Glow -->
-                    <div class="absolute -top-24 -right-24 w-96 h-96 bg-teal-100/30 rounded-full blur-[100px]"></div>
-                    <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-orange-100/20 rounded-full blur-[100px]"></div>
-                    
-                    <div class="relative z-10 max-w-3xl mx-auto space-y-10">
-                        <h2 class="text-4xl md:text-6xl font-black text-[#0d3b44] tracking-tight leading-tight">
-                            Personalized Healing, <br>
-                            <span class="text-teal-600">Where You Need It.</span>
-                        </h2>
-                        <p class="text-gray-500 text-lg md:text-xl font-medium leading-relaxed">
-                            Whether at our premium clinic or the comfort of your home, our commitment to your recovery remains uncompromising.
-                        </p>
-                        
-                        <div class="flex flex-col sm:flex-row gap-6 justify-center pt-6">
-                            <a href="https://wa.me/919773960242?text=Hi%20Step2Heal!%20%F0%9F%8F%A0%20I%20would%20like%20to%20book%20a%20Home%20Visit%20physiotherapy%20session.%20Could%20you%20please%20guide%20me%20on%20the%20process%3F" 
-                               class="btn-premium bg-[#0d3b44] text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-xs shadow-2xl shadow-teal-900/20 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
-                                <i data-lucide="home" class="w-4 h-4"></i> Book Home Visit
-                            </a>
-                            <a href="https://wa.me/919773960242?text=Hi%20Step2Heal!%20%F0%9F%93%B9%20I'm%20interested%20in%20an%20Online%20Video%20Consultation.%20Please%20let%20me%20know%20how%20to%20schedule%20it.%20Thank%20you!" 
-                               class="btn-premium bg-white border border-gray-200 text-[#0d3b44] px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-gray-50 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
-                                <i data-lucide="video" class="w-4 h-4 text-orange-500"></i> Video Consultation
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- REDESIGNED Recovery Process: Magazine Layout -->
-        <section class="py-32 bg-white">
-            <div class="max-w-7xl mx-auto px-6 lg:px-8">
-                <div class="mb-24 text-center">
-                    <h2 class="text-xs font-black uppercase tracking-[0.5em] text-orange-500 mb-6">Our Philosophy</h2>
-                    <h3 class="text-4xl md:text-5xl font-black text-[#0d3b44] tracking-tighter">The Step2Heal Journey</h3>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-16 relative">
-                    <!-- Step 1 -->
-                    <div class="space-y-8 group">
-                        <div class="text-[8rem] font-black text-gray-50 leading-none h-24 mb-4 group-hover:text-teal-50 transition-colors duration-500">01</div>
-                        <div class="space-y-4">
-                            <h4 class="text-2xl font-extrabold text-[#0d3b44]">Clinical Assessment</h4>
-                            <p class="text-gray-400 font-medium leading-relaxed">
-                                Detailed evaluation of movement biomechanics and pain triggers to identify the root pathological cause.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Step 2 -->
-                    <div class="space-y-8 group pt-12 md:pt-24">
-                        <div class="text-[8rem] font-black text-gray-50 leading-none h-24 mb-4 group-hover:text-teal-50 transition-colors duration-500">02</div>
-                        <div class="space-y-4">
-                            <h4 class="text-2xl font-extrabold text-[#0d3b44]">Bespoke Therapy</h4>
-                            <p class="text-gray-400 font-medium leading-relaxed">
-                                A curated mix of manual adjustments and advanced technology tailored to your body's specific response.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Step 3 -->
-                    <div class="space-y-8 group pt-12 md:pt-48">
-                        <div class="text-[8rem] font-black text-gray-50 leading-none h-24 mb-4 group-hover:text-teal-50 transition-colors duration-500">03</div>
-                        <div class="space-y-4">
-                            <h4 class="text-2xl font-extrabold text-[#0d3b44]">Sustained Precision</h4>
-                            <p class="text-gray-400 font-medium leading-relaxed">
-                                Ergonomic coaching and long-term movement maintenance to ensure permanent structural freedom.
-                            </p>
                         </div>
                     </div>
                 </div>
@@ -514,37 +301,29 @@
         </section>
     </main>
 
-    <!-- Footer (PRESERVED) -->
-    <footer class="bg-white border-t border-gray-100 py-20">
-        <div class="max-w-7xl mx-auto px-6 text-center space-y-10">
-            <div class="flex justify-center flex-col items-center gap-3">
-                <span class="font-black text-2xl text-[#0d3b44] tracking-tighter">Step2Heal</span>
-                <span class="text-orange-500 italic text-[10px] font-black uppercase tracking-[0.2em]">Where every step matters</span>
-            </div>
-            
-            <nav class="flex flex-wrap justify-center gap-8 text-xs font-black uppercase tracking-widest text-gray-400">
-                <a href="/" class="hover:text-teal-600 transition-colors">Home</a>
-                <a href="services.html" class="hover:text-teal-600 transition-colors">Services</a>
-                <a href="founders.html" class="hover:text-teal-600 transition-colors">Founders</a>
-                <a href="gallery.html" class="hover:text-teal-600 transition-colors">Gallery</a>
-                <a href="contact.html" class="hover:text-teal-600 transition-colors">Contact</a>
-            </nav>
+    <!-- Decluttered Footer -->
+    <footer class="bg-white pt-16 pb-12 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col items-center text-center">
+                <!-- Brand Info -->
+                <div class="flex flex-col items-center mb-8">
+                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-16 w-auto object-contain mb-4">
+                    <h4 class="text-2xl font-black text-[#0d3b44]">Step2Heal Physiotherapy & Wellness</h4>
+                    <p class="text-orange-500 italic font-bold text-sm mt-1 uppercase tracking-widest">Where every step matters</p>
+                </div>
 
-            <p class="text-gray-300 text-[10px] uppercase tracking-widest max-w-xl mx-auto leading-loose">
-                © 2026 Step2Heal Advanced Physiotherapy and Rehabilitation Centre. Noida Sector 12. All rights reserved. 
-                Designed for medical excellence.
-            </p>
-            
-            <div class="flex justify-center gap-8">
-                <a href="#" class="text-gray-300 hover:text-teal-600 transition-all hover:scale-110"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-                <a href="#" class="text-gray-300 hover:text-teal-600 transition-all hover:scale-110"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-                <a href="#" class="text-gray-300 hover:text-teal-600 transition-all hover:scale-110"><i data-lucide="youtube" class="w-5 h-5"></i></a>
+                <!-- Copyright Area -->
+                <div class="pt-8 border-t border-gray-100 w-full">
+                    <p class="text-gray-400 text-xs font-bold uppercase tracking-widest">
+                        &copy; 2024 Step2Heal. All Rights Reserved.
+                    </p>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize Icons
+        // Initialize Lucide Icons
         lucide.createIcons();
 
         // Reveal animations on scroll
@@ -556,15 +335,11 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('reveal-up');
-                    observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
 
-        document.querySelectorAll('section > div').forEach(el => {
-            el.classList.add('opacity-0');
-            observer.observe(el);
-        });
+        document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
