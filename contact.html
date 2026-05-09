@@ -5,20 +5,38 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Step2Heal Physiotherapy and Rehabilation Centre Noida</title>
+    <title>Contact Us | Step2Heal Physiotherapy and Rehabilitation Centre Noida</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome (More reliable for Social Icons) -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Alpine.js -->
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
         .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        .hero-gradient { background: radial-gradient(circle at top right, #f8fafc 0%, #ffffff 100%); }
+        
+        /* Circular Grid Pattern */
+        .circular-grid-bg {
+            background-image: radial-gradient(#e5e7eb 1.5px, transparent 1.5px);
+            background-size: 30px 30px;
+        }
+
+        /* Clinic Ops Pattern */
+        .clinic-pattern {
+            background-image: radial-gradient(rgba(20, 184, 166, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .hero-gradient { 
+            background: radial-gradient(circle at top right, rgba(248, 250, 252, 0.8) 0%, rgba(255, 255, 255, 0.95) 100%); 
+        }
+
         [x-cloak] { display: none !important; }
         
         .input-focus { 
@@ -37,7 +55,6 @@
             -webkit-backdrop-filter: blur(8px);
         }
 
-        /* Icon sizing consistency */
         .fa-solid, .fa-brands, .fa-regular {
             display: inline-flex;
             align-items: center;
@@ -122,10 +139,14 @@
     </div>
 
     <!-- Contact Hero -->
-    <section class="hero-gradient pt-32 pb-16 lg:pt-48 lg:pb-20 px-4">
+    <section class="relative pt-32 pb-16 lg:pt-48 lg:pb-20 px-4 overflow-hidden">
+        <!-- Background Patterns -->
+        <div class="absolute inset-0 circular-grid-bg -z-10 opacity-40"></div>
+        <div class="absolute inset-0 hero-gradient -z-10"></div>
+        
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 items-end gap-12">
             <div class="space-y-6">
-                <div class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 text-gray-600 rounded-md text-[10px] font-bold uppercase tracking-widest">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/80 border border-gray-100 text-gray-600 rounded-md text-[10px] font-bold uppercase tracking-widest backdrop-blur-sm">
                     <span class="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></span>
                     Available for Consultation
                 </div>
@@ -159,7 +180,7 @@
     </section>
 
     <!-- Main Contact Section -->
-    <section class="pb-24 px-4">
+    <section class="pb-24 px-4 mt-12">
         <div class="max-w-7xl mx-auto">
             <div class="grid lg:grid-cols-12 gap-12 items-start">
                 <!-- Left: Contact Form -->
@@ -211,6 +232,9 @@
                 <!-- Right: Clinic Details -->
                 <div class="lg:col-span-5 space-y-6">
                     <div class="bg-[#0d3b44] p-8 rounded-2xl text-white relative overflow-hidden group">
+                        <!-- New Background Pattern for this card -->
+                        <div class="absolute inset-0 clinic-pattern opacity-10"></div>
+                        
                         <div class="relative z-10 space-y-6">
                             <h3 class="text-xl font-black border-b border-white/10 pb-4">Clinic Operations</h3>
                             
@@ -247,26 +271,13 @@
                         </div>
                         <div class="absolute right-0 top-0 w-32 h-full bg-gradient-to-l from-white/5 to-transparent skew-x-[-20deg] translate-x-10"></div>
                     </div>
-
-                    <!-- Trust Bar -->
-                    <div class="p-6 border border-gray-100 rounded-2xl flex items-center justify-between">
-                         <div class="flex -space-x-3">
-                             <div class="w-10 h-10 rounded-full border-2 border-white bg-gray-200 flex items-center justify-center text-[10px] font-bold">SJ</div>
-                             <div class="w-10 h-10 rounded-full border-2 border-white bg-teal-100 flex items-center justify-center text-[10px] font-bold text-teal-700">RK</div>
-                             <div class="w-10 h-10 rounded-full border-2 border-white bg-orange-100 flex items-center justify-center text-[10px] font-bold text-orange-700">MS</div>
-                         </div>
-                         <div class="text-right">
-                             <p class="text-xs font-black text-[#0d3b44]">500+ Recoveries</p>
-                             <p class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Trusted in Noida</p>
-                         </div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Map Section -->
-    <section class="relative h-[600px] w-full overflow-hidden border-t border-gray-100 mt-12">
+    <section class="relative h-[600px] w-full overflow-hidden border-t border-gray-100">
         <iframe 
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.20311749106!2d77.3411082!3d28.5936881!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce566f076c729%3A0x19b3f3cf74d232b5!2sStep2Heal%20Advanced%20Physiotherapy%20and%20Rehabilitation%20Centre!5e0!3m2!1sen!2sin!4v1713700000000!5m2!1sen!2sin" 
             class="absolute inset-0 w-full h-full grayscale opacity-80 contrast-125" 
@@ -310,44 +321,80 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-white py-16 border-t border-gray-100">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid md:grid-cols-3 gap-12 items-center text-center md:text-left">
-                <div class="flex flex-col items-center md:items-start gap-4">
-                    <div class="flex items-center gap-3">
-                        <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="S2H Logo" class="h-12 w-auto">
-                        <div>
-                            <span class="font-bold text-[#0d3b44] text-xl block leading-none">Step2Heal</span>
-                            <span class="text-[10px] italic text-orange-500 font-bold tracking-tight">Where every step matters</span>
-                        </div>
-                    </div>
+    <!-- Modern Footer -->
+    <footer class="bg-[#0d3b44] text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 border-b border-white/10 pb-16">
+            <div class="space-y-6">
+                <div class="flex items-center gap-3">
+                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal" class="h-12 brightness-0 invert">
+                    <span class="font-bold text-2xl">Step2Heal</span>
                 </div>
-                
-                <div class="flex flex-wrap justify-center gap-8 text-[11px] font-black text-gray-400 uppercase tracking-widest">
-                    <a href="home.html" class="hover:text-teal-600 transition-colors">Home</a>
-                    <a href="services.html" class="hover:text-teal-600 transition-colors">Services</a>
-                    <a href="founders.html" class="hover:text-teal-600 transition-colors">Founders</a>
-                    <a href="contact.html" class="text-[#0d3b44]">Contact</a>
-                </div>
-
-                <div class="flex justify-center md:justify-end gap-6">
-                    <a href="https://www.instagram.com/pt_step2heal/" class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-100 text-gray-400 hover:text-pink-600 hover:border-pink-100 transition-all"><i class="fa-brands fa-instagram text-xl"></i></a>
-                    <a href="https://www.linkedin.com/company/step2heal-advanced-physiotherapy-and-rehabilitation-centre/" class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-100 text-gray-400 hover:text-blue-700 hover:border-blue-100 transition-all"><i class="fa-brands fa-linkedin text-xl"></i></a>
-                    <button @click="triggerWhatsApp('general')" class="w-10 h-10 flex items-center justify-center rounded-lg border border-gray-100 text-gray-400 hover:text-green-600 hover:border-green-100 transition-all"><i class="fa-brands fa-whatsapp text-xl"></i></button>
-                </div>
-            </div>
-            
-            <div class="mt-16 pt-8 border-t border-gray-50 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em]">
-                    &copy; 2026 Step2Heal Noida. All Rights Reserved.
+                <p class="text-teal-50/60 leading-relaxed italic">
+                    "Where every step matters"<br>
+                    Noida's most trusted name in advanced physiotherapy and sports rehabilitation.
                 </p>
-                <div class="flex gap-4 text-[10px] text-gray-300 font-bold uppercase tracking-widest">
-                    <span>Privacy Policy</span>
-                    <span>Terms of Service</span>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-lg mb-6 text-teal-400">Quick Links</h4>
+                <ul class="space-y-4 text-teal-50/60">
+                    <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
+                    <li><a href="services.html" class="hover:text-white transition-colors">Treatments & Services</a></li>
+                    <li><a href="founders.html" class="hover:text-white transition-colors">Meet the Founders</a></li>
+                    <li><a href="gallery.html" class="hover:text-white transition-colors">Clinic Gallery</a></li>
+                    <li><a href="blog.html" class="hover:text-white transition-colors">Health Insights</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-lg mb-6 text-teal-400">Specialities</h4>
+                <ul class="space-y-4 text-teal-50/60">
+                    <li>Sports Injury Rehab</li>
+                    <li>Dry Needling Therapy</li>
+                    <li>Laser Therapy</li>
+                    <li>Orthopedic Physio</li>
+                    <li>Post-Surgery Recovery</li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-lg mb-6 text-teal-400">Direct Contact</h4>
+                <ul class="space-y-4 text-teal-50/60">
+                    <li class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4 text-teal-400"></i> +91 97739 60242</li>
+                    <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4 text-teal-400"></i> step2heal1111@gmail.com</li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-teal-400 mt-1"></i>
+                        <span>Sector 12, Noida, Uttar Pradesh</span>
+                    </li>
+                </ul>
+                <div class="flex gap-4 mt-8">
+                    <a href="https://wa.me/919773960242" class="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 text-teal-400 hover:bg-teal-400 hover:text-[#0d3b44] transition-all">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/step2heal-advanced-physiotherapy-and-rehabilitation-centre/" class="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 text-teal-400 hover:bg-teal-400 hover:text-[#0d3b44] transition-all">
+                        <i class="fa-brands fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/pt_step2heal/" class="w-10 h-10 flex items-center justify-center rounded-lg bg-white/5 border border-white/10 text-teal-400 hover:bg-teal-400 hover:text-[#0d3b44] transition-all">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                    </a>
                 </div>
             </div>
         </div>
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-teal-50/40">
+            <div class="flex flex-col items-center md:items-start w-full">
+                <p>&copy; 2026 Step2Heal Advanced Physiotherapy and Rehabilation Centre Noida. All rights reserved.</p>
+                <p class="mt-1">Developed by: <a href="https://www.linkedin.com/in/tejas-yadav-3b1ab83a6/" target="_blank" class="text-teal-400 hover:underline">Tejas Yadav</a></p>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide Icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
 </body>
 </html>
