@@ -303,61 +303,225 @@
             </div>
         </section>
 
-        <!-- Standard Services Section (Accordion Style) -->
+        <!-- Standard Services Section (Editorial Accordion Style) -->
         <section class="py-32 bg-white" x-data="{ active: 1 }">
             <div class="max-w-7xl mx-auto px-6 lg:px-8">
                 <div class="mb-24 reveal-up">
                     <h2 class="text-xs font-black uppercase tracking-[0.4em] text-teal-600 mb-6">Our Expertise</h2>
-                    <h3 class="text-4xl md:text-6xl font-black text-[#0d3b44] tracking-tight">Conditions We Treat</h3>
+                    <h3 class="text-4xl md:text-6xl font-black text-[#0d3b44] tracking-tight">Clinical Specializations</h3>
                 </div>
 
                 <div class="border-t border-gray-100 reveal-up">
-                    <!-- Service 01 -->
+                    <!-- Service 01: Spine & Chronic Pain -->
                     <div class="border-b border-gray-100">
-                        <button @click="active = (active === 1 ? null : 1)" class="w-full py-10 flex flex-col md:flex-row md:items-center justify-between text-left group">
+                        <button @click="active = (active === 1 ? null : 1)" class="w-full py-12 flex flex-col md:flex-row md:items-center justify-between text-left group">
                             <div class="flex items-baseline gap-6">
                                 <span class="text-sm font-black text-gray-300 group-hover:text-teal-600 transition-colors">01</span>
-                                <span class="text-2xl md:text-4xl font-bold text-[#0d3b44] group-hover:translate-x-2 transition-transform duration-500">Spine & Chronic Pain</span>
+                                <span class="text-3xl md:text-5xl font-bold text-[#0d3b44] group-hover:translate-x-2 transition-transform duration-500">Spine & Chronic Pain</span>
                             </div>
                             <div class="mt-4 md:mt-0 flex items-center gap-4">
-                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest hidden md:block">Back & Neck Specialists</span>
-                                <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center transition-all"
-                                     :class="active === 1 ? 'bg-[#0d3b44] border-[#0d3b44] text-white' : 'group-hover:bg-[#0d3b44] group-hover:text-white'">
-                                    <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-500" :class="active === 1 ? 'rotate-180' : ''"></i>
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest hidden md:block">Neuromuscular Focus</span>
+                                <div class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all"
+                                     :class="active === 1 ? 'bg-[#0d3b44] border-[#0d3b44] text-white shadow-lg' : 'group-hover:bg-[#0d3b44] group-hover:text-white'">
+                                    <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-500" :class="active === 1 ? 'rotate-180' : ''"></i>
                                 </div>
                             </div>
                         </button>
                         <div x-show="active === 1" x-collapse x-cloak>
-                            <div class="pb-16 grid md:grid-cols-2 gap-12">
-                                <p class="text-xl text-gray-500 font-medium leading-relaxed">
-                                    Comprehensive care for Slip Disc, Sciatica, Cervical Spondylosis, and postural strains. We focus on long-term spinal health.
-                                </p>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="bg-gray-50 p-4 rounded-2xl"><p class="text-sm font-bold text-[#0d3b44]">Lumbar Traction</p></div>
-                                    <div class="bg-gray-50 p-4 rounded-2xl"><p class="text-sm font-bold text-[#0d3b44]">McKenzie Method</p></div>
+                            <div class="pb-20">
+                                <div class="grid lg:grid-cols-12 gap-12 items-start">
+                                    <div class="lg:col-span-7">
+                                        <p class="text-2xl text-gray-500 font-medium leading-relaxed mb-10">
+                                            We treat complex spinal conditions by combining neurological assessment with precise biomechanical correction. Our goal is permanent resolution, not just temporary relief.
+                                        </p>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6">
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2.5"></div>
+                                                <p class="text-gray-600 font-semibold">Slip Disc & Nerve Compression</p>
+                                            </div>
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2.5"></div>
+                                                <p class="text-gray-600 font-semibold">Cervical Spondylosis</p>
+                                            </div>
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2.5"></div>
+                                                <p class="text-gray-600 font-semibold">Chronic Lower Back Pain</p>
+                                            </div>
+                                            <div class="flex items-start gap-4">
+                                                <div class="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2.5"></div>
+                                                <p class="text-gray-600 font-semibold">Postural Scoliosis Care</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="lg:col-span-5 bg-teal-50/50 p-8 rounded-[2rem] border border-teal-100">
+                                        <h5 class="text-xs font-black uppercase tracking-widest text-teal-700 mb-6">Signature Protocol</h5>
+                                        <div class="space-y-6">
+                                            <div class="flex justify-between items-center pb-4 border-b border-teal-100">
+                                                <span class="font-bold text-[#0d3b44]">Lumbar Decompression</span>
+                                                <i data-lucide="check-circle-2" class="w-5 h-5 text-teal-600"></i>
+                                            </div>
+                                            <div class="flex justify-between items-center pb-4 border-b border-teal-100">
+                                                <span class="font-bold text-[#0d3b44]">McKenzie Mechanical Therapy</span>
+                                                <i data-lucide="check-circle-2" class="w-5 h-5 text-teal-600"></i>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="font-bold text-[#0d3b44]">Nerve Flossing Techniques</span>
+                                                <i data-lucide="check-circle-2" class="w-5 h-5 text-teal-600"></i>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Service 02 -->
+                    <!-- Service 02: Post-Surgical Rehabilitation -->
                     <div class="border-b border-gray-100">
-                        <button @click="active = (active === 2 ? null : 2)" class="w-full py-10 flex flex-col md:flex-row md:items-center justify-between text-left group">
+                        <button @click="active = (active === 2 ? null : 2)" class="w-full py-12 flex flex-col md:flex-row md:items-center justify-between text-left group">
                             <div class="flex items-baseline gap-6">
                                 <span class="text-sm font-black text-gray-300 group-hover:text-teal-600 transition-colors">02</span>
-                                <span class="text-2xl md:text-4xl font-bold text-[#0d3b44] group-hover:translate-x-2 transition-transform duration-500">Post-Surgical Rehab</span>
+                                <span class="text-3xl md:text-5xl font-bold text-[#0d3b44] group-hover:translate-x-2 transition-transform duration-500">Post-Surgical Rehab</span>
                             </div>
                             <div class="mt-4 md:mt-0 flex items-center gap-4">
-                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest hidden md:block">Recovery Mastery</span>
-                                <div class="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center transition-all"
-                                     :class="active === 2 ? 'bg-[#0d3b44] border-[#0d3b44] text-white' : 'group-hover:bg-[#0d3b44] group-hover:text-white'">
-                                    <i data-lucide="chevron-down" class="w-4 h-4 transition-transform duration-500" :class="active === 2 ? 'rotate-180' : ''"></i>
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest hidden md:block">Milestone Driven</span>
+                                <div class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all"
+                                     :class="active === 2 ? 'bg-[#0d3b44] border-[#0d3b44] text-white shadow-lg' : 'group-hover:bg-[#0d3b44] group-hover:text-white'">
+                                    <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-500" :class="active === 2 ? 'rotate-180' : ''"></i>
                                 </div>
                             </div>
                         </button>
                         <div x-show="active === 2" x-collapse x-cloak>
-                            <div class="pb-16 text-xl text-gray-500 font-medium leading-relaxed">
-                                Specialized recovery for ACL Reconstruction, Knee/Hip Replacements, and Shoulder surgeries with phased milestone tracking.
+                            <div class="pb-20">
+                                <div class="flex flex-col md:flex-row gap-12">
+                                    <div class="flex-1">
+                                        <p class="text-xl text-gray-500 font-medium leading-relaxed mb-8">
+                                            Precision-timed rehabilitation protocol starting from day zero. We bridge the gap between surgery and full function through structured phases of recovery.
+                                        </p>
+                                        <div class="flex flex-wrap gap-3">
+                                            <span class="px-5 py-2.5 bg-gray-100 rounded-full text-sm font-bold text-[#0d3b44]">ACL Reconstruction</span>
+                                            <span class="px-5 py-2.5 bg-gray-100 rounded-full text-sm font-bold text-[#0d3b44]">Total Knee Replacement</span>
+                                            <span class="px-5 py-2.5 bg-gray-100 rounded-full text-sm font-bold text-[#0d3b44]">Hip Arthroplasty</span>
+                                            <span class="px-5 py-2.5 bg-gray-100 rounded-full text-sm font-bold text-[#0d3b44]">Spine Discectomy</span>
+                                            <span class="px-5 py-2.5 bg-gray-100 rounded-full text-sm font-bold text-[#0d3b44]">Rotator Cuff Repair</span>
+                                        </div>
+                                    </div>
+                                    <div class="md:w-1/3 grid grid-cols-1 gap-4">
+                                        <div class="p-6 border-l-4 border-[#0d3b44] bg-gray-50">
+                                            <h6 class="text-sm font-black text-[#0d3b44] mb-1">Phase 1: Acute</h6>
+                                            <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Pain & Swelling Management</p>
+                                        </div>
+                                        <div class="p-6 border-l-4 border-teal-600 bg-gray-50">
+                                            <h6 class="text-sm font-black text-[#0d3b44] mb-1">Phase 2: Functional</h6>
+                                            <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Mobility & Strength Load</p>
+                                        </div>
+                                        <div class="p-6 border-l-4 border-orange-500 bg-gray-50">
+                                            <h6 class="text-sm font-black text-[#0d3b44] mb-1">Phase 3: High Performance</h6>
+                                            <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Sport Specific Re-entry</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 03: Sports & Mobility Recovery -->
+                    <div class="border-b border-gray-100">
+                        <button @click="active = (active === 3 ? null : 3)" class="w-full py-12 flex flex-col md:flex-row md:items-center justify-between text-left group">
+                            <div class="flex items-baseline gap-6">
+                                <span class="text-sm font-black text-gray-300 group-hover:text-teal-600 transition-colors">03</span>
+                                <span class="text-3xl md:text-5xl font-bold text-[#0d3b44] group-hover:translate-x-2 transition-transform duration-500">Sports & Mobility Recovery</span>
+                            </div>
+                            <div class="mt-4 md:mt-0 flex items-center gap-4">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest hidden md:block">Elite Performance</span>
+                                <div class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all"
+                                     :class="active === 3 ? 'bg-[#0d3b44] border-[#0d3b44] text-white shadow-lg' : 'group-hover:bg-[#0d3b44] group-hover:text-white'">
+                                    <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-500" :class="active === 3 ? 'rotate-180' : ''"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div x-show="active === 3" x-collapse x-cloak>
+                            <div class="pb-20">
+                                <div class="grid md:grid-cols-3 gap-8">
+                                    <div class="bg-gray-900 p-10 rounded-[2.5rem] text-white">
+                                        <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center mb-8">
+                                            <i data-lucide="trophy" class="w-6 h-6 text-orange-400"></i>
+                                        </div>
+                                        <h4 class="text-2xl font-black mb-4">Elite Edge</h4>
+                                        <p class="text-gray-400 text-sm leading-relaxed font-medium">Used by international athletes to optimize movement efficiency and cut recovery time by 40%.</p>
+                                    </div>
+                                    <div class="md:col-span-2 grid sm:grid-cols-2 gap-8">
+                                        <div class="p-4 border-b border-gray-100">
+                                            <h5 class="font-black text-[#0d3b44] mb-2 uppercase text-xs tracking-widest">Kinesiology Taping</h5>
+                                            <p class="text-gray-500 text-sm">Proprioceptive support for joints without restricting range of motion.</p>
+                                        </div>
+                                        <div class="p-4 border-b border-gray-100">
+                                            <h5 class="font-black text-[#0d3b44] mb-2 uppercase text-xs tracking-widest">Gait Analysis</h5>
+                                            <p class="text-gray-500 text-sm">Digital study of your walking/running cycle to correct biomechanical flaws.</p>
+                                        </div>
+                                        <div class="p-4 border-b border-gray-100">
+                                            <h5 class="font-black text-[#0d3b44] mb-2 uppercase text-xs tracking-widest">Plyometric Intro</h5>
+                                            <p class="text-gray-500 text-sm">Gradual explosive strength building for safe return to competitive play.</p>
+                                        </div>
+                                        <div class="p-4 border-b border-gray-100">
+                                            <h5 class="font-black text-[#0d3b44] mb-2 uppercase text-xs tracking-widest">PNF Stretching</h5>
+                                            <p class="text-gray-500 text-sm">Advanced flexibility techniques used in professional sports clinics worldwide.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 04: Advanced Therapy & Recovery Techniques -->
+                    <div class="border-b border-gray-100">
+                        <button @click="active = (active === 4 ? null : 4)" class="w-full py-12 flex flex-col md:flex-row md:items-center justify-between text-left group">
+                            <div class="flex items-baseline gap-6">
+                                <span class="text-sm font-black text-gray-300 group-hover:text-teal-600 transition-colors">04</span>
+                                <span class="text-3xl md:text-5xl font-bold text-[#0d3b44] group-hover:translate-x-2 transition-transform duration-500">Advanced Therapy</span>
+                            </div>
+                            <div class="mt-4 md:mt-0 flex items-center gap-4">
+                                <span class="text-xs font-bold text-gray-400 uppercase tracking-widest hidden md:block">Clinical Innovation</span>
+                                <div class="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center transition-all"
+                                     :class="active === 4 ? 'bg-[#0d3b44] border-[#0d3b44] text-white shadow-lg' : 'group-hover:bg-[#0d3b44] group-hover:text-white'">
+                                    <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-500" :class="active === 4 ? 'rotate-180' : ''"></i>
+                                </div>
+                            </div>
+                        </button>
+                        <div x-show="active === 4" x-collapse x-cloak>
+                            <div class="pb-20">
+                                <div class="bg-[#f8fafc] p-12 rounded-[3rem] border border-gray-200 relative overflow-hidden">
+                                    <div class="absolute top-0 right-0 p-12 opacity-[0.03]">
+                                        <i data-lucide="microscope" class="w-64 h-64 text-[#0d3b44]"></i>
+                                    </div>
+                                    <div class="relative z-10">
+                                        <h4 class="text-2xl font-black text-[#0d3b44] mb-8 max-w-xl leading-tight">Integrating Medical Science with Mechanical Excellence</h4>
+                                        <div class="grid lg:grid-cols-4 gap-8">
+                                            <div class="space-y-3">
+                                                <div class="w-8 h-8 bg-teal-600 text-white rounded-lg flex items-center justify-center font-bold text-xs">A1</div>
+                                                <h6 class="font-extrabold text-[#0d3b44] uppercase text-[10px] tracking-widest">Neuro-rehab</h6>
+                                                <p class="text-gray-500 text-xs font-medium">Re-education of the nervous system after stroke or paralysis.</p>
+                                            </div>
+                                            <div class="space-y-3">
+                                                <div class="w-8 h-8 bg-orange-500 text-white rounded-lg flex items-center justify-center font-bold text-xs">A2</div>
+                                                <h6 class="font-extrabold text-[#0d3b44] uppercase text-[10px] tracking-widest">Dry Needling</h6>
+                                                <p class="text-gray-500 text-xs font-medium">Neuro-muscular targeting for instant muscle knot deactivation.</p>
+                                            </div>
+                                            <div class="space-y-3">
+                                                <div class="w-8 h-8 bg-[#0d3b44] text-white rounded-lg flex items-center justify-center font-bold text-xs">A3</div>
+                                                <h6 class="font-extrabold text-[#0d3b44] uppercase text-[10px] tracking-widest">Laser Therapy</h6>
+                                                <p class="text-gray-500 text-xs font-medium">High-intensity light energy for cellular bio-stimulation.</p>
+                                            </div>
+                                            <div class="space-y-3">
+                                                <div class="w-8 h-8 bg-gray-400 text-white rounded-lg flex items-center justify-center font-bold text-xs">A4</div>
+                                                <h6 class="font-extrabold text-[#0d3b44] uppercase text-[10px] tracking-widest">Shockwave</h6>
+                                                <p class="text-gray-500 text-xs font-medium">Acoustic waves to treat chronic calcified tendon issues.</p>
+                                            </div>
+                                        </div>
+                                        <div class="mt-12 pt-10 border-t border-gray-200">
+                                            <p class="text-sm font-bold text-gray-400 italic">"Our advanced modalities are applied only after rigorous clinical screening to ensure safety and maximum efficacy."</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
