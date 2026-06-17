@@ -1,72 +1,85 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth antialiased">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XG3J8PES22"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XG3J8PES22');
+    </script>
+    
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Step2Heal | Advanced Physiotherapy & Rehabilitation Centre Noida</title>
+    <title>Step2Heal | Advanced Physiotherapy and Rehabilitation Centre | Noida</title>
+    
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
+    
+    <!-- Google Fonts: Plus Jakarta Sans for a warm, human, yet highly professional feel -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <!-- Alpine.js -->
-    <script src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            deep: '#0d3b44',   // Core trust color
+                            teal: '#0d9488',   // Vibrant healthcare accent
+                            light: '#f0fdfa',  // Soft clinical background
+                            orange: '#f97316', // Action color (Salmon/Orange)
+                            warm: '#fafaf9',   // Warm off-white
+                        }
+                    },
+                    boxShadow: {
+                        'soft': '0 10px 40px -10px rgba(13, 59, 68, 0.08)',
+                        'card': '0 4px 20px -2px rgba(13, 59, 68, 0.05)',
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
-        .hero-gradient { background: radial-gradient(circle at top right, #f0fdfa 0%, #ffffff 100%); }
-        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        body { background-color: #fafaf9; color: #334155; }
         [x-cloak] { display: none !important; }
         
-        .portal-card { transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
-        .portal-card:hover { transform: translateY(-12px); }
+        ::selection { background-color: #0d9488; color: white; }
         
-        .image-mask { clip-path: border-box; border-radius: 3rem 3rem 10rem 3rem; }
-
-        /* Review Slider Mobile Specific Styles */
-        @media (max-width: 767px) {
-            .review-slider {
-                display: flex;
-                overflow-x: auto;
-                scroll-snap-type: x mandatory;
-                scroll-behavior: smooth;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                padding-bottom: 20px;
-            }
-            .review-slider::-webkit-scrollbar {
-                display: none;
-            }
-            .review-item {
-                flex: 0 0 85%;
-                scroll-snap-align: center;
-                margin-right: 16px;
-            }
-            .review-item:first-child { margin-left: 5%; }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-        .animate-float { animation: float 6s ease-in-out infinite; }
-
-        /* Hero Slider Transition */
-        .hero-image-fade {
-            transition: opacity 1000ms ease-in-out;
-        }
+        /* Soft, human-centric shapes instead of harsh SaaS rectangles */
+        .img-hero-mask { border-radius: 2rem 2rem 10rem 2rem; }
+        
+        /* Smooth transitions for images */
+        .img-fade { transition: opacity 1.5s ease-in-out; }
+        
+        /* Custom scrollbar for horizontal review list */
+        .review-scroll::-webkit-scrollbar { display: none; }
+        .review-scroll { -ms-overflow-style: none; scrollbar-width: none; scroll-snap-type: x mandatory; }
+        .review-snap { scroll-snap-align: start; }
     </style>
 </head>
-<body class="bg-white text-gray-900 selection:bg-teal-100 selection:text-[#0d3b44]" 
+
+<body class="selection:bg-brand-teal selection:text-white"
       x-data="{ 
         scrolled: false, 
         mobileMenu: false, 
-        activeReview: 0,
         heroActive: 0,
         heroImages: [
             'b1113011-2f24-4a6a-a7e9-0d5823ec1386.jpg',
@@ -75,275 +88,330 @@
         ],
         whatsappMsg: 'Hi Step2Heal! 👋 I\'d like to book a physiotherapy session. Could you please share the available slots? Thank you!'
       }" 
-      x-init="setInterval(() => { heroActive = (heroActive + 1) % heroImages.length }, 3000)"
+      x-init="setInterval(() => { heroActive = (heroActive + 1) % heroImages.length }, 4000)"
       @scroll.window="scrolled = (window.pageYOffset > 20)">
 
-    <!-- Navbar -->
-    <nav :class="scrolled ? 'shadow-sm py-2 bg-white/90' : 'py-5 bg-transparent'" 
-          class="fixed w-full z-[60] transition-all duration-300 nav-blur">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-4 group cursor-pointer" onclick="window.location.href='index.html'">
-                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-14 w-auto object-contain">
-                    <div class="flex flex-col leading-none">
-                        <span class="font-extrabold text-xl text-[#0d3b44] tracking-tight">Step2Heal</span>
-                        <span class="text-[10px] italic font-semibold text-orange-500 mt-1">Where every step matters</span>
-                    </div>
+    <!-- Navigation: Warm, accessible, clear contrast -->
+    <nav :class="scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-6'" 
+         class="fixed w-full z-[60] transition-all duration-300">
+        <div class="max-w-[1400px] w-full mx-auto px-6 lg:px-12 flex justify-between items-center">
+            
+            <a href="/" class="flex items-center gap-3 group">
+                <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal Logo" class="h-12 w-auto object-contain">
+                <div class="flex flex-col leading-none">
+                    <span class="font-bold text-xl tracking-tight text-brand-deep">Step2Heal</span>
+                    <span class="text-[11px] font-medium text-brand-teal mt-1">Where every step matters</span>
                 </div>
+            </a>
 
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="home.html" class="text-sm font-bold text-teal-600">Home</a>
-                    <a href="services.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Services</a>
-                    <a href="founders.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Founders</a>
-                    <a href="gallery.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Gallery</a>
-                    <a href="blog.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Blog</a>
-                    <a href="contact.html" class="text-sm font-bold text-gray-600 hover:text-teal-600 transition-colors">Contact</a>
-                    <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" class="bg-[#0d3b44] text-white px-6 py-3 rounded-xl text-sm font-bold hover:shadow-xl hover:shadow-teal-900/20 transition-all">Book Session</a>
-                </div>
-
-                <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-[#0d3b44]">
-                    <i data-lucide="menu" x-show="!mobileMenu"></i>
-                    <i data-lucide="x" x-show="mobileMenu"></i>
-                </button>
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex space-x-8 items-center">
+                <a href="/" class="text-[15px] font-semibold text-brand-teal">Home</a>
+                <a href="services.html" class="text-[15px] font-medium text-gray-600 hover:text-brand-teal transition-colors">Services</a>
+                <a href="founders.html" class="text-[15px] font-medium text-gray-600 hover:text-brand-teal transition-colors">Founders</a>
+                <a href="gallery.html" class="text-[15px] font-medium text-gray-600 hover:text-brand-teal transition-colors">Gallery</a>
+                <a href="blog.html" class="text-[15px] font-medium text-gray-600 hover:text-brand-teal transition-colors">Blog</a>
+                <a href="contact.html" class="text-[15px] font-medium text-gray-600 hover:text-brand-teal transition-colors">Contact</a>
+                
+                <!-- Primary Action Button: Salmon Orange for visibility and warmth -->
+                <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" 
+                   class="bg-brand-orange text-white px-6 py-3 rounded-full text-[15px] font-semibold hover:bg-[#ea580c] transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 flex items-center gap-2">
+                    Book Session <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
             </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button @click="mobileMenu = !mobileMenu" class="lg:hidden text-brand-deep focus:outline-none p-2 bg-brand-light rounded-full">
+                <i data-lucide="menu" x-show="!mobileMenu" class="w-6 h-6"></i>
+                <i data-lucide="x" x-show="mobileMenu" class="w-6 h-6" x-cloak></i>
+            </button>
         </div>
     </nav>
 
     <!-- Mobile Menu -->
-    <div x-show="mobileMenu" x-transition x-cloak class="fixed inset-0 z-[55] bg-white pt-24 px-8 md:hidden">
-        <div class="flex flex-col space-y-6 text-center">
-            <a href="home.html" class="text-2xl font-bold">Home</a>
-            <a href="services.html" class="text-2xl font-bold">Services</a>
-            <a href="founders.html" class="text-2xl font-bold">Founders</a>
-            <a href="gallery.html" class="text-2xl font-bold">Gallery</a>
-            <a href="blog.html" class="text-2xl font-bold">Blog</a>
-            <a href="contact.html" class="text-2xl font-bold">Contact</a>
-            <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" class="bg-[#0d3b44] text-white py-4 rounded-2xl font-bold text-lg">Book Session</a>
+    <div x-show="mobileMenu" 
+         x-transition:enter="transition ease-out duration-200"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-150"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         x-cloak 
+         class="fixed inset-0 z-[55] bg-brand-deep text-white pt-32 px-6 lg:hidden overflow-y-auto">
+        <div class="flex flex-col space-y-6">
+            <a href="/" class="text-3xl font-semibold text-brand-teal">Home</a>
+            <a href="services.html" class="text-3xl font-semibold text-white/80 hover:text-white">Services</a>
+            <a href="founders.html" class="text-3xl font-semibold text-white/80 hover:text-white">Founders</a>
+            <a href="gallery.html" class="text-3xl font-semibold text-white/80 hover:text-white">Gallery</a>
+            <a href="blog.html" class="text-3xl font-semibold text-white/80 hover:text-white">Blog</a>
+            <a href="contact.html" class="text-3xl font-semibold text-white/80 hover:text-white">Contact</a>
+            
+            <div class="pt-8 mt-4 border-t border-white/10">
+                <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" 
+                   class="bg-brand-orange text-white px-6 py-4 rounded-xl text-center font-semibold text-lg block">
+                    Book Session via WhatsApp
+                </a>
+            </div>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="hero-gradient pt-32 pb-20 lg:pt-52 lg:pb-32 px-4 overflow-hidden">
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-            <div class="w-full lg:w-1/2 space-y-8 text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-50 border border-teal-100 text-teal-700 text-xs font-bold uppercase tracking-widest">
-                    <span class="relative flex h-2 w-2">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2 w-2 bg-teal-500"></span>
+    <!-- Hero Section: Warm, inviting, clear healthcare focus -->
+    <section class="pt-32 pb-20 lg:pt-48 lg:pb-32 px-6 lg:px-12 bg-brand-light overflow-hidden relative">
+        <div class="max-w-[1400px] mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24 relative z-10">
+            
+            <!-- Left Copy -->
+            <div class="w-full lg:w-1/2 flex flex-col justify-center text-center lg:text-left">
+                <div class="inline-flex items-center justify-center lg:justify-start gap-2 mb-8">
+                    <span class="bg-brand-deep text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                        Premium Care
                     </span>
-                    Advanced Physiotherapy and Rehabilitation Centre
+                    <span class="text-sm font-semibold text-brand-teal">Advanced Physiotherapy Centre</span>
                 </div>
-                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-[#0d3b44] leading-[0.9] tracking-tighter uppercase">
-                    MOVE BETTER. <br><span class="text-teal-600">FEEL BETTER.</span><br><span class="text-orange-500">LIVE BETTER.</span>
+                
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-brand-deep mb-6">
+                    Move Better.<br>
+                    <span class="text-brand-teal">Feel Better.</span><br>
+                    Live Better.
                 </h1>
-                <p class="text-lg md:text-xl text-gray-500 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
+                
+                <p class="text-lg md:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto lg:mx-0 mb-10 font-medium">
                     Stop managing pain. Start outgrowing it. Personalised physiotherapy for chronic pain, sports recovery, and every step in between.
                 </p>
+                
                 <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-                    <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" class="w-full sm:w-auto bg-[#0d3b44] text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-teal-700 transition-all shadow-2xl shadow-teal-900/10 flex items-center justify-center gap-2">
-                        Get Started <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" 
+                       class="bg-brand-orange text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#ea580c] transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 w-full sm:w-auto flex items-center justify-center gap-2">
+                        Start Recovery
                     </a>
-                    <a href="services.html" class="w-full sm:w-auto px-10 py-5 rounded-2xl font-bold text-lg border-2 border-gray-100 hover:border-teal-500 transition-all flex items-center justify-center gap-2">
+                    <a href="physiotherapy-recovery-guide.html" 
+                       class="px-8 py-4 rounded-full font-semibold text-lg border-2 border-brand-deep text-brand-deep hover:bg-brand-deep hover:text-white transition-all w-full sm:w-auto justify-center flex">
                         View Services
                     </a>
                 </div>
             </div>
-            <div class="w-full lg:w-1/2 relative h-[400px] md:h-[600px]">
-                <!-- Image Slider Container -->
-                <div class="relative z-10 w-full h-full animate-float">
+
+            <!-- Right Image Area: Organic, caring shapes -->
+            <div class="w-full lg:w-1/2 mt-12 lg:mt-0 relative aspect-[4/3] lg:h-[600px]">
+                <div class="absolute inset-0 img-hero-mask overflow-hidden shadow-2xl border-8 border-white">
                     <template x-for="(img, index) in heroImages" :key="index">
                         <img :src="img" 
-                             alt="Step2Heal Treatment" 
-                             class="image-mask shadow-2xl w-full h-full object-cover absolute inset-0 hero-image-fade"
-                             :class="heroActive === index ? 'opacity-100' : 'opacity-0'"
-                             onerror="this.src='https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1000'">
+                             alt="Clinic Environment and Patient Care" 
+                             class="w-full h-full object-cover absolute inset-0 img-fade"
+                             :class="heroActive === index ? 'opacity-100 z-10' : 'opacity-0 z-0'"
+                             onerror="this.src='https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&q=80&w=1200'">
                     </template>
                 </div>
-                <div class="absolute -top-10 -right-10 w-40 h-40 bg-teal-100 rounded-full blur-3xl opacity-50"></div>
-                <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
+                <!-- Decorative element to ground the image -->
+                <div class="absolute -bottom-8 -left-8 w-48 h-48 bg-brand-teal/10 rounded-full blur-2xl z-0 pointer-events-none"></div>
             </div>
         </div>
     </section>
 
-    <!-- Google Reviews Section -->
-    <section class="py-24 px-0 md:px-4 bg-teal-50/30 overflow-hidden" id="reviews-section">
-        <div class="max-w-7xl mx-auto px-4 md:px-0">
+    <!-- Navigation Hub (Portals): Editorial split design -->
+    <section class="py-24 px-6 lg:px-12 bg-white">
+        <div class="max-w-[1400px] mx-auto">
+            
+            <div class="flex flex-col lg:flex-row justify-between items-end mb-16 gap-8">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-brand-deep mb-6">Explore Our World.</h2>
+                    <p class="text-gray-600 text-lg md:text-xl font-medium leading-relaxed">Everything you need to regain your strength, mobility, and confidence, provided by experts who genuinely care about your recovery.</p>
+                </div>
+            </div>
+
+            <!-- Asymmetrical Grid to break monotony -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 lg:gap-8">
+                
+                <!-- Primary Portal: Services (Large) -->
+                <a href="services.html" class="md:col-span-12 lg:col-span-8 group relative rounded-3xl overflow-hidden bg-brand-light p-10 flex flex-col justify-end min-h-[400px] shadow-card hover:shadow-soft transition-all duration-300 border border-teal-100">
+                    <div class="absolute top-10 right-10 w-16 h-16 bg-white rounded-full flex items-center justify-center text-brand-teal shadow-sm group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="activity" class="w-8 h-8"></i>
+                    </div>
+                    <div class="relative z-10 max-w-lg">
+                        <span class="text-brand-teal font-bold tracking-wider uppercase text-sm mb-2 block">Comprehensive Care</span>
+                        <h3 class="text-3xl md:text-4xl font-bold text-brand-deep mb-4 group-hover:text-brand-teal transition-colors">Our Services</h3>
+                        <p class="text-gray-600 text-lg mb-6 leading-relaxed">Laser therapy, dry needling, and advanced sports rehab. Dedicated care for complex issues.</p>
+                        <div class="inline-flex items-center text-brand-deep font-semibold border-b-2 border-brand-teal pb-1">
+                            Explore Treatments <i data-lucide="arrow-right" class="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Secondary Portal: Founders -->
+                <a href="founders.html" class="md:col-span-6 lg:col-span-4 group relative rounded-3xl overflow-hidden bg-brand-deep p-10 flex flex-col justify-end min-h-[400px] shadow-card hover:shadow-soft transition-all duration-300">
+                    <div class="absolute top-10 right-10 w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center text-white shadow-sm group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="users" class="w-8 h-8"></i>
+                    </div>
+                    <div class="relative z-10">
+                        <span class="text-teal-300 font-bold tracking-wider uppercase text-sm mb-2 block">Expertise</span>
+                        <h3 class="text-3xl font-bold text-white mb-4">The Founders</h3>
+                        <p class="text-gray-300 text-lg mb-6 leading-relaxed">Visionaries behind Step2Heal's care. Meet Dr. Saijal and Megha.</p>
+                        <div class="inline-flex items-center text-white font-semibold border-b-2 border-brand-orange pb-1">
+                            Our Story <i data-lucide="arrow-right" class="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Tertiary Portal: Clinic Tour -->
+                <a href="gallery.html" class="md:col-span-6 lg:col-span-12 group relative rounded-3xl overflow-hidden bg-gray-50 p-10 flex flex-col lg:flex-row items-start lg:items-center justify-between min-h-[250px] shadow-card hover:shadow-soft transition-all duration-300 border border-gray-200">
+                    <div class="max-w-2xl">
+                        <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-gray-700 shadow-sm mb-6 lg:hidden">
+                            <i data-lucide="image" class="w-8 h-8"></i>
+                        </div>
+                        <span class="text-gray-500 font-bold tracking-wider uppercase text-sm mb-2 block">Facility</span>
+                        <h3 class="text-3xl font-bold text-brand-deep mb-4">Clinic Tour</h3>
+                        <p class="text-gray-600 text-lg leading-relaxed">See our state-of-the-art equipment and comfortable healing spaces designed for your optimal recovery journey.</p>
+                    </div>
+                    <div class="mt-8 lg:mt-0 flex items-center">
+                        <div class="hidden lg:flex w-16 h-16 bg-white rounded-full items-center justify-center text-gray-700 shadow-sm mr-6 group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="image" class="w-8 h-8"></i>
+                        </div>
+                        <div class="inline-flex items-center text-brand-deep font-semibold border-b-2 border-gray-300 group-hover:border-brand-deep transition-colors pb-1">
+                            Look Inside <i data-lucide="arrow-right" class="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform"></i>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section: Warm, Testimonial Style -->
+    <section class="py-24 px-0 lg:px-12 bg-brand-deep text-white overflow-hidden relative">
+        <!-- Soft background pattern/glow -->
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-teal/20 rounded-full blur-[100px] pointer-events-none"></div>
+        
+        <div class="max-w-[1400px] mx-auto">
+            <div class="px-6 lg:px-0 flex flex-col md:flex-row justify-between items-end mb-16 gap-6 relative z-10">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Patient Success Stories</h2>
+                    <p class="text-teal-100 text-lg md:text-xl font-medium">Real stories from individuals who have regained their mobility and health.</p>
+                </div>
+                <a href="https://share.google/rvc6hhUrntZ1oY3fh" target="_blank" class="text-brand-orange font-semibold flex items-center gap-2 hover:text-white transition-colors">
+                    Verify on Google <i data-lucide="external-link" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <!-- Horizontal Scroll Container -->
+            <div class="flex overflow-x-auto review-scroll pb-12 px-6 lg:px-0 gap-6 lg:gap-8 snap-x relative z-10">
+                
+                <!-- Review 1 -->
+                <div class="flex-none w-[85vw] md:w-[400px] lg:w-[450px] bg-white text-gray-800 p-8 lg:p-10 rounded-3xl review-snap flex flex-col shadow-xl">
+                    <div class="flex text-brand-orange mb-6">
+                        <i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i>
+                    </div>
+                    <p class="text-lg font-medium leading-relaxed mb-8 flex-grow">
+                        "Thank you Dr Saijal & Megha. Amazing physiotherapist. Their skills & knowledge r outstanding. They are so passionate to achieve the best possible outcome for their patients. I was taking sessions for my slip disc and I am feeling so much better now."
+                    </p>
+                    <div class="flex items-center gap-4 pt-6 border-t border-gray-100">
+                        <div class="w-12 h-12 rounded-full bg-brand-light text-brand-teal flex items-center justify-center font-bold text-lg">P</div>
+                        <div>
+                            <div class="font-bold text-brand-deep">Parul Kapoor</div>
+                            <div class="text-sm text-gray-500">Patient</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="flex-none w-[85vw] md:w-[400px] lg:w-[450px] bg-white text-gray-800 p-8 lg:p-10 rounded-3xl review-snap flex flex-col shadow-xl">
+                    <div class="flex text-brand-orange mb-6">
+                        <i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i>
+                    </div>
+                    <p class="text-lg font-medium leading-relaxed mb-8 flex-grow">
+                        "Experiencing therapy and relaxation at his center is truly amazing! It's a great way to find relief from pain and rejuvenate your body. The expert care and modern techniques used here help you feel your best."
+                    </p>
+                    <div class="flex items-center gap-4 pt-6 border-t border-gray-100">
+                        <div class="w-12 h-12 rounded-full bg-brand-light text-brand-teal flex items-center justify-center font-bold text-lg">A</div>
+                        <div>
+                            <div class="font-bold text-brand-deep">Akash Singh</div>
+                            <div class="text-sm text-gray-500">Patient</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="flex-none w-[85vw] md:w-[400px] lg:w-[450px] bg-white text-gray-800 p-8 lg:p-10 rounded-3xl review-snap flex flex-col shadow-xl">
+                    <div class="flex text-brand-orange mb-6">
+                        <i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i><i data-lucide="star" class="fill-current w-5 h-5"></i>
+                    </div>
+                    <p class="text-lg font-medium leading-relaxed mb-8 flex-grow">
+                        "The best physiotherapy ever, care comfort confidence that helps the patient recover faster and live healthier lives. They support every step of healing. Must visit."
+                    </p>
+                    <div class="flex items-center gap-4 pt-6 border-t border-gray-100">
+                        <div class="w-12 h-12 rounded-full bg-brand-light text-brand-teal flex items-center justify-center font-bold text-lg">P</div>
+                        <div>
+                            <div class="font-bold text-brand-deep">Panshul Gupta</div>
+                            <div class="text-sm text-gray-500">Patient</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section: Clean, accessible, soft grey background -->
+    <section class="py-24 px-6 lg:px-12 bg-brand-warm" x-data="{ active: null }">
+        <div class="max-w-[900px] mx-auto">
             <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl font-black text-[#0d3b44] tracking-tight mb-4 px-4">Patient Success Stories</h2>
-                <p class="text-gray-500 font-medium px-4">Hear from those who've regained their mobility at Step2Heal.</p>
+                <h2 class="text-4xl font-bold tracking-tight text-brand-deep mb-4">Information & Protocols</h2>
+                <p class="text-gray-600 text-lg">Common questions about starting your recovery journey.</p>
             </div>
             
-            <!-- Horizontal slider -->
-            <div id="reviewSlider" class="review-slider md:grid md:grid-cols-3 md:gap-8">
-                <!-- Review 1 -->
-                <div class="review-item bg-white p-8 rounded-[2rem] shadow-sm border border-teal-50 flex flex-col h-full">
-                    <div class="flex text-orange-400 mb-4">
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                    </div>
-                    <p class="text-gray-600 mb-6 italic flex-grow">"Thank you Dr Saijal & Megha. Amazing physiotherapist. Their skills & knowledge r outstanding. They are so passionate to achieve the best possible outcome for their patients. I was taking sessions for my slip disc and I am feeling so much better now. I highly recommend step to heal."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[#0d3b44]">P</div>
-                        <span class="font-bold text-[#0d3b44]">Parul Kapoor</span>
-                    </div>
-                </div>
-                <!-- Review 2 -->
-                <div class="review-item bg-white p-8 rounded-[2rem] shadow-sm border border-teal-50 flex flex-col h-full">
-                    <div class="flex text-orange-400 mb-4">
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                    </div>
-                    <p class="text-gray-600 mb-6 italic flex-grow">"Experiencing therapy and relaxation at his center is truly amazing! It's a great way to find relief from pain and rejuvenate your body. The expert care and modern techniques used here help you feel your best."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[#0d3b44]">A</div>
-                        <span class="font-bold text-[#0d3b44]">Akash Singh</span>
-                    </div>
-                </div>
-                <!-- Review 3 -->
-                <div class="review-item bg-white p-8 rounded-[2rem] shadow-sm border border-teal-50 flex flex-col h-full">
-                    <div class="flex text-orange-400 mb-4">
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                        <i data-lucide="star" class="fill-current w-4 h-4"></i>
-                    </div>
-                    <p class="text-gray-600 mb-6 italic flex-grow">"The best physiotherapy ever, care comfort confidence that helps the patient recover faster and live healthier lives. They support every step of healing. Must visit."</p>
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-[#0d3b44]">P</div>
-                        <span class="font-bold text-[#0d3b44]">Panshul Gupta</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-12 text-center">
-                <a href="https://share.google/rvc6hhUrntZ1oY3fh" target="_blank" class="text-teal-600 font-bold flex items-center justify-center gap-2 hover:underline">
-                    Read more on Google <i data-lucide="external-link" class="w-4 h-4"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Navigation Hub (Portals) -->
-    <section class="py-24 px-4 bg-white">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-                <div class="max-w-xl">
-                    <h2 class="text-4xl md:text-5xl font-black text-[#0d3b44] tracking-tight mb-4">Explore Our World.</h2>
-                    <p class="text-gray-500 font-medium text-lg">Everything you need to regain your strength, mobility, and confidence.</p>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <a href="services.html" class="portal-card group relative bg-gray-50 rounded-[2.5rem] p-8 overflow-hidden h-80 flex flex-col justify-between">
-                    <div class="absolute inset-0 bg-teal-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                    <div class="relative z-10">
-                        <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-teal-600 shadow-sm group-hover:scale-110 transition-transform">
-                            <i data-lucide="activity" class="w-7 h-7"></i>
-                        </div>
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="text-2xl font-black text-[#0d3b44] group-hover:text-white mb-2">Our Services</h3>
-                        <p class="text-gray-500 group-hover:text-teal-50 text-sm font-medium">Laser therapy, dry needling, and sports rehab.</p>
-                        <div class="mt-4 flex items-center text-teal-600 group-hover:text-white font-bold text-xs uppercase tracking-widest">
-                            Explore <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="founders.html" class="portal-card group relative bg-gray-50 rounded-[2.5rem] p-8 overflow-hidden h-80 flex flex-col justify-between">
-                    <div class="absolute inset-0 bg-[#0d3b44] translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                    <div class="relative z-10">
-                        <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-[#0d3b44] shadow-sm group-hover:scale-110 transition-transform">
-                            <i data-lucide="users" class="w-7 h-7"></i>
-                        </div>
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="text-2xl font-black text-[#0d3b44] group-hover:text-white mb-2">The Founders</h3>
-                        <p class="text-gray-500 group-hover:text-teal-50 text-sm font-medium">Visionaries behind Step2Heal's advanced care.</p>
-                        <div class="mt-4 flex items-center text-[#0d3b44] group-hover:text-white font-bold text-xs uppercase tracking-widest">
-                            Our Story <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
-                        </div>
-                    </div>
-                </a>
-
-                <a href="gallery.html" class="portal-card group relative bg-gray-50 rounded-[2.5rem] p-8 overflow-hidden h-80 flex flex-col justify-between">
-                    <div class="absolute inset-0 bg-teal-500 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                    <div class="relative z-10">
-                        <div class="w-14 h-14 rounded-2xl bg-white flex items-center justify-center text-teal-500 shadow-sm group-hover:scale-110 transition-transform">
-                            <i data-lucide="image" class="w-7 h-7"></i>
-                        </div>
-                    </div>
-                    <div class="relative z-10">
-                        <h3 class="text-2xl font-black text-[#0d3b44] group-hover:text-white mb-2">Clinic Tour</h3>
-                        <p class="text-gray-500 group-hover:text-teal-50 text-sm font-medium">See our advanced equipment and healing spaces.</p>
-                        <div class="mt-4 flex items-center text-teal-500 group-hover:text-white font-bold text-xs uppercase tracking-widest">
-                            Look Inside <i data-lucide="chevron-right" class="w-4 h-4 ml-1"></i>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQs Section -->
-    <section class="py-24 px-4 bg-white" x-data="{ active: null }">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-4xl font-black text-[#0d3b44] mb-12 text-center">Frequently Asked Questions</h2>
             <div class="space-y-4">
-                <div class="border border-gray-100 rounded-2xl overflow-hidden bg-white">
-                    <button @click="active = active === 0 ? null : 0" 
-                            class="w-full flex items-center justify-between p-6 text-left font-bold text-gray-700 hover:bg-teal-50 transition-colors">
-                        <span>What should I expect during my first visit?</span>
-                        <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 0 ? 'rotate-45 text-teal-600' : ''"></i>
+                <!-- FAQ 1 -->
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <button @click="active = active === 0 ? null : 0" class="w-full p-6 lg:p-8 flex items-center justify-between text-left focus:outline-none">
+                        <span class="font-semibold text-lg text-brand-deep">What should I expect during my first visit?</span>
+                        <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center flex-shrink-0 text-brand-teal ml-4">
+                            <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 0 ? 'rotate-45' : ''"></i>
+                        </div>
                     </button>
                     <div x-show="active === 0" x-collapse x-cloak>
-                        <div class="p-6 text-gray-500 bg-white border-t border-gray-100">
+                        <div class="px-6 lg:px-8 pb-8 text-gray-600 text-lg leading-relaxed border-t border-gray-100 pt-4">
                             Your first session includes a comprehensive evaluation where we discuss your medical history, perform physical tests, and create a customized treatment plan.
                         </div>
                     </div>
                 </div>
 
-                <div class="border border-gray-100 rounded-2xl overflow-hidden bg-white">
-                    <button @click="active = active === 1 ? null : 1" 
-                            class="w-full flex items-center justify-between p-6 text-left font-bold text-gray-700 hover:bg-teal-50 transition-colors">
-                        <span>How many sessions will I need?</span>
-                        <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 1 ? 'rotate-45 text-teal-600' : ''"></i>
+                <!-- FAQ 2 -->
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <button @click="active = active === 1 ? null : 1" class="w-full p-6 lg:p-8 flex items-center justify-between text-left focus:outline-none">
+                        <span class="font-semibold text-lg text-brand-deep">How many sessions will I need?</span>
+                        <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center flex-shrink-0 text-brand-teal ml-4">
+                            <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 1 ? 'rotate-45' : ''"></i>
+                        </div>
                     </button>
                     <div x-show="active === 1" x-collapse x-cloak>
-                        <div class="p-6 text-gray-500 bg-white border-t border-gray-100">
+                        <div class="px-6 lg:px-8 pb-8 text-gray-600 text-lg leading-relaxed border-t border-gray-100 pt-4">
                             The number of sessions depends on the severity of your condition and your body's response to treatment.
                         </div>
                     </div>
                 </div>
 
-                <div class="border border-gray-100 rounded-2xl overflow-hidden bg-white">
-                    <button @click="active = active === 2 ? null : 2" 
-                            class="w-full flex items-center justify-between p-6 text-left font-bold text-gray-700 hover:bg-teal-50 transition-colors">
-                        <span>Do I need a doctor referral for physiotherapy?</span>
-                        <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 2 ? 'rotate-45 text-teal-600' : ''"></i>
+                <!-- FAQ 3 -->
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <button @click="active = active === 2 ? null : 2" class="w-full p-6 lg:p-8 flex items-center justify-between text-left focus:outline-none">
+                        <span class="font-semibold text-lg text-brand-deep">Do I need a doctor referral for physiotherapy?</span>
+                        <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center flex-shrink-0 text-brand-teal ml-4">
+                            <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 2 ? 'rotate-45' : ''"></i>
+                        </div>
                     </button>
                     <div x-show="active === 2" x-collapse x-cloak>
-                        <div class="p-6 text-gray-500 bg-white border-t border-gray-100">
+                        <div class="px-6 lg:px-8 pb-8 text-gray-600 text-lg leading-relaxed border-t border-gray-100 pt-4">
                             No referral required. Physiotherapy is something you can access directly. If you're in pain, dealing with an injury, or simply want to move better — you don't need a doctor's note to get started. Just reach out.
                         </div>
                     </div>
                 </div>
 
-                <div class="border border-gray-100 rounded-2xl overflow-hidden bg-white">
-                    <button @click="active = active === 3 ? null : 3" 
-                            class="w-full flex items-center justify-between p-6 text-left font-bold text-gray-700 hover:bg-teal-50 transition-colors">
-                        <span>Do you offer home visit services?</span>
-                        <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 3 ? 'rotate-45 text-teal-600' : ''"></i>
+                <!-- FAQ 4 -->
+                <div class="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <button @click="active = active === 3 ? null : 3" class="w-full p-6 lg:p-8 flex items-center justify-between text-left focus:outline-none">
+                        <span class="font-semibold text-lg text-brand-deep">Do you offer home visit services?</span>
+                        <div class="w-10 h-10 rounded-full bg-brand-light flex items-center justify-center flex-shrink-0 text-brand-teal ml-4">
+                            <i data-lucide="plus" class="w-5 h-5 transition-transform duration-300" :class="active === 3 ? 'rotate-45' : ''"></i>
+                        </div>
                     </button>
                     <div x-show="active === 3" x-collapse x-cloak>
-                        <div class="p-6 text-gray-500 bg-white border-t border-gray-100">
+                        <div class="px-6 lg:px-8 pb-8 text-gray-600 text-lg leading-relaxed border-t border-gray-100 pt-4">
                             Yes, we provide advanced physiotherapy home services in Noida and surrounding areas for patients who have mobility constraints.
                         </div>
                     </div>
@@ -352,155 +420,101 @@
         </div>
     </section>
 
-    <!-- Location & Map Section -->
-    <section class="py-24 px-4 bg-gray-50">
-        <div class="max-w-7xl mx-auto flex flex-col lg:flex-row gap-12">
-            <div class="w-full lg:w-1/2 p-12 bg-white rounded-[3rem] shadow-sm border border-gray-100 flex flex-col justify-between">
-                <div>
-                    <h3 class="text-3xl font-black text-[#0d3b44] mb-6">Find Us in Noida</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-start gap-4">
-                            <div class="p-3 rounded-xl bg-teal-50 text-teal-600"><i data-lucide="map-pin"></i></div>
-                            <div>
-                                <p class="font-bold text-gray-900">Step2Heal Centre</p>
-                                <p class="text-sm text-gray-500">Ground Floor, O 91, Opp. Noida Stadium, Block O, Sector 12, Noida, UP 201301</p>
-                            </div>
-                        </div>
-                        <div class="flex items-start gap-4">
-                            <div class="p-3 rounded-xl bg-teal-50 text-teal-600"><i data-lucide="clock"></i></div>
-                            <div>
-                                <p class="font-bold text-gray-900">Working Hours</p>
-                                <p class="text-sm text-gray-500">Mon - Sat: 10:00 AM - 2:30 PM and 4:00 PM - 8:30 PM<br>Sun: By Appointment Only</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-10 overflow-hidden rounded-3xl h-64 border border-gray-200">
-                    <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.220197541624!2d77.3368705755054!3d28.592946775688647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce51cf414c6db%3A0xb521cfc7d4322d0a!2sStep2Heal%20Advanced%20Physiotherapy%20and%20Rehabilitation%20Centre!5e0!3m2!1sen!2sin!4v1714560000000!5m2!1sen!2sin" 
-                        width="100%" 
-                        height="100%" 
-                        style="border:0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            </div>
+    <!-- Location & Contact: Distinct visual identities for Map vs Contact Box -->
+    <section class="py-24 px-6 lg:px-12 bg-white">
+        <div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
-            <div class="w-full lg:w-1/2 p-12 bg-teal-600 rounded-[3rem] shadow-xl text-white relative overflow-hidden">
-                <div class="relative z-10 h-full flex flex-col justify-center">
-                    <h3 class="text-4xl font-black mb-6">Book Your Visit</h3>
-                    <p class="text-teal-50/80 mb-10 text-lg leading-relaxed">Our coordinators are ready to assist you with booking or answering questions. We prioritize same-day appointments for urgent cases.</p>
-                    <div class="space-y-4">
-                        <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" class="flex items-center justify-between p-6 rounded-2xl bg-white/10 hover:bg-white/20 transition-all border border-white/20">
-                            <div class="flex items-center gap-4">
-                                <i data-lucide="message-circle" class="w-8 h-8"></i>
-                                <span class="font-bold text-xl">WhatsApp Us</span>
+            <!-- Information / Contact side -->
+            <div class="bg-brand-deep text-white rounded-[2rem] p-10 lg:p-16 shadow-2xl relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-64 h-64 bg-brand-teal/30 rounded-full blur-[80px]"></div>
+                
+                <div class="relative z-10">
+                    <h2 class="text-4xl font-bold tracking-tight mb-8">Visit Our Clinic</h2>
+                    
+                    <div class="space-y-8 mb-12">
+                        <div class="flex items-start gap-5">
+                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-brand-orange"></i>
                             </div>
-                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                            <div>
+                                <p class="font-bold text-lg mb-1">Step2Heal Centre</p>
+                                <p class="text-teal-50 text-base leading-relaxed opacity-90">Ground Floor, O 91, Opp. Noida Stadium,<br>Block O, Sector 12, Noida, UP 201301</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-5">
+                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="clock" class="w-6 h-6 text-brand-orange"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-lg mb-1">Operating Hours</p>
+                                <p class="text-teal-50 text-base leading-relaxed opacity-90">Mon–Sat: 10:00 AM – 2:30 PM, 4:00 PM – 8:30 PM<br>Sunday: By appointment only</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-5">
+                            <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="mail" class="w-6 h-6 text-brand-orange"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-lg mb-1">Email</p>
+                                <a href="mailto:step2heal1111@gmail.com" class="text-teal-50 text-base hover:text-white transition-colors">step2heal1111@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 pt-8 border-t border-white/10">
+                        <a :href="'https://wa.me/919773960242?text=' + encodeURIComponent(whatsappMsg)" 
+                           class="bg-[#25D366] text-white px-6 py-4 rounded-xl font-bold hover:bg-[#20b958] transition-all flex items-center justify-center gap-3 shadow-lg">
+                            <i data-lucide="message-square" class="w-5 h-5"></i> WhatsApp Us
                         </a>
-                        <a href="tel:+919773960242" class="flex items-center justify-between p-6 rounded-2xl bg-white/10 hover:bg-white/20 transition-all border border-white/20">
-                            <div class="flex items-center gap-4">
-                                <i data-lucide="phone" class="w-8 h-8"></i>
-                                <span class="font-bold text-xl">Call +91 97739 60242</span>
-                            </div>
-                            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+                        <a href="tel:+919773960242" 
+                           class="bg-white/10 text-white px-6 py-4 rounded-xl font-bold hover:bg-white/20 transition-all flex items-center justify-center gap-3 backdrop-blur-sm">
+                            <i data-lucide="phone" class="w-5 h-5"></i> +91 97739 60242
                         </a>
                     </div>
                 </div>
-                <div class="absolute -right-10 -bottom-10 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
             </div>
+
+            <!-- Map Area -->
+            <div class="h-[500px] lg:h-full min-h-[600px] rounded-[2rem] overflow-hidden bg-gray-100 shadow-card border border-gray-200">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.220197541624!2d77.3368705755054!3d28.592946775688647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce51cf414c6db%3A0xb521cfc7d4322d0a!2sStep2Heal%20Advanced%20Physiotherapy%20and%20Rehabilitation%20Centre!5e0!3m2!1sen!2sin!4v1714560000000!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+
         </div>
     </section>
 
-    <!-- Modern Footer -->
-    <footer class="bg-[#0d3b44] text-white pt-20 pb-10">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16 border-b border-white/10 pb-16">
-            <div class="space-y-6">
-                <div class="flex items-center gap-3">
-                    <img src="WhatsApp_Image_2026-04-21_at_17.24.20-removebg-preview.png" alt="Step2Heal" class="h-12 brightness-0 invert">
-                    <span class="font-bold text-2xl">Step2Heal</span>
-                </div>
-                <p class="text-teal-50/60 leading-relaxed italic">
-                    "Where every step matters"<br>
-                    Noida's most trusted name in advanced physiotherapy and sports rehabilitation.
-                </p>
+    <!-- Footer: Clean, modern, brand-aligned -->
+    <footer class="bg-brand-warm border-t border-gray-200 py-12 px-6 lg:px-12 text-gray-600">
+        <div class="max-w-[1400px] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <span class="font-bold text-xl tracking-tight text-brand-deep">Step2Heal.</span>
             </div>
-
-            <div>
-                <h4 class="font-bold text-lg mb-6 text-teal-400">Quick Links</h4>
-                <ul class="space-y-4 text-teal-50/60">
-                    <li><a href="index.html" class="hover:text-white transition-colors">Home</a></li>
-                    <li><a href="services.html" class="hover:text-white transition-colors">Treatments & Services</a></li>
-                    <li><a href="founders.html" class="hover:text-white transition-colors">Meet the Founders</a></li>
-                    <li><a href="gallery.html" class="hover:text-white transition-colors">Clinic Gallery</a></li>
-                    <li><a href="blog.html" class="hover:text-white transition-colors">Health Insights</a></li>
-                </ul>
+            
+            <div class="flex gap-8 text-[15px] font-medium">
+                <a href="services.html" class="hover:text-brand-teal transition-colors">Services</a>
+                <a href="founders.html" class="hover:text-brand-teal transition-colors">Founders</a>
+                <a href="contact.html" class="hover:text-brand-teal transition-colors">Contact</a>
             </div>
-
-            <div>
-                <h4 class="font-bold text-lg mb-6 text-teal-400">Specialities</h4>
-                <ul class="space-y-4 text-teal-50/60">
-                    <li>Sports Injury Rehab</li>
-                    <li>Dry Needling Therapy</li>
-                    <li>Laser Therapy</li>
-                    <li>Orthopedic Physio</li>
-                    <li>Post-Surgery Recovery</li>
-                </ul>
-            </div>
-
-            <div>
-                <h4 class="font-bold text-lg mb-6 text-teal-400">Direct Contact</h4>
-                <ul class="space-y-4 text-teal-50/60">
-                    <li class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4 text-teal-400"></i> +91 97739 60242</li>
-                    <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4 text-teal-400"></i> step2heal1111@gmail.com</li>
-                    <li class="flex items-start gap-3">
-                        <i data-lucide="map-pin" class="w-4 h-4 text-teal-400 mt-1"></i>
-                        <span>Sector 12, Noida, Uttar Pradesh</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-teal-50/40">
-            <div class="flex flex-col items-center md:items-start w-full">
-                <p>&copy; 2026 Step2Heal Advanced Physiotherapy and Rehabilation Centre Noida. All rights reserved.</p>
-                <p class="mt-1">Developed by: <a href="https://www.linkedin.com/in/tejas-yadav-3b1ab83a6/" target="_blank" class="text-teal-400 hover:underline">Tejas Yadav</a></p>
+            
+            <div class="text-[14px]">
+                &copy; <span x-text="new Date().getFullYear()"></span> Step2Heal. All rights reserved.
             </div>
         </div>
     </footer>
 
+    <!-- Initialize Lucide Icons -->
     <script>
-        window.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
-
-            // Automatic Slider Logic for Reviews
-            const slider = document.getElementById('reviewSlider');
-            if (slider) {
-                const items = slider.querySelectorAll('.review-item');
-                const totalItems = items.length;
-                let currentIndex = 0;
-                let isAutoScrolling = true;
-
-                function autoScroll() {
-                    // Only autoscroll on mobile where layout is horizontal
-                    if (!isAutoScrolling || window.innerWidth >= 768) return;
-
-                    currentIndex = (currentIndex + 1) % totalItems;
-                    
-                    // Scroll the container
-                    const item = items[currentIndex];
-                    if (item) {
-                        const scrollAmount = item.offsetLeft - (slider.offsetWidth - item.offsetWidth) / 2;
-                        slider.scrollTo({
-                            left: scrollAmount,
-                            behavior: 'smooth'
-                        });
-                    }
-                }
-
-                setInterval(autoScroll, 4000);
-            }
         });
     </script>
 </body>
