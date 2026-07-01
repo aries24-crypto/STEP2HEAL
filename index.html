@@ -16,16 +16,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Step2Heal | Advanced Physiotherapy and Rehabilitation Centre | Noida</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Static Compiled Tailwind CSS Fallback (Ensures complete formatting and layout load even if JS is blocked/crashes on iOS WebKit) -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Alpine.js -->
-    <script src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
-    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-
+    
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
         .hero-gradient { background: radial-gradient(circle at top right, #f0fdfa 0%, #ffffff 100%); }
@@ -71,6 +68,12 @@
             transition: opacity 1000ms ease-in-out;
         }
     </style>
+
+    <!-- Defer JS CDNs so they compile progressively without breaking the layout render -->
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="https://unpkg.com/lucide@0.395.0/dist/umd/lucide.min.js"></script>
 </head>
 <body class="bg-white text-gray-900 selection:bg-teal-100 selection:text-[#0d3b44]" 
       x-data="{ 
@@ -86,7 +89,7 @@
         whatsappMsg: 'Hi Step2Heal! 👋 I would like to book a physiotherapy session. Could you please share the available slots? Thank you!'
       }" 
       x-init="setInterval(() => { heroActive = (heroActive + 1) % heroImages.length }, 3000)"
-      @scroll.window="scrolled = (window.pageYOffset > 20)">
+      @scroll.window="scrolled = (window.scrollY > 20)">
 
     <!-- Navbar -->
     <nav :class="scrolled ? 'shadow-sm py-2 bg-white/90 nav-blur' : 'py-5 bg-transparent'" 
@@ -133,8 +136,8 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="relative pt-28 pb-16 sm:pt-36 sm:pb-20 lg:pt-52 lg:pb-32 px-4 overflow-hidden min-h-[85vh] sm:min-h-[90vh] flex items-center bg-teal-50/50">
-        <!-- Background Video (pointer-events-none added to prevent touch-blocking on iOS) -->
+    <section class="relative pt-28 pb-16 sm:pt-36 sm:pb-20 lg:pt-52 lg:pb-32 px-4 overflow-hidden min-h-[85vh] sm:min-h-[90vh] flex items-center bg-teal-50/50" style="background-image: radial-gradient(circle at top right, #f0fdfa 0%, #ffffff 100%);">
+        <!-- Background Video (pointer-events-none prevents touch tracking issues on iOS) -->
         <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none">
             <source src="WhatsApp Video 2026-05-15 at 09.30.13.webm" type="video/webm">
         </video>
@@ -166,7 +169,7 @@
                 </div>
             </div>
             
-            <!-- Spacer container to keep desktop layout consistent with text aligned beautifully on the left -->
+            <!-- Spacer container to keep desktop layout consistent -->
             <div class="w-full lg:w-1/2 relative h-[100px] lg:h-[600px] pointer-events-none hidden lg:block">
                 <div class="absolute -top-10 -right-10 w-40 h-40 bg-teal-100 rounded-full blur-3xl opacity-50"></div>
                 <div class="absolute -bottom-10 -left-10 w-64 h-64 bg-blue-100 rounded-full blur-3xl opacity-30"></div>
@@ -477,10 +480,12 @@
         </div>
     </footer>
 
-    <!-- Initialize Lucide Icons -->
+    <!-- Initialize Lucide Icons Safely -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            lucide.createIcons();
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
         });
     </script>
 </body>
